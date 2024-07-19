@@ -1,9 +1,7 @@
-import { RequestInit } from "next/dist/server/web/spec-extension/request";
-
 interface CustomReuqest extends RequestInit {
-  body: any;
+  body?: any;
 }
-
+// intercepter fetch
 const ConfigHttp = async <ResType>(method: string, URL: string, option?: CustomReuqest) => {
   const body = JSON.stringify(option?.body);
   const headers = option?.headers;
@@ -18,7 +16,6 @@ const ConfigHttp = async <ResType>(method: string, URL: string, option?: CustomR
     credentials,
   });
   const result: ResType = await response.json();
-  // @ts-ignore
   if (!response.ok) {
     throw result;
   }

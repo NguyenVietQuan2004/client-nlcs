@@ -1,8 +1,10 @@
 "use client";
 import { AuthProvider, FacebookAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+
 import { auth } from "@/firebase/config";
 import { authApi } from "@/apiRequest/authAPI";
-import { FacebookIcon, GoogleIcon } from "../../../public/icons/icons";
+import { LoginResType } from "@/app/Type/AuthTypes";
+import { FacebookIcon, GoogleIcon } from "../../../../public/icons/icons";
 
 const googleProvider = new GoogleAuthProvider();
 const faceobookProvider = new FacebookAuthProvider();
@@ -15,13 +17,20 @@ function LoginWithFirebase() {
         // @ts-ignore
         const { accessToken, uid, displayName } = user;
         try {
-          await authApi.loginFirebase({ id: uid, userName: displayName || "", accessToken });
+          const result: LoginResType = await authApi.loginFirebase({
+            id: uid,
+            userName: displayName || "",
+            accessToken,
+          });
+          await authApi.sendCookieToServer(result);
+          localStorage.setItem("user", JSON.stringify(result.data.userName));
+          window.location.assign("/");
         } catch (error: any) {
-          console.log("Error login with firebase to server", error);
+          console.error("Error login with firebase to server", error);
         }
       })
       .catch((error: any) => {
-        console.log("Error login with firebase", error);
+        console.error("Error login with firebase", error);
       });
   };
 

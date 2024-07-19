@@ -65,20 +65,15 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "login-show-up": {
-          from: { top: "78%" },
-          to: { top: "8%" },
-        },
-        "login-show-down": {
-          from: { top: "8%" },
-          to: { top: "78%" },
+        loading: {
+          from: { "background-color": "white" },
+          to: { "background-color": "black" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "animate-login-show-up": "login-show-up 2s ease-out forwards",
-        "animate-login-show-down": "login-show-down 2s ease-out forwards",
+        "loading-animate": "loading 1s ease-out infinite",
       },
     },
   },
