@@ -3,8 +3,11 @@ import {
   LoginBodyType,
   RegisterResType,
   RegisterBodyType,
-  LoginBodyFirebaseType,
-} from "@/app/Type/AuthTypes";
+  LoginFirebaseResType,
+  LoginFirebaseBodyType,
+  SendCookieToServerResType,
+  SendCookieToServerBodyType,
+} from "@/Type/AuthTypes";
 import httpRequest from "@/lib/http";
 
 export const authApi = {
@@ -14,19 +17,22 @@ export const authApi = {
       credentials: "include",
     });
   },
-  loginFirebase(body: LoginBodyFirebaseType) {
-    return httpRequest.post<LoginResType>(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/auth/loginwithfirebase`, {
+
+  loginFirebase(body: LoginFirebaseBodyType) {
+    return httpRequest.post<LoginFirebaseResType>(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/auth/loginwithfirebase`, {
       body,
       credentials: "include",
     });
   },
+
   register(body: RegisterBodyType) {
     return httpRequest.post<RegisterResType>(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/auth/register`, {
       body,
     });
   },
-  sendCookieToServer(body: LoginResType) {
-    return httpRequest.post<LoginResType>(`/api/auth/login`, {
+
+  sendCookieToServer(body: SendCookieToServerBodyType) {
+    return httpRequest.post<SendCookieToServerResType>(`/api/auth/login`, {
       body,
       credentials: "include",
     });

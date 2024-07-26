@@ -3,8 +3,10 @@ import { PlusIcon } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 
 import Heading from "@/components/heading";
-import { ListBillboardResType } from "@/app/Type/AuthTypes";
+import { ListBillboardResType } from "@/Type/BillboardTypes";
 import { Button, buttonVariants } from "@/components/ui/button";
+import { DataTable } from "@/components/data-table/data-table";
+import { BillboardColumns } from "@/app/(stores)/[storeId]/billboards/[billboardId]/_table_billboard/billboard-columns";
 
 interface BillboardsClientProps {
   listObjectBillboard: ListBillboardResType | null;
@@ -27,13 +29,11 @@ function BillboardsClient({ listObjectBillboard }: BillboardsClientProps) {
           <PlusIcon className="w-5 h-5" /> Add item
         </Button>
       </div>
-      {listBillboard?.map((item) => {
-        return (
-          <div key={item._id}>
-            {item.label} {item._id}
-          </div>
-        );
-      })}
+      {listBillboard && (
+        <div className="container mx-auto py-10">
+          <DataTable columns={BillboardColumns} data={listBillboard} filterBy="label" />
+        </div>
+      )}
     </div>
   );
 }

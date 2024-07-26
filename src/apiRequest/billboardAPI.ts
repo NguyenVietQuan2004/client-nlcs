@@ -1,48 +1,56 @@
 import httpRequest from "@/lib/http";
 import {
   BillboardResType,
-  createBillboardBodyType,
-  createBillboardResType,
-  deleteBillboardBodyType,
+  BillboardBodyType,
   ListBillboardResType,
-  updateBillboardBodyType,
-} from "@/app/Type/AuthTypes";
+  ListBillboardBodyType,
+  CreateBillboardResType,
+  UpdateBillboardResType,
+  DeleteBillboardResType,
+  DeleteBillboardBodyType,
+  CreateBillboardBodyType,
+  UpdateBillboardBodyType,
+} from "@/Type/BillboardTypes";
 
 export const billboardAPI = {
-  createBillboard(body: createBillboardBodyType) {
-    return httpRequest.post<createBillboardResType>(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/billboard`, {
-      body,
-      credentials: "include",
-    });
-  },
-  updateBillboard(body: updateBillboardBodyType) {
-    return httpRequest.put<createBillboardResType>(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/billboard`, {
-      body,
-      credentials: "include",
-    });
-  },
-  getBillboard(billboardId: string, sessionToken: string, storeId: string) {
+  getBillboard(body: BillboardBodyType) {
     return httpRequest.get<BillboardResType>(
-      `${process.env.NEXT_PUBLIC_API_ENDPOINT}/billboard?id=${billboardId}&storeId=${storeId}`,
+      `${process.env.NEXT_PUBLIC_API_ENDPOINT}/billboard?_id=${body._id}&storeId=${body.storeId}`,
       {
         headers: {
-          Cookie: `sessionToken=${sessionToken}`,
+          Cookie: `sessionToken=${body.sessionToken}`,
         },
       }
     );
   },
-  getListBillboard(storeId: string, sessionToken: string) {
+
+  getListBillboard(body: ListBillboardBodyType) {
     return httpRequest.get<ListBillboardResType>(
-      `${process.env.NEXT_PUBLIC_API_ENDPOINT}/billboard/getall?storeId=${storeId}`,
+      `${process.env.NEXT_PUBLIC_API_ENDPOINT}/billboard/getall?storeId=${body.storeId}`,
       {
         headers: {
-          Cookie: `sessionToken=${sessionToken}`,
+          Cookie: `sessionToken=${body.sessionToken}`,
         },
       }
     );
   },
-  deleteBillboard(body: deleteBillboardBodyType) {
-    return httpRequest.delete<createBillboardResType>(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/billboard`, {
+
+  createBillboard(body: CreateBillboardBodyType) {
+    return httpRequest.post<CreateBillboardResType>(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/billboard`, {
+      body,
+      credentials: "include",
+    });
+  },
+
+  updateBillboard(body: UpdateBillboardBodyType) {
+    return httpRequest.put<UpdateBillboardResType>(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/billboard`, {
+      body,
+      credentials: "include",
+    });
+  },
+
+  deleteBillboard(body: DeleteBillboardBodyType) {
+    return httpRequest.delete<DeleteBillboardResType>(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/billboard`, {
       body: body,
       credentials: "include",
     });

@@ -6,7 +6,7 @@ import { CheckIcon, ChevronsUpDown, SearchIcon, StoreIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { buttonVariants } from "@/components/ui/button";
-import { ListStoreResType } from "@/app/Type/AuthTypes";
+import { ListStoreResType } from "@/Type/StoreTypes";
 import ModalCreateStore from "@/components/modal-create-store";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
@@ -21,7 +21,7 @@ function DropDownStore({ listStore: listStoreInit }: DropDownStoreProps) {
   const [listStore, setListStore] = useState(listStoreInit.data);
 
   const onSelectedStore = (newStoreId: string) => {
-    router.push(`${newStoreId}`);
+    router.replace(`${newStoreId}`);
   };
   const currentStore = listStoreInit.data.find((item) => {
     return item._id === params.storeId;
@@ -34,7 +34,7 @@ function DropDownStore({ listStore: listStoreInit }: DropDownStoreProps) {
         return listStoreInit.data.filter((item) => item.name.includes(inputValue));
       }
     });
-  }, [inputValue]);
+  }, [inputValue, listStoreInit.data]);
   return (
     <Popover>
       <PopoverTrigger asChild>

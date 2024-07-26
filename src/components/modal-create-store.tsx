@@ -20,6 +20,7 @@ import LoadingButton from "@/components/loadingButton";
 import useModalCreateStore from "@/hooks/useModalCreateStore";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { handlError } from "./handle-error";
 
 interface ModalCreateStoreProps {
   autoShow?: boolean;
@@ -43,7 +44,7 @@ function ModalCreateStore({ autoShow }: ModalCreateStoreProps) {
     if (autoShow) {
       setIsShowModalCreate(true);
     }
-  }, []);
+  }, [autoShow, setIsShowModalCreate]);
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     setIsLoading(true);
     try {
@@ -54,11 +55,11 @@ function ModalCreateStore({ autoShow }: ModalCreateStoreProps) {
       });
       setIsShowModalCreate(false);
       window.location.assign(`/${result.data._id}`);
-    } catch (error: any) {
-      console.error("CREATE_STORE_ERROR", error);
-      toast({
-        title: error.message || "Something went wrong",
-        variant: "destructiveCustom",
+    } catch (error) {
+      handlError({
+        consoleError: "CREATE_STORE_ERROR",
+        error,
+        isToast: true,
       });
     } finally {
       setIsLoading(false);

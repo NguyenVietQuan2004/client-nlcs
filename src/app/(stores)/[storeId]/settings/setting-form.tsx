@@ -2,7 +2,7 @@
 import z from "zod";
 import { Trash } from "lucide-react";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useFormState } from "react-hook-form";
 import { useRouter } from "next/navigation";
 
 import Heading from "@/components/heading";
@@ -10,52 +10,49 @@ import { Input } from "@/components/ui/input";
 import { storeAPI } from "@/apiRequest/storeAPI";
 import AlertModal from "@/components/alert-modal";
 import { toast } from "@/components/ui/use-toast";
-import { storeResType } from "@/app/Type/AuthTypes";
-import useModalConfirm from "@/hooks/useModalConfirm";
+import { StoreResType } from "@/Type/StoreTypes";
 import { zodResolver } from "@hookform/resolvers/zod";
 import LoadingButton from "@/components/loadingButton";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { handlError } from "@/components/handle-error";
 
 interface SettingFormProps {
-  initData: storeResType;
+  initData: StoreResType;
 }
+const formSchema = z.object({
+  name: z.string().min(1, {
+    message: "Name must be contain at least 1 character",
+  }),
+});
 
 function SettingForm({ initData }: SettingFormProps) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const { setIsShowModalConfirm } = useModalConfirm();
-  const formSchema = z.object({
-    name: z
-      .string()
-      .min(1, {
-        message: "Name must be contain at least 1 character",
-      })
-      .refine((name) => name !== initData.data.name, {
-        message: "New name must be different from the old name",
-      }),
-  });
+  const [open, setOpen] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: initData.data.name,
     },
   });
+  const { isDirty } = useFormState({ control: form.control });
+
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
       setIsLoading(true);
-      await storeAPI.updateStore({ storeId: initData.data._id, name: data.name });
+      if (!isDirty) {
+        return form.setError("name", { message: "Nothing has change." });
+      }
+      await storeAPI.updateStore({ _id: initData.data._id, name: data.name });
       router.refresh();
       toast({
         title: "Store updated.",
         variant: "success",
       });
-    } catch (error: any) {
-      console.error("UPDATE_STORE_ERROR", error);
-      toast({
-        title: error.message || "Something went wrong.",
-        variant: "destructiveCustom",
-      });
+    } catch (error) {
+      handlError({ consoleError: "UPDATE_STORE_ERROR", error, isToast: true });
     } finally {
       setIsLoading(false);
     }
@@ -63,27 +60,34 @@ function SettingForm({ initData }: SettingFormProps) {
   const handleDeleteStore = async () => {
     try {
       setIsLoading(true);
-      await storeAPI.deleteStore({ storeId: initData.data._id });
+      await storeAPI.deleteStore({ _id: initData.data._id });
       toast({
         title: "Delete store success.",
         variant: "success",
       });
       router.refresh();
-    } catch (error: any) {
-      toast({
-        title: error.message || "Something went wrong.",
-        variant: "destructiveCustom",
+    } catch (error) {
+      handlError({
+        consoleError: "DELETE_STORE_ERROR",
+        error,
+        isToast: true,
       });
-      console.error("DELETE_STORE_ERROR", error);
     } finally {
       setIsLoading(false);
-      setIsShowModalConfirm(false);
+      setOpen(false);
     }
   };
 
   return (
     <>
-      <AlertModal action="Delete" variant="destructive" onConfirm={handleDeleteStore} isLoading={isLoading} />
+      <AlertModal
+        open={open}
+        onClose={() => setOpen(false)}
+        action="Delete"
+        variant="destructive"
+        onConfirm={handleDeleteStore}
+        isLoading={isLoading}
+      />
       <div className="flex items-center border-b pb-4">
         <Heading title="Setting" description="Manage store preferences" />
         <Button
@@ -91,13 +95,13 @@ function SettingForm({ initData }: SettingFormProps) {
             className: "!p-3 ml-auto",
             variant: "destructive",
           })}
-          onClick={() => setIsShowModalConfirm(true)}
+          onClick={() => setOpen(true)}
         >
           <Trash className="w-5 h-5" />
         </Button>
       </div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="w-[300px] mt-4">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="w-[320px] mt-4">
           <FormField
             control={form.control}
             name="name"

@@ -5,7 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Input } from "@/components/ui/input";
 import { authApi } from "@/apiRequest/authAPI";
-import { LoginResType } from "@/app/Type/AuthTypes";
+import { LoginResType } from "@/Type/AuthTypes";
+import { handlError } from "@/components/handle-error";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 
 interface ResgisterFormProps {
@@ -33,7 +34,10 @@ function LoginForm({ isSignUp }: ResgisterFormProps) {
       localStorage.setItem("user", JSON.stringify(result.data));
       window.location.assign("/");
     } catch (error: any) {
-      console.error("LOGIN_ERROR", error);
+      handlError({
+        consoleError: "LOGIN_ERROR",
+        error,
+      });
       if (error.statusCode === 401) {
         form.setError("password", { type: "manual", message: error.message || "Something went wrong, try later." });
       }

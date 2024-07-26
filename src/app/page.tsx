@@ -2,22 +2,32 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { storeAPI } from "@/apiRequest/storeAPI";
-import { ListStoreResType } from "@/app/Type/AuthTypes";
+import { ListStoreResType } from "@/Type/StoreTypes";
+import { handlError } from "@/components/handle-error";
 import ModalCreateStore from "@/components/modal-create-store";
 
-export default async function Home() {
+export const dynamic = "force-dynamic";
+
+async function getStores() {
   let stores: ListStoreResType | null = null;
-  const cookie = cookies();
-  const sessionToken = cookie.get("sessionToken")?.value || "";
 
   try {
-    stores = await storeAPI.getListStore(sessionToken);
-  } catch (error: any) {
-    console.error("GET_ALL_STORE", error);
-  } finally {
-    if (stores && stores?.data?.length > 0) {
-      redirect(`/${stores.data[0]._id}`);
-    }
+    const cookie = cookies();
+    const sessionToken = cookie.get("sessionToken")?.value || "";
+    stores = await storeAPI.getListStore({ sessionToken });
+  } catch (error) {
+    handlError({
+      consoleError: "GET_ALL_STORE_ERROR",
+      error,
+    });
   }
-  return <div>{stores?.data?.length === 0 && <ModalCreateStore autoShow={true} />}</div>;
+  if (stores && stores?.data.length > 0) {
+    redirect(`/${stores.data[0]._id}`);
+  } else {
+    return true;
+  }
+}
+export default async function Home() {
+  let isNull = await getStores();
+  return <div>{isNull && <ModalCreateStore autoShow={true} />}</div>;
 }

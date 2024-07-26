@@ -12,14 +12,34 @@ function ListRoute() {
       name: "Overview",
     },
     {
-      href: `/${params.storeId}/settings`,
-      active: pathName === `/${params.storeId}/settings`,
-      name: "Settings",
-    },
-    {
       href: `/${params.storeId}/billboards`,
       active: pathName.startsWith(`/${params.storeId}/billboards`),
       name: "Billboards",
+    },
+    {
+      href: `/${params.storeId}/categories`,
+      active: pathName.startsWith(`/${params.storeId}/categories`),
+      name: "Categories",
+    },
+    {
+      href: `/${params.storeId}/sizes`,
+      active: pathName.startsWith(`/${params.storeId}/sizes`),
+      name: "Sizes",
+    },
+    {
+      href: `/${params.storeId}/colors`,
+      active: pathName.startsWith(`/${params.storeId}/colors`),
+      name: "Colors",
+    },
+    {
+      href: `/${params.storeId}/products`,
+      active: pathName.startsWith(`/${params.storeId}/products`),
+      name: "Products",
+    },
+    {
+      href: `/${params.storeId}/settings`,
+      active: pathName === `/${params.storeId}/settings`,
+      name: "Settings",
     },
   ];
   return (

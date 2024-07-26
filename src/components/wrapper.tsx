@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 function Wrapper({ children }: { children: ReactNode }) {
-  return <div className="px-10 py-4">{children}</div>;
+  return <div className="px-10 pt-4 pb-36">{children}</div>;
 }
 
 export default Wrapper;

@@ -2,18 +2,19 @@ import { cookies } from "next/headers";
 
 import { storeAPI } from "@/apiRequest/storeAPI";
 import UserAvatar from "@/components/user-avatar";
-import { ListStoreResType } from "@/app/Type/AuthTypes";
+import { ListStoreResType } from "@/Type/StoreTypes";
 import ListRoute from "@/app/(stores)/[storeId]/_navbar/List-route";
 import DropDownStore from "@/app/(stores)/[storeId]/_navbar/drop-down";
 import { redirect } from "next/navigation";
+import { handlError } from "@/components/handle-error";
 
 async function MainNavbar() {
   let stores: ListStoreResType | null = null;
   try {
-    const sessionToken = cookies().get("sessionToken")?.value;
-    stores = await storeAPI.getListStore(sessionToken || "");
-  } catch (error: any) {
-    console.error("GET_ALL_STORE", error);
+    const sessionToken = cookies().get("sessionToken")?.value || "";
+    stores = await storeAPI.getListStore({ sessionToken });
+  } catch (error) {
+    handlError({ consoleError: "GET_ALL_STORE", error });
   }
   if (stores?.data.length === 0 || !stores) {
     return <div>no store loading redirect main page...</div>;

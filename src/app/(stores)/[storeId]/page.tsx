@@ -2,26 +2,33 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { storeAPI } from "@/apiRequest/storeAPI";
-import { storeResType } from "@/app/Type/AuthTypes";
+import { StoreResType } from "@/Type/StoreTypes";
+import { handlError } from "@/components/handle-error";
 
 interface StoreProps {
   params: { storeId: string };
 }
-
-async function Store({ params }: StoreProps) {
-  let store: storeResType | null = null;
+async function getStore(storeId: string) {
+  let store: StoreResType | null = null;
   const cookie = cookies();
   const sessionToken = cookie.get("sessionToken")?.value || "";
   try {
-    store = await storeAPI.getStore(params.storeId, sessionToken);
+    store = await storeAPI.getStore({ _id: storeId, sessionToken });
   } catch (error) {
-    console.error("GET_STORE_ERROR", error);
-  } finally {
-    if (!store?.data) {
-      redirect("/");
-    }
+    handlError({
+      consoleError: "GET_STORE_ERROR",
+      error,
+    });
   }
-  return <div>this is {store.data.name}`</div>;
+  if (!store?.data) {
+    redirect("/");
+  } else {
+    return store;
+  }
 }
 
-export default Store;
+export default async function Store({ params }: StoreProps) {
+  let store: StoreResType;
+  store = await getStore(params.storeId);
+  return <div>this is {store.data.name}`</div>;
+}

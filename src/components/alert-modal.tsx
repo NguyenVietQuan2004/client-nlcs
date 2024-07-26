@@ -13,18 +13,18 @@ import {
 } from "@/components/ui/alert-dialog";
 import LoadingButton from "@/components/loadingButton";
 import { buttonVariants } from "@/components/ui/button";
-import useModalConfirm from "@/hooks/useModalConfirm";
 
 interface AlertModalProps {
   action: string;
+  open: boolean;
   isLoading: boolean;
   onConfirm: () => void;
+  onClose: () => void;
   variant: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link" | null | undefined;
 }
-function AlertModal({ variant, action, onConfirm, isLoading }: AlertModalProps) {
-  const { isShowModalConfirm, setIsShowModalConfirm } = useModalConfirm();
+function AlertModal({ variant, action, onConfirm, isLoading, open, onClose }: AlertModalProps) {
   return (
-    <UiAlertDialog open={isShowModalConfirm}>
+    <UiAlertDialog open={open}>
       <AlertDialogTrigger className="hidden"></AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
@@ -32,7 +32,7 @@ function AlertModal({ variant, action, onConfirm, isLoading }: AlertModalProps) 
           <AlertDialogDescription>This action cannot be undone</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel onClick={() => setIsShowModalConfirm(false)}>Cancel</AlertDialogCancel>
+          <AlertDialogCancel onClick={onClose}>Cancel</AlertDialogCancel>
           <AlertDialogAction
             className={buttonVariants({
               variant: variant || "default",

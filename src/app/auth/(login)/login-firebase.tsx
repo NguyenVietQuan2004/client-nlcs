@@ -3,8 +3,9 @@ import { AuthProvider, FacebookAuthProvider, GoogleAuthProvider, signInWithPopup
 
 import { auth } from "@/firebase/config";
 import { authApi } from "@/apiRequest/authAPI";
-import { LoginResType } from "@/app/Type/AuthTypes";
+import { LoginResType } from "@/Type/AuthTypes";
 import { FacebookIcon, GoogleIcon } from "../../../../public/icons/icons";
+import { handlError } from "@/components/handle-error";
 
 const googleProvider = new GoogleAuthProvider();
 const faceobookProvider = new FacebookAuthProvider();
@@ -25,12 +26,18 @@ function LoginWithFirebase() {
           await authApi.sendCookieToServer(result);
           localStorage.setItem("user", JSON.stringify(result.data.userName));
           window.location.assign("/");
-        } catch (error: any) {
-          console.error("Error login with firebase to server", error);
+        } catch (error) {
+          handlError({
+            consoleError: "Error login with firebase to server",
+            error,
+          });
         }
       })
-      .catch((error: any) => {
-        console.error("Error login with firebase", error);
+      .catch((error) => {
+        handlError({
+          consoleError: "Error login with firebase",
+          error,
+        });
       });
   };
 

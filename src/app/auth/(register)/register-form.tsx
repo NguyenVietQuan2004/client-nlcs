@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { authApi } from "@/apiRequest/authAPI";
 import { toast } from "@/components/ui/use-toast";
+import { handlError } from "@/components/handle-error";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 
 interface ResgisterFormProps {
@@ -38,12 +39,12 @@ function RegisterForm({ isSignUp, setIsSignUp }: ResgisterFormProps) {
         title: "Register success.",
         variant: "success",
       });
-    } catch (error: any) {
-      toast({
-        title: error.message || "Sommething went wrong.",
-        variant: "destructiveCustom",
+    } catch (error) {
+      handlError({
+        consoleError: "REGISTER_ERROR",
+        error,
+        isToast: true,
       });
-      console.error("REGISTER_ERROR", error);
     }
   };
   return (

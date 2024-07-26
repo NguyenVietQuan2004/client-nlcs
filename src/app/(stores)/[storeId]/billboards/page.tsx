@@ -1,26 +1,30 @@
 import { cookies } from "next/headers";
 import BillboardsClient from "./billboards-client";
-import { ListBillboardResType } from "@/app/Type/AuthTypes";
+import { ListBillboardResType } from "@/Type/BillboardTypes";
 import { billboardAPI } from "@/apiRequest/billboardAPI";
+import { handlError } from "@/components/handle-error";
 
 interface BillboardProps {
   params: { storeId: string };
 }
 
-async function Billboards({ params }: BillboardProps) {
-  let bilboards: ListBillboardResType | null = null;
-  try {
-    const sessionToken = cookies().get("sessionToken")?.value;
-    bilboards = await billboardAPI.getListBillboard(params.storeId, sessionToken || "");
-  } catch (error: any) {
-    console.error("GET_ALL_BILLBOARD", error);
-  }
+async function getBillboards(storeId: string) {
+  let billboards: ListBillboardResType | null = null;
 
+  try {
+    const sessionToken = cookies().get("sessionToken")?.value || "";
+    billboards = await billboardAPI.getListBillboard({ storeId, sessionToken });
+  } catch (error) {
+    handlError({ consoleError: "GET_ALL_BILLBOARD", error });
+  }
+  return billboards;
+}
+
+export default async function Billboards({ params }: BillboardProps) {
+  const billboards = await getBillboards(params.storeId);
   return (
     <div>
-      <BillboardsClient listObjectBillboard={bilboards} />
+      <BillboardsClient listObjectBillboard={billboards} />
     </div>
   );
 }
-
-export default Billboards;
