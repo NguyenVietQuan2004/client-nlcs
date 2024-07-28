@@ -1,8 +1,10 @@
 "use client";
-import { ListColorResType } from "@/Type/ColorType";
+
 import { CheckIcon, XIcon } from "lucide-react";
-import { Button, buttonVariants } from "./ui/button";
 import { useEffect, useRef, useState } from "react";
+
+import { ListColorResType } from "@/Type/ColorType";
+import { Button, buttonVariants } from "@/components/ui/button";
 
 interface MultiSelectProps {
   listColor: ListColorResType["data"] | undefined;
@@ -65,8 +67,8 @@ function MultiSelect({ listColor, onChange, onRemove, values = [""] }: MultiSele
                     variant: "outline",
                   })}
                   key={item._id}
-                  onClick={() => handleAddToList(item.name)}
-                  disabled={values.includes(item.name)}
+                  onClick={() => handleAddToList(item.value)}
+                  disabled={values.includes(item.value)}
                 >
                   <div className={` rounded-md hover:bg-zinc-100 `}>{item.name} </div>
                   {values.includes(item.name) ? <CheckIcon className="w-4 h-4" /> : <div></div>}

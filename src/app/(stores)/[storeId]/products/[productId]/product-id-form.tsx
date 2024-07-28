@@ -1,4 +1,5 @@
 "use client";
+
 import z from "zod";
 import { useForm } from "react-hook-form";
 import { PlusIcon, Trash } from "lucide-react";
@@ -10,8 +11,6 @@ import Heading from "@/components/heading";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import AlertModal from "@/components/alert-modal";
-import { ListSizeResType } from "@/Type/SizeTypes";
-import { ListColorResType } from "@/Type/ColorType";
 import { ProductResType } from "@/Type/ProductType";
 import { Checkbox } from "@/components/ui/checkbox";
 import ImageUpload from "@/components/image-upload";
@@ -19,7 +18,6 @@ import MultiSelect from "@/components/multi-select";
 import { productAPI } from "@/apiRequest/productAPI";
 import LoadingButton from "@/components/loadingButton";
 import { handlError } from "@/components/handle-error";
-import { ListCategoryResType } from "@/Type/CategoryTypes";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { createListDefaultValueForm, createListSchemaForm, createUniqueArray, formatDefaultValue } from "@/lib/utils";
@@ -27,16 +25,13 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 
 interface ProductFormProps {
   initObjectData: ProductResType | null;
-  listSizeObject: ListSizeResType | null;
-  listColorObject: ListColorResType | null;
-  listCategoryObject: ListCategoryResType | null;
 }
 
-function ProductForm({ initObjectData, listCategoryObject, listSizeObject, listColorObject }: ProductFormProps) {
-  const initData = initObjectData?.data;
-  const listSize = listSizeObject?.data;
-  const listColor = listColorObject?.data;
-  const listCategory = listCategoryObject?.data;
+function ProductForm({ initObjectData }: ProductFormProps) {
+  const initData = initObjectData?.data.product;
+  const listSize = initObjectData?.data.listSize;
+  const listColor = initObjectData?.data.listColor;
+  const listCategory = initObjectData?.data.listCategory;
 
   const router = useRouter();
   const params = useParams();
@@ -110,7 +105,7 @@ function ProductForm({ initObjectData, listCategoryObject, listSizeObject, listC
       message: "Name must be contain at least 1 character",
     }),
     ...listPriceSchema,
-    category: z.string().min(1, { message: "Category cannot be emty" }),
+    categoryId: z.string().min(1, { message: "Category cannot be emty" }),
     ...listSizeSchema,
     ...listColorSchema,
     isFeature: z.boolean(),
@@ -127,7 +122,7 @@ function ProductForm({ initObjectData, listCategoryObject, listSizeObject, listC
       ...formatDefaultValue(defaultValueListSize),
       ...formatDefaultValue(defaultValueListPrice),
       ...formatDefaultValue(defaultValueListColor),
-      category: initData?.categoryObject.categoryId || "",
+      categoryId: initData?.categoryId?._id || "",
       isFeature: initData?.isFeature || false,
       isArchive: initData?.isArchive || false,
     },
@@ -140,7 +135,6 @@ function ProductForm({ initObjectData, listCategoryObject, listSizeObject, listC
   useEffect(() => {
     // tránh lần đầu mounted bị gọi luôn hàm và set giá trị của numsize hiện tại rỗng
     if (!isMounted) return;
-    console.log(isIncrease, numSize);
     const sizeIndex = `size${numSize}`;
     const priceIndex = `price${numSize}`;
     const colorIndex = `color${numSize}`;
@@ -168,7 +162,7 @@ function ProductForm({ initObjectData, listCategoryObject, listSizeObject, listC
   }, [numSize]);
   // lỗi thì thêm form vào
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    const categoryObject = listCategory?.find((item) => item._id === data.category);
+    const category = listCategory?.find((item) => item._id === data.categoryId);
     const arrayPrice = createUniqueArray(numSize).map((_, index) => {
       return {
         size: data[`size${index + 1}`],
@@ -183,10 +177,7 @@ function ProductForm({ initObjectData, listCategoryObject, listSizeObject, listC
           images: data.images,
           storeId: params.storeId as string,
           arrayPrice,
-          categoryObject: {
-            categoryId: categoryObject?._id || "",
-            categoryName: categoryObject?.name || "",
-          },
+          categoryId: category!._id,
           isFeature: data.isFeature,
           isArchive: data.isArchive,
         });
@@ -197,10 +188,7 @@ function ProductForm({ initObjectData, listCategoryObject, listSizeObject, listC
           images: data.images,
           storeId: params.storeId as string,
           arrayPrice,
-          categoryObject: {
-            categoryId: categoryObject?._id || "",
-            categoryName: categoryObject?.name || "",
-          },
+          categoryId: category!._id,
           isFeature: data.isFeature,
           isArchive: data.isArchive,
         });
@@ -241,6 +229,7 @@ function ProductForm({ initObjectData, listCategoryObject, listSizeObject, listC
       setIsLoading(false);
     }
   };
+
   const handleIncreaseForm = () => {
     setIsIncrease(true);
     setNumsize(numSize + 1);
@@ -326,7 +315,7 @@ function ProductForm({ initObjectData, listCategoryObject, listSizeObject, listC
 
             <FormField
               control={form.control}
-              name="category"
+              name="categoryId"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="font-semibold">Category</FormLabel>
@@ -370,7 +359,11 @@ function ProductForm({ initObjectData, listCategoryObject, listSizeObject, listC
                             </FormControl>
                             <SelectContent>
                               {listSize?.map((size) => (
-                                <SelectItem key={size._id} value={`${size.value}`}>
+                                <SelectItem
+                                  key={size._id}
+                                  value={`${size.value}`}
+                                  disabled={Object.values(form.getValues()).includes(size.value)}
+                                >
                                   {size.name}
                                 </SelectItem>
                               ))}

@@ -1,21 +1,22 @@
 "use client";
+
 import z from "zod";
 import { Trash } from "lucide-react";
 import { useState } from "react";
-import { useForm, useFormState } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { useForm, useFormState } from "react-hook-form";
 
 import Heading from "@/components/heading";
 import { Input } from "@/components/ui/input";
+import { StoreResType } from "@/Type/StoreTypes";
 import { storeAPI } from "@/apiRequest/storeAPI";
 import AlertModal from "@/components/alert-modal";
 import { toast } from "@/components/ui/use-toast";
-import { StoreResType } from "@/Type/StoreTypes";
 import { zodResolver } from "@hookform/resolvers/zod";
 import LoadingButton from "@/components/loadingButton";
+import { handlError } from "@/components/handle-error";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { handlError } from "@/components/handle-error";
 
 interface SettingFormProps {
   initData: StoreResType;

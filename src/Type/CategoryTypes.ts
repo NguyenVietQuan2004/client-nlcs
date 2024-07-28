@@ -13,12 +13,24 @@ export type CategoryBodyType = z.TypeOf<typeof CategoryBody>;
 //  CATEGORY RES TYPE
 export const CategoryRes = z.object({
   data: z.object({
-    _id: z.string(),
-    name: z.string(),
-    storeId: z.string(),
-    billboardId: z.string(),
-    createdAt: z.string(),
-    updatedAt: z.string(),
+    category: z.object({
+      _id: z.string(),
+      name: z.string(),
+      storeId: z.string(),
+      billboardId: z.string(),
+      createdAt: z.string(),
+      updatedAt: z.string(),
+    }),
+    listBillboard: z.array(
+      z.object({
+        _id: z.string(),
+        label: z.string(),
+        image: z.string(),
+        storeId: z.string(),
+        createdAt: z.string(),
+        updatedAt: z.string(),
+      })
+    ),
   }),
   message: z.string(),
   ok: z.boolean(),
@@ -27,7 +39,22 @@ export const CategoryRes = z.object({
 export type CategoryResType = z.TypeOf<typeof CategoryRes>;
 
 // CATEGORT TYPE
-export type CategoryType = Omit<CategoryResType, "message" | "ok" | "statusCode">["data"];
+const Category = z.object({
+  _id: z.string(),
+  name: z.string(),
+  storeId: z.string(),
+  billboardId: z.object({
+    _id: z.string(),
+    label: z.string(),
+    image: z.string(),
+    storeId: z.string(),
+    createdAt: z.string(),
+    updatedAt: z.string(),
+  }),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+});
+export type CategoryType = z.TypeOf<typeof Category>;
 
 // LIST CATEGORY BODY TYPE
 export const ListCategoryBody = z.object({
@@ -43,7 +70,14 @@ export const ListCategoryRes = z.object({
       _id: z.string(),
       name: z.string(),
       storeId: z.string(),
-      billboardId: z.string(),
+      billboardId: z.object({
+        _id: z.string(),
+        label: z.string(),
+        image: z.string(),
+        storeId: z.string(),
+        createdAt: z.string(),
+        updatedAt: z.string(),
+      }),
       createdAt: z.string(),
       updatedAt: z.string(),
     })

@@ -1,4 +1,5 @@
 "use client";
+
 import z from "zod";
 import { Trash } from "lucide-react";
 import { useState } from "react";
@@ -46,11 +47,10 @@ function BillboardForm({ initObjectData }: BillboardFormProps) {
     resolver: zodResolver(formSchema),
     defaultValues: {
       label: initData?.label || "",
-      image: initData?.image || "vc",
+      image: initData?.image || "",
     },
   });
   const { isDirty } = useFormState({ control: form.control });
-  console.log(form.getValues());
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     if (!data.image) {
       return form.setError("image", {

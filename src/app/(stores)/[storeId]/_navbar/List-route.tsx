@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 
@@ -35,6 +36,11 @@ function ListRoute() {
       href: `/${params.storeId}/products`,
       active: pathName.startsWith(`/${params.storeId}/products`),
       name: "Products",
+    },
+    {
+      href: `/${params.storeId}/orders`,
+      active: pathName.startsWith(`/${params.storeId}/orders`),
+      name: "Orders",
     },
     {
       href: `/${params.storeId}/settings`,

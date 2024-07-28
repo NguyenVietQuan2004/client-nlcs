@@ -6,7 +6,7 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import { Button } from "@/components/ui/button";
 import { BillboardType } from "@/Type/BillboardTypes";
-import BillboardCellAction from "@/app/(stores)/[storeId]/billboards/[billboardId]/_table_billboard//cellBillboardActions";
+import BillboardCellAction from "@/app/(stores)/[storeId]/billboards/[billboardId]/_table_billboard/cell-billboard-actions";
 
 export const BillboardColumns: ColumnDef<BillboardType>[] = [
   {

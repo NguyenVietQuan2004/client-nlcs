@@ -1,56 +1,45 @@
 "use client";
+
 import { useState } from "react";
 import { MoreHorizontal } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 
 import {
   DropdownMenu,
-  DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
+  DropdownMenuContent,
 } from "@/components/ui/dropdown-menu";
+import { OrderType } from "@/Type/OrderTypes";
 import { Button } from "@/components/ui/button";
+import { orderAPI } from "@/apiRequest/orderAPI";
 import { toast } from "@/components/ui/use-toast";
 import AlertModal from "@/components/alert-modal";
-import { ProductType } from "@/Type/ProductType";
-import { productAPI } from "@/apiRequest/productAPI";
 import { handlError } from "@/components/handle-error";
 
 interface CellActionProps {
-  row: ProductType;
+  row: OrderType;
 }
-function ProductCellAction({ row }: CellActionProps) {
+function OrderCellAction({ row }: CellActionProps) {
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const params = useParams();
-  const onCopy = () => {
-    toast({
-      variant: "success",
-      title: "Copied!",
-    });
-    navigator.clipboard.writeText(row._id);
-  };
-  const handleDeleteProduct = async () => {
+
+  const handleDeleteOrder = async () => {
     try {
       setIsLoading(true);
-      await productAPI.deleteProduct({
+      await orderAPI.deleteOrder({
         storeId: params.storeId as string,
-        _id: row._id as string,
+        _id: row._id,
       });
       toast({
-        title: "Delete product success.",
+        title: "Delete order success.",
         variant: "success",
       });
-      router.push(`/${params.storeId}/products`);
       router.refresh();
     } catch (error) {
-      handlError({
-        consoleError: "DELETE_PRODUCT_ERROR",
-        error,
-        isToast: true,
-      });
+      handlError({ consoleError: "DELETE_ORDER_ERROR", error, isToast: true });
     } finally {
       setIsLoading(false);
       setOpen(false);
@@ -64,7 +53,7 @@ function ProductCellAction({ row }: CellActionProps) {
         onClose={() => setOpen(false)}
         action="Delete"
         variant="destructive"
-        onConfirm={handleDeleteProduct}
+        onConfirm={handleDeleteOrder}
         isLoading={isLoading}
       />
       <DropdownMenu>
@@ -75,9 +64,6 @@ function ProductCellAction({ row }: CellActionProps) {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuItem onClick={onCopy}>Copy ID</DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => router.push(`products/${row._id}`)}>Update</DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpen(true)}>Delete</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -85,4 +71,4 @@ function ProductCellAction({ row }: CellActionProps) {
   );
 }
 
-export default ProductCellAction;
+export default OrderCellAction;

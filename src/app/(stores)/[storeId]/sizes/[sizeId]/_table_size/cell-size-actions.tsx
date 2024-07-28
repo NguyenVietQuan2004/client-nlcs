@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import { MoreHorizontal } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
@@ -10,19 +11,19 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { SizeType } from "@/Type/SizeTypes";
+import { sizeAPI } from "@/apiRequest/sizeAPI";
 import { Button } from "@/components/ui/button";
-import AlertModal from "@/components/alert-modal";
 import { toast } from "@/components/ui/use-toast";
-import { categoryAPI } from "@/apiRequest/categoryAPI";
-import { CategoryType } from "@/Type/CategoryTypes";
+import AlertModal from "@/components/alert-modal";
 import { handlError } from "@/components/handle-error";
 
 interface CellActionProps {
-  row: CategoryType;
+  row: SizeType;
 }
-function CategoryCellAction({ row }: CellActionProps) {
-  const [isLoading, setIsLoading] = useState(false);
+function SizeCellAction({ row }: CellActionProps) {
   const [open, setOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const params = useParams();
   const onCopy = () => {
@@ -32,38 +33,34 @@ function CategoryCellAction({ row }: CellActionProps) {
     });
     navigator.clipboard.writeText(row._id);
   };
-  const handleDeleteCategory = async () => {
+  const handleDeleteSize = async () => {
     try {
       setIsLoading(true);
-      await categoryAPI.deleteBillboard({
+      await sizeAPI.deleteSize({
         storeId: params.storeId as string,
         _id: row._id,
       });
       toast({
-        title: "Delete category success.",
+        title: "Delete size success.",
         variant: "success",
       });
-      router.push(`/${params.storeId}/categories`);
       router.refresh();
     } catch (error) {
-      handlError({
-        consoleError: "DELETE_CATEGORY_ERROR",
-        error,
-        isToast: true,
-      });
+      handlError({ consoleError: "DELETE_SIZE_ERROR", error, isToast: true });
     } finally {
       setIsLoading(false);
       setOpen(false);
     }
   };
+
   return (
     <div>
       <AlertModal
-        action="Delete"
         open={open}
         onClose={() => setOpen(false)}
+        action="Delete"
         variant="destructive"
-        onConfirm={handleDeleteCategory}
+        onConfirm={handleDeleteSize}
         isLoading={isLoading}
       />
       <DropdownMenu>
@@ -76,7 +73,7 @@ function CategoryCellAction({ row }: CellActionProps) {
         <DropdownMenuContent align="end">
           <DropdownMenuItem onClick={onCopy}>Copy ID</DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => router.push(`categories/${row._id}`)}>Update</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => router.push(`sizes/${row._id}`)}>Update</DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpen(true)}>Delete</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -84,4 +81,4 @@ function CategoryCellAction({ row }: CellActionProps) {
   );
 }
 
-export default CategoryCellAction;
+export default SizeCellAction;

@@ -1,16 +1,16 @@
 import httpRequest from "@/lib/http";
 
 import {
-  CreateProductBodyType,
+  ProductResType,
+  ProductBodyType,
+  ListProductResType,
+  ListProductBodyType,
+  UpdateProductResType,
+  DeleteProductResType,
   CreateProductResType,
   DeleteProductBodyType,
-  DeleteProductResType,
-  ListProductBodyType,
-  ListProductResType,
-  ProductBodyType,
-  ProductResType,
   UpdateProductBodyType,
-  UpdateProductResType,
+  CreateProductBodyType,
 } from "@/Type/ProductType";
 
 export const productAPI = {

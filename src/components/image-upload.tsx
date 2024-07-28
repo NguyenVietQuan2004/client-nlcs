@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import { File, TrashIcon } from "lucide-react";
 import { CldUploadWidget } from "next-cloudinary";

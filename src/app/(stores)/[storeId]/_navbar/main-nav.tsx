@@ -3,10 +3,9 @@ import { cookies } from "next/headers";
 import { storeAPI } from "@/apiRequest/storeAPI";
 import UserAvatar from "@/components/user-avatar";
 import { ListStoreResType } from "@/Type/StoreTypes";
+import { handlError } from "@/components/handle-error";
 import ListRoute from "@/app/(stores)/[storeId]/_navbar/List-route";
 import DropDownStore from "@/app/(stores)/[storeId]/_navbar/drop-down";
-import { redirect } from "next/navigation";
-import { handlError } from "@/components/handle-error";
 
 async function MainNavbar() {
   let stores: ListStoreResType | null = null;

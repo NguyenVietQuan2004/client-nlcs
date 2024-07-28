@@ -1,4 +1,5 @@
 "use client";
+
 import { PlusIcon } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 
@@ -7,6 +8,7 @@ import { ListColorResType } from "@/Type/ColorType";
 import { DataTable } from "@/components/data-table/data-table";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { ColorColumns } from "@/app/(stores)/[storeId]/colors/[colorId]/_table_color/color-columns";
+import ApiList from "@/components/api-list";
 
 interface ColorsClientProps {
   listObjectColor: ListColorResType | null;
@@ -34,6 +36,10 @@ function ColorsClient({ listObjectColor }: ColorsClientProps) {
           <DataTable columns={ColorColumns} data={listColor} filterBy="name" />
         </div>
       )}
+      <div className="border-b pb-4 border-[rgb(228, 228, 231)]">
+        <Heading title={`API`} description="API call for categories" />
+      </div>
+      <ApiList entityName="colors" entityIdName="colorId" />
     </div>
   );
 }

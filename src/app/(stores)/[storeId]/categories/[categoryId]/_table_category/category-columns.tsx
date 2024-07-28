@@ -6,7 +6,8 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import { Button } from "@/components/ui/button";
 import { CategoryType } from "@/Type/CategoryTypes";
-import CategoryCellAction from "./cellCategoryActions";
+import { BillboardType } from "@/Type/BillboardTypes";
+import CategoryCellAction from "@/app/(stores)/[storeId]/categories/[categoryId]/_table_category/cell-category-actions";
 
 export const CategoryColumns: ColumnDef<CategoryType>[] = [
   {
@@ -14,8 +15,12 @@ export const CategoryColumns: ColumnDef<CategoryType>[] = [
     accessorKey: "name",
   },
   {
-    header: "BillboardId",
+    header: "Billboard",
     accessorKey: "billboardId",
+    cell: ({ row }) => {
+      const billboard: BillboardType = row.getValue("billboardId");
+      return <div>{billboard.label}</div>;
+    },
   },
   {
     header: ({ column }) => {

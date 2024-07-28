@@ -1,12 +1,12 @@
 "use client";
 
+import { format } from "date-fns";
+import { ArrowUpDown } from "lucide-react";
 import { ColumnDef } from "@tanstack/react-table";
 
-import { ProductType } from "@/Type/ProductType";
-import ProductCellAction from "./cellProductActions";
-import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
-import { ArrowUpDown } from "lucide-react";
+import { ProductType } from "@/Type/ProductType";
+import ProductCellAction from "@/app/(stores)/[storeId]/products/[productId]/_table_product/cell-product-actions";
 
 // export const ProductColumns: ColumnDef<ProductType>[] = [
 export const ProductColumns: ColumnDef<ProductType>[] = [
@@ -31,10 +31,10 @@ export const ProductColumns: ColumnDef<ProductType>[] = [
   },
   {
     header: "Category",
-    accessorKey: "categoryObject",
+    accessorKey: "categoryId",
     cell: ({ row }) => {
-      const categoryObject = row.getValue("categoryObject") as { categoryId: string; categoryName: string };
-      return <div>{categoryObject.categoryName}</div>;
+      const category: any = row.getValue("categoryId");
+      return <div>{category.name}</div>;
     },
   },
   {

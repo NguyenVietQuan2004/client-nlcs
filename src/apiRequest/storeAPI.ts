@@ -2,8 +2,8 @@ import httpRequest from "@/lib/http";
 import {
   StoreResType,
   StoreBodyType,
-  LitStoreBodyType,
   ListStoreResType,
+  LitStoreBodyType,
   CreateStoreResType,
   UpdateStoreResType,
   DeleteStoreResType,

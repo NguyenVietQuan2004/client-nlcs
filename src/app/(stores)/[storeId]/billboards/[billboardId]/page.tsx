@@ -1,9 +1,9 @@
 import { cookies } from "next/headers";
 
+import { handlError } from "@/components/handle-error";
 import { billboardAPI } from "@/apiRequest/billboardAPI";
 import { BillboardResType } from "@/Type/BillboardTypes";
 import BillboardForm from "@/app/(stores)/[storeId]/billboards/[billboardId]/billboard-id-form";
-import { handlError } from "@/components/handle-error";
 
 interface BillboardIdProps {
   params: { storeId: string; billboardId: string };
@@ -18,8 +18,10 @@ async function getBillboard(storeId: string, billboardId: string) {
       sessionToken,
       storeId,
     });
-  } catch (error) {
-    handlError({ consoleError: "GET_BILLBOSRD_ERROR", error });
+  } catch (error: any) {
+    if (error.statusCode !== 400) {
+      handlError({ consoleError: "GET_BILLBOSRD_ERROR", error });
+    }
   }
   return billboard;
 }

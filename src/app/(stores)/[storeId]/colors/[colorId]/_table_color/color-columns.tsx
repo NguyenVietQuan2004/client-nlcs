@@ -6,7 +6,7 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import { ColorType } from "@/Type/ColorType";
 import { Button } from "@/components/ui/button";
-import ColorCellAction from "@/app/(stores)/[storeId]/colors/[colorId]/_table_color/cellColorActions";
+import ColorCellAction from "@/app/(stores)/[storeId]/colors/[colorId]/_table_color/cell-color-actions";
 
 export const ColorColumns: ColumnDef<ColorType>[] = [
   {

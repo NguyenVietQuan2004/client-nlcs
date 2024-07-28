@@ -1,12 +1,13 @@
 "use client";
+
 import { PlusIcon } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 
 import Heading from "@/components/heading";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { DataTable } from "@/components/data-table/data-table";
-import { ProductColumns } from "@/app/(stores)/[storeId]/products/[productId]/_table_product/product-columns";
 import { ListProductResType } from "@/Type/ProductType";
+import { DataTable } from "@/components/data-table/data-table";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { ProductColumns } from "@/app/(stores)/[storeId]/products/[productId]/_table_product/product-columns";
 
 interface ProductsClientProps {
   listObjectProduct: ListProductResType | null;

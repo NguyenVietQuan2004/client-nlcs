@@ -3,8 +3,8 @@ import { redirect } from "next/navigation";
 
 import { storeAPI } from "@/apiRequest/storeAPI";
 import { StoreResType } from "@/Type/StoreTypes";
-import SettingForm from "@/app/(stores)/[storeId]/settings/setting-form";
 import { handlError } from "@/components/handle-error";
+import SettingForm from "@/app/(stores)/[storeId]/settings/setting-form";
 
 interface SettingsProps {
   params: { storeId: string };

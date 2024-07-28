@@ -1,15 +1,15 @@
 import httpRequest from "@/lib/http";
 import {
-  CreateSizeBodyType,
-  CreateSizeResType,
-  DeleteSizeBodyType,
-  DeleteSizeResType,
-  ListSizeBodyType,
-  ListSizeResType,
-  SizeBodyType,
   SizeResType,
-  UpdateSizeBodyType,
+  SizeBodyType,
+  ListSizeResType,
+  ListSizeBodyType,
+  DeleteSizeResType,
+  CreateSizeResType,
   UpdateSizeResType,
+  DeleteSizeBodyType,
+  UpdateSizeBodyType,
+  CreateSizeBodyType,
 } from "@/Type/SizeTypes";
 
 export const sizeAPI = {

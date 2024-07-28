@@ -13,25 +13,61 @@ export type ProductBodyType = z.TypeOf<typeof ProductBody>;
 //  PRODUCT RES TYPE
 export const ProductRes = z.object({
   data: z.object({
-    _id: z.string(),
-    images: z.array(z.string()),
-    name: z.string(),
-    storeId: z.string(),
-    arrayPrice: z.array(
+    product: z.object({
+      _id: z.string(),
+      images: z.array(z.string()),
+      name: z.string(),
+      storeId: z.string(),
+      arrayPrice: z.array(
+        z.object({
+          size: z.string(),
+          price: z.number(),
+          colors: z.array(z.string()),
+        })
+      ),
+      categoryId: z.object({
+        _id: z.string(),
+        name: z.string(),
+        storeId: z.string(),
+        billboardId: z.string(),
+        createdAt: z.string(),
+        updatedAt: z.string(),
+      }),
+      isFeature: z.boolean(),
+      isArchive: z.boolean(),
+      createdAt: z.string(),
+      updatedAt: z.string(),
+    }),
+    listColor: z.array(
       z.object({
-        size: z.string(),
-        price: z.number(),
-        colors: z.array(z.string()),
+        _id: z.string(),
+        name: z.string(),
+        storeId: z.string(),
+        value: z.string(),
+        createdAt: z.string(),
+        updatedAt: z.string(),
       })
     ),
-    categoryObject: z.object({
-      categoryId: z.string(),
-      categoryName: z.string(),
-    }),
-    isFeature: z.boolean(),
-    isArchive: z.boolean(),
-    createdAt: z.string(),
-    updatedAt: z.string(),
+    listSize: z.array(
+      z.object({
+        _id: z.string(),
+        name: z.string(),
+        storeId: z.string(),
+        value: z.string(),
+        createdAt: z.string(),
+        updatedAt: z.string(),
+      })
+    ),
+    listCategory: z.array(
+      z.object({
+        _id: z.string(),
+        name: z.string(),
+        storeId: z.string(),
+        billboardId: z.string(),
+        createdAt: z.string(),
+        updatedAt: z.string(),
+      })
+    ),
   }),
   message: z.string(),
   ok: z.boolean(),
@@ -40,7 +76,8 @@ export const ProductRes = z.object({
 export type ProductResType = z.TypeOf<typeof ProductRes>;
 
 // PRODUCT TYPE
-export type ProductType = Omit<ProductResType, "message" | "ok" | "statusCode">["data"];
+
+export type ProductType = Omit<ProductResType, "message" | "ok" | "statusCode">["data"]["product"];
 
 // LIST PRODUCT BODY TYPE
 export const ListProductBody = z.object({
@@ -64,9 +101,13 @@ export const ListProductRes = z.object({
           colors: z.array(z.string()),
         })
       ),
-      categoryObject: z.object({
-        categoryId: z.string(),
-        categoryName: z.string(),
+      categoryId: z.object({
+        _id: z.string(),
+        name: z.string(),
+        storeId: z.string(),
+        billboardId: z.string(),
+        createdAt: z.string(),
+        updatedAt: z.string(),
       }),
       isFeature: z.boolean(),
       isArchive: z.boolean(),
@@ -93,10 +134,7 @@ export const CreateProductBody = z.object({
       colors: z.array(z.string()),
     })
   ),
-  categoryObject: z.object({
-    categoryId: z.string(),
-    categoryName: z.string(),
-  }),
+  categoryId: z.string(),
   isFeature: z.boolean(),
   isArchive: z.boolean(),
 });
@@ -116,10 +154,7 @@ export const CreateProductRes = z.object({
         colors: z.array(z.string()),
       })
     ),
-    categoryObject: z.object({
-      categoryId: z.string(),
-      categoryName: z.string(),
-    }),
+    categoryId: z.string(),
     isFeature: z.boolean(),
     isArchive: z.boolean(),
     createdAt: z.string(),
@@ -145,10 +180,7 @@ export const UpdateProductBody = z.object({
       colors: z.array(z.string()),
     })
   ),
-  categoryObject: z.object({
-    categoryId: z.string(),
-    categoryName: z.string(),
-  }),
+  categoryId: z.string(),
   isFeature: z.boolean(),
   isArchive: z.boolean(),
 });
@@ -168,10 +200,7 @@ export const UpdateProductRes = z.object({
         colors: z.array(z.string()),
       })
     ),
-    categoryObject: z.object({
-      categoryId: z.string(),
-      categoryName: z.string(),
-    }),
+    categoryId: z.string(),
     isFeature: z.boolean(),
     isArchive: z.boolean(),
     createdAt: z.string(),
@@ -204,10 +233,7 @@ export const DeleteProductRes = z.object({
         colors: z.array(z.string()),
       })
     ),
-    categoryObject: z.object({
-      categoryId: z.string(),
-      categoryName: z.string(),
-    }),
+    categoryId: z.string(),
     isFeature: z.boolean(),
     isArchive: z.boolean(),
     createdAt: z.string(),

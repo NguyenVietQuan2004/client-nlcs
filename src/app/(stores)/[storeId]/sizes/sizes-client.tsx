@@ -1,4 +1,5 @@
 "use client";
+
 import { PlusIcon } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 
@@ -7,6 +8,7 @@ import { ListSizeResType } from "@/Type/SizeTypes";
 import { DataTable } from "@/components/data-table/data-table";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { SizeColumns } from "@/app/(stores)/[storeId]/sizes/[sizeId]/_table_size/size-columns";
+import ApiList from "@/components/api-list";
 
 interface SizesClientProps {
   listObjectSize: ListSizeResType | null;
@@ -34,6 +36,10 @@ function SizesClient({ listObjectSize }: SizesClientProps) {
           <DataTable columns={SizeColumns} data={listSize} filterBy="name" />
         </div>
       )}
+      <div className="border-b pb-4 border-[rgb(228, 228, 231)]">
+        <Heading title={`API`} description="API call for categories" />
+      </div>
+      <ApiList entityName="sizes" entityIdName="sizeId" />
     </div>
   );
 }

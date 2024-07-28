@@ -14,8 +14,10 @@ async function getSizes(storeId: string) {
   try {
     const sessionToken = cookies().get("sessionToken")?.value || "";
     sizes = await sizeAPI.getListSize({ storeId, sessionToken });
-  } catch (error) {
-    handlError({ consoleError: "GET_ALL_SIZE", error });
+  } catch (error: any) {
+    if (error.statusCode !== 400) {
+      handlError({ consoleError: "GET_ALL_SIZE", error });
+    }
   }
   return sizes;
 }

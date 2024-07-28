@@ -1,10 +1,11 @@
 import { cookies } from "next/headers";
-import BillboardsClient from "./billboards-client";
-import { ListBillboardResType } from "@/Type/BillboardTypes";
-import { billboardAPI } from "@/apiRequest/billboardAPI";
-import { handlError } from "@/components/handle-error";
 
-interface BillboardProps {
+import { handlError } from "@/components/handle-error";
+import { billboardAPI } from "@/apiRequest/billboardAPI";
+import { ListBillboardResType } from "@/Type/BillboardTypes";
+import BillboardsClient from "@/app/(stores)/[storeId]/billboards/billboards-client";
+
+interface BillboardsProps {
   params: { storeId: string };
 }
 
@@ -20,7 +21,7 @@ async function getBillboards(storeId: string) {
   return billboards;
 }
 
-export default async function Billboards({ params }: BillboardProps) {
+export default async function Billboards({ params }: BillboardsProps) {
   const billboards = await getBillboards(params.storeId);
   return (
     <div>

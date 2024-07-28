@@ -1,15 +1,13 @@
-import { Trash } from "lucide-react";
-
 import {
-  AlertDialog as UiAlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
+  AlertDialogTitle,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogTitle,
+  AlertDialogCancel,
+  AlertDialogAction,
   AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialog as UiAlertDialog,
 } from "@/components/ui/alert-dialog";
 import LoadingButton from "@/components/loadingButton";
 import { buttonVariants } from "@/components/ui/button";

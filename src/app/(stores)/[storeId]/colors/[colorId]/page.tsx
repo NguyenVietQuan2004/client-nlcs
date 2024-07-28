@@ -18,8 +18,10 @@ async function getColor(storeId: string, colorId: string) {
       sessionToken,
       storeId,
     });
-  } catch (error) {
-    handlError({ consoleError: "GET_COLOR_ERROR", error });
+  } catch (error: any) {
+    if (error.statusCode !== 400) {
+      handlError({ consoleError: "GET_COLOR_ERROR", error });
+    }
   }
   return color;
 }

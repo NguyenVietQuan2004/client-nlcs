@@ -1,4 +1,5 @@
 "use client";
+
 import z from "zod";
 import { useState } from "react";
 import { Trash } from "lucide-react";
@@ -14,14 +15,12 @@ import LoadingButton from "@/components/loadingButton";
 import { categoryAPI } from "@/apiRequest/categoryAPI";
 import { handlError } from "@/components/handle-error";
 import { CategoryResType } from "@/Type/CategoryTypes";
-import { ListBillboardResType } from "@/Type/BillboardTypes";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface CategoryFormProps {
   initObjectData: CategoryResType | null;
-  listBillboardObject: ListBillboardResType | null;
 }
 const formSchema = z.object({
   name: z.string().min(1, {
@@ -30,9 +29,9 @@ const formSchema = z.object({
   billboardId: z.string().min(1, { message: "Image cannot be emty" }),
 });
 
-function CategoryForm({ initObjectData, listBillboardObject }: CategoryFormProps) {
-  const initData = initObjectData?.data;
-  const listBillboard = listBillboardObject?.data;
+function CategoryForm({ initObjectData }: CategoryFormProps) {
+  const initData = initObjectData?.data.category;
+  const listBillboard = initObjectData?.data.listBillboard;
   const router = useRouter();
   const params = useParams();
   const [isLoading, setIsLoading] = useState(false);

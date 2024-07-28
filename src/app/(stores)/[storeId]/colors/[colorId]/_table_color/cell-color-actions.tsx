@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import { MoreHorizontal } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
@@ -43,7 +44,6 @@ function ColorCellAction({ row }: CellActionProps) {
         title: "Delete color success.",
         variant: "success",
       });
-      router.push(`/${params.storeId}/colors`);
       router.refresh();
     } catch (error) {
       handlError({ consoleError: "DELETE_COLOR_ERROR", error, isToast: true });

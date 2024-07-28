@@ -6,7 +6,7 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import { SizeType } from "@/Type/SizeTypes";
 import { Button } from "@/components/ui/button";
-import SizeCellAction from "@/app/(stores)/[storeId]/sizes/[sizeId]/_table_size/cellSizeActions";
+import SizeCellAction from "@/app/(stores)/[storeId]/sizes/[sizeId]/_table_size/cell-size-actions";
 
 export const SizeColumns: ColumnDef<SizeType>[] = [
   {

@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import { MoreHorizontal } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
@@ -13,9 +14,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
 import AlertModal from "@/components/alert-modal";
-import { billboardAPI } from "@/apiRequest/billboardAPI";
 import { BillboardType } from "@/Type/BillboardTypes";
 import { handlError } from "@/components/handle-error";
+import { billboardAPI } from "@/apiRequest/billboardAPI";
 
 interface CellActionProps {
   row: BillboardType;
@@ -43,7 +44,6 @@ function BillboardCellAction({ row }: CellActionProps) {
         title: "Delete billboard success.",
         variant: "success",
       });
-      router.push(`/${params.storeId}/billboards`);
       router.refresh();
     } catch (error) {
       handlError({ consoleError: "DELETE_BILLBOARD_ERROR", error, isToast: true });

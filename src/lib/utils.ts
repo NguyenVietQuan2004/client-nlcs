@@ -1,6 +1,5 @@
-import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import z, { object } from "zod";
+import { type ClassValue, clsx } from "clsx";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -26,7 +25,7 @@ export const createListDefaultValueForm = (numSize: number, prefixName: string, 
 };
 
 export const createListSchemaForm = (numSize: number, prefixName: string, defaultValue: any) => {
-  return createUniqueArray(numSize)?.reduce((acc: any, _, index) => {
+  return createUniqueArray(numSize)?.reduce((acc: Record<string, any>, _, index) => {
     acc[`${prefixName}${index + 1}`] = defaultValue;
     return acc;
   }, {});
