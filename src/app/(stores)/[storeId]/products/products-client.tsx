@@ -8,6 +8,7 @@ import { ListProductResType } from "@/Type/ProductType";
 import { DataTable } from "@/components/data-table/data-table";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { ProductColumns } from "@/app/(stores)/[storeId]/products/[productId]/_table_product/product-columns";
+import ApiList from "@/components/api-list";
 
 interface ProductsClientProps {
   listObjectProduct: ListProductResType | null;
@@ -35,6 +36,10 @@ function ProductsClient({ listObjectProduct }: ProductsClientProps) {
           <DataTable columns={ProductColumns} data={listProduct} filterBy="name" />
         </div>
       )}
+      <div className="border-b pb-4 border-[rgb(228, 228, 231)]">
+        <Heading title={`API`} description="API call for billboards" />
+      </div>
+      <ApiList entityName="products" entityIdName="productId" />
     </div>
   );
 }
