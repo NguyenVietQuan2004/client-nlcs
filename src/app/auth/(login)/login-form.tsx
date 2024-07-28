@@ -32,7 +32,7 @@ function LoginForm({ isSignUp }: ResgisterFormProps) {
     try {
       const result: LoginResType = await authApi.login(data);
       await authApi.sendCookieToServer(result);
-      localStorage.setItem("user", JSON.stringify(result.data));
+      localStorage.setItem("user", JSON.stringify(result.data.userName));
       window.location.assign("/");
     } catch (error: any) {
       handlError({
