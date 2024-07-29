@@ -7,7 +7,7 @@ interface CellPriceOrderProps {
 
 function CellPriceOrder({ row }: CellPriceOrderProps) {
   const error: Array<string> = [];
-  const totalPrice = row.listProductOrder.reduce((acc: any, order: any) => {
+  const totalPrice = row.listProductOrder.reduce((acc: number, order: any) => {
     const sizeUserSelect = order.size;
     const colorsUserSelect = order.colors;
     const product: ProductType = order._id[0];

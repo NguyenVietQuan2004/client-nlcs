@@ -7,19 +7,24 @@ import { ProductType } from "@/Type/ProductType";
 import CellPriceOrder from "@/app/(stores)/[storeId]/orders/_table_order/cell-price-order";
 import OrderCellAction from "@/app/(stores)/[storeId]/orders/_table_order/cell-action-oder";
 
+interface orderProps {
+  _id: ProductType[];
+  size: string;
+  colors: string[];
+}
+
 export const OrderColumns: ColumnDef<OrderType>[] = [
   {
     header: "Products",
     accessorKey: "listProductOrder",
     cell: ({ row }) => {
-      const listProductOrder: any = row.getValue("listProductOrder");
-      return listProductOrder.map((order: any) => {
+      const listProductOrder: orderProps[] = row.getValue("listProductOrder");
+      return listProductOrder.map((order: orderProps) => {
         const sizeUserSelect = order.size;
         const product: ProductType = order._id[0];
         const colorsUserSelect = order.colors;
-
         return (
-          <div key={order.size}>
+          <div key={product._id}>
             <div>
               <span className="font-semibold">Name:</span> {product?.name}{" "}
             </div>

@@ -2,6 +2,44 @@
 
 import z from "zod";
 
+//ORDER DATA
+export const OrderData = z.object({
+  _id: z.string(),
+  phone: z.string(),
+  storeId: z.string(),
+  address: z.string(),
+  isPaid: z.boolean(),
+  listProductOrder: z.array(
+    z.object({
+      // cho nay tra ve 1 mang chua fix
+      _id: z.array(
+        z.object({
+          _id: z.string(),
+          images: z.array(z.string()),
+          name: z.string(),
+          storeId: z.string(),
+          arrayPrice: z.array(
+            z.object({
+              size: z.string(),
+              price: z.number(),
+              colors: z.array(z.string()),
+            })
+          ),
+          categoryId: z.string(),
+          isFeature: z.boolean(),
+          isArchive: z.boolean(),
+          createdAt: z.string(),
+          updatedAt: z.string(),
+        })
+      ),
+      size: z.string(),
+      colors: z.array(z.string()),
+    })
+  ),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+});
+
 //  ORDER BODY TYPE
 export const OrderBody = z.object({
   _id: z.string(),
@@ -12,42 +50,7 @@ export type OrderBodyType = z.TypeOf<typeof OrderBody>;
 
 //  ORDER RES TYPE
 export const OrderRes = z.object({
-  data: z.object({
-    _id: z.string(),
-    phone: z.string(),
-    storeId: z.string(),
-    address: z.string(),
-    isPaid: z.boolean(),
-    listProductOrder: z.array(
-      z.object({
-        // cho nay tra ve 1 mang chua fix
-        _id: z.array(
-          z.object({
-            _id: z.string(),
-            images: z.array(z.string()),
-            name: z.string(),
-            storeId: z.string(),
-            arrayPrice: z.array(
-              z.object({
-                size: z.string(),
-                price: z.number(),
-                colors: z.array(z.string()),
-              })
-            ),
-            categoryId: z.string(),
-            isFeature: z.boolean(),
-            isArchive: z.boolean(),
-            createdAt: z.string(),
-            updatedAt: z.string(),
-          })
-        ),
-        size: z.string(),
-        colors: z.array(z.string()),
-      })
-    ),
-    createdAt: z.string(),
-    updatedAt: z.string(),
-  }),
+  data: OrderData,
   message: z.string(),
   ok: z.boolean(),
   statusCode: z.number(),
@@ -55,7 +58,7 @@ export const OrderRes = z.object({
 export type OrderResType = z.TypeOf<typeof OrderRes>;
 
 // ORDER TYPE
-export type OrderType = Pick<OrderResType, "data">["data"];
+export type OrderType = z.TypeOf<typeof OrderData>;
 
 // LIST ORDER BODY TYPE
 export const ListOrderBody = z.object({
@@ -214,5 +217,25 @@ export const DeleteOrderRes = z.object({
   statusCode: z.number(),
 });
 export type DeleteOrderResType = z.TypeOf<typeof DeleteOrderRes>;
+
+// GET OVERVIEW BODY TYPE
+
+export const OverviewBody = z.object({
+  sessionToken: z.string(),
+  storeId: z.string(),
+});
+export type OverviewBodyType = z.TypeOf<typeof OverviewBody>;
+
+// OVERVIEW RES TYPE
+export const OverviewRes = z.object({
+  data: z.object({
+    listOrderPaid: z.array(OrderData),
+    countProductsInStock: z.number(),
+  }),
+  message: z.string(),
+  ok: z.boolean(),
+  statusCode: z.number(),
+});
+export type OverviewResType = z.TypeOf<typeof OverviewRes>;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

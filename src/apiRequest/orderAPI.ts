@@ -6,6 +6,8 @@ import {
   DeleteOrderResType,
   CreateOrderBodyType,
   DeleteOrderBodyType,
+  OverviewBodyType,
+  OverviewResType,
 } from "@/Type/OrderTypes";
 
 export const orderAPI = {
@@ -32,5 +34,15 @@ export const orderAPI = {
       body: body,
       credentials: "include",
     });
+  },
+  getOverview(body: OverviewBodyType) {
+    return httpRequest.get<OverviewResType>(
+      `${process.env.NEXT_PUBLIC_API_ENDPOINT}/order/overview?storeId=${body.storeId}`,
+      {
+        headers: {
+          Cookie: `sessionToken=${body.sessionToken}`,
+        },
+      }
+    );
   },
 };
