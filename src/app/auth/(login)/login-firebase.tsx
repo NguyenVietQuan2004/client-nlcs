@@ -26,7 +26,7 @@ function LoginWithFirebase() {
           });
           await authApi.sendCookieToServer(result);
           localStorage.setItem("user", JSON.stringify(result.data.userName));
-          window.location.assign("/");
+          // window.location.assign("/");
         } catch (error) {
           handlError({
             consoleError: "Error login with firebase to server",

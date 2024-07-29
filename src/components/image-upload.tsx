@@ -25,8 +25,8 @@ export default function ImageUpload({ value, isLoading, onChange, onRemove }: Im
           return (
             <div key={item} className="relative w-[200px] h-[200px] object-cover overflow-hidden">
               <Image
-                width={200}
-                height={200}
+                width={600}
+                height={600}
                 src={item}
                 alt=""
                 className="w-[200px] h-[200px] object-cover rounded-sm"

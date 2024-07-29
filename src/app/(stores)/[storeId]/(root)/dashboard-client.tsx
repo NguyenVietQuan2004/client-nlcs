@@ -16,7 +16,6 @@ function DashboardClient({
   let revenue = 0;
   const sales = dataOverview.listOrderPaid.length;
   const numberProductsInStock = dataOverview.countProductsInStock;
-  console.log(dataOverview.listOrderPaid[0]);
   const revenueMonth = [
     { name: "Jan", total: 0 },
     { name: "Feb", total: 0 },
