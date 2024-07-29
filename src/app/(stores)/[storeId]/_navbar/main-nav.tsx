@@ -21,23 +21,13 @@ async function MainNavbar() {
     // redirect("/");
   }
   return (
-    <div className="relative p-4 border-b flex items-center">
+    <div className="p-4 border-b flex items-center">
       <div className="mr-8">
         <DropDownStore listStore={stores} />
       </div>
       <ListRoute />
       <div className="ml-auto">
         <UserAvatar />
-      </div>
-      <div className="absolute top-[70%] right-6  bg-zinc-100 shadow-lg ">
-        <Button
-          className={buttonVariants({
-            variant: "outline",
-            className: "text-black",
-          })}
-        >
-          Sign out
-        </Button>
       </div>
     </div>
   );

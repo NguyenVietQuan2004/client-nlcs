@@ -97,7 +97,14 @@ function LoginForm({ isSignUp }: ResgisterFormProps) {
       </Form>
       <div className="mt-4 text-sm text-blue-400 cursor-pointer underline">Forgot password? </div>
       <div className="h-16 w-16 mx-auto mt-4">
-        <Image priority alt="" src="/hange.png" className="h-full w-full object-cover" width={300} height={300} />
+        <Image
+          priority
+          alt=""
+          src="/images/hange.png"
+          className="h-full w-full object-cover"
+          width={300}
+          height={300}
+        />
       </div>
     </div>
   );
