@@ -37,7 +37,7 @@ function RegisterForm({ isSignUp, setIsSignUp }: ResgisterFormProps) {
     if (!isSignUp) {
       form.reset();
     }
-  }, [isSignUp]);
+  }, [isSignUp, form]);
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
       await authApi.register(data);
