@@ -7,6 +7,7 @@ import { handlError } from "@/components/handle-error";
 import ListRoute from "@/app/(stores)/[storeId]/_navbar/List-route";
 import DropDownStore from "@/app/(stores)/[storeId]/_navbar/drop-down";
 import { Button, buttonVariants } from "@/components/ui/button";
+import { redirect } from "next/navigation";
 
 async function MainNavbar() {
   let stores: ListStoreResType | null = null;
@@ -17,8 +18,8 @@ async function MainNavbar() {
     handlError({ consoleError: "GET_ALL_STORE", error });
   }
   if (stores?.data.length === 0 || !stores) {
-    return <div>no store loading redirect main page...</div>;
-    // redirect("/");
+    redirect("/");
+    // return <div>no store loading redirect main page...</div>;
   }
   return (
     <div className="p-4 border-b flex items-center">

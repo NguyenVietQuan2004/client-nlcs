@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
 const config = {
   darkMode: ["class"],
@@ -69,15 +70,53 @@ const config = {
           from: { "background-color": "white" },
           to: { "background-color": "black" },
         },
+
+        navbarLoading: {
+          "0%": { left: "0" },
+          "50%": {
+            left: "100%",
+          },
+          "100%": {
+            left: "0",
+          },
+        },
+        overviewLoading: {
+          "0%": { top: "0", opacity: "0" },
+          "10%": {
+            opacity: "1",
+          },
+          "100%": {
+            top: "100%",
+            display: "block",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "loading-animate": "loading 1s ease-out infinite",
+        "navbar-loading": "navbarLoading 4s ease-out infinite",
+        "overview-loading": "overviewLoading 0.3s linear forwards  infinite ",
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    plugin(({ matchUtilities, theme }) => {
+      matchUtilities(
+        {
+          "animation-delay": (value) => {
+            return {
+              "animation-delay": value,
+            };
+          },
+        },
+        {
+          values: theme("transitionDelay"),
+        }
+      );
+    }),
+    require("tailwindcss-animate"),
+  ],
 } satisfies Config;
 
 export default config;

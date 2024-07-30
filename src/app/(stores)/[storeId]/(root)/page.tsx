@@ -8,6 +8,8 @@ import { handlError } from "@/components/handle-error";
 import DashboardClient from "@/app/(stores)/[storeId]/(root)/dashboard-client";
 import { OverviewBodyType, OverviewResType } from "@/Type/OrderTypes";
 import { boolean } from "zod";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 interface StoreProps {
   params: { storeId: string };
@@ -35,7 +37,6 @@ async function getStore(storeId: string) {
 
 export default async function Store({ params }: StoreProps) {
   const dataOverview = await getStore(params.storeId);
-  console.log(dataOverview);
   return (
     <div>
       <DashboardClient dataOverview={dataOverview.data} />

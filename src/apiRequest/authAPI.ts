@@ -37,4 +37,15 @@ export const authApi = {
       credentials: "include",
     });
   },
+
+  signOut() {
+    return httpRequest.post<any>(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/auth/signout`, {
+      credentials: "include",
+    });
+  },
+  signOutNextServer() {
+    return httpRequest.post<any>(`/api/auth/signout`, {
+      credentials: "include",
+    });
+  },
 };

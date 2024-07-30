@@ -10,13 +10,13 @@ const Footer = () => {
   const pathsToMinimize = ["/verify-email", "/sign-up", "/sign-in"];
 
   return (
-    <footer className="bg-white flex-grow-0">
+    <footer className="bg-white flex-grow-0 z-10">
       <Wrapper>
         <div className="border-t border-gray-200">
           {pathsToMinimize.includes(pathname) ? null : (
             <div className="pb-8 pt-16">
               <div className="flex justify-center">
-                <Image priority alt="" src="/images//hange.png" className="h-20 w-20" width={300} height={300}></Image>
+                <Image priority alt="" src="/images/hange.png" className="h-20 w-20" width={300} height={300}></Image>
               </div>
             </div>
           )}
