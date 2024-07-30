@@ -10,10 +10,10 @@ function StoreLayout({
 }>) {
   return (
     <div>
-      {/* <MainNavbar />
+      <MainNavbar />
       <Wrapper>{children}</Wrapper>
-      <Footer /> */}
-      <Loading />
+      <Footer />
+      {/* <Loading /> */}
     </div>
   );
 }
