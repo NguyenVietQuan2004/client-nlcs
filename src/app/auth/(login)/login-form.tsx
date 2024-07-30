@@ -12,6 +12,7 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from "@/component
 import { GoogleIcon } from "../../../../public/icons/icons";
 import Image from "next/image";
 import LoginWithFirebase from "./login-firebase";
+import { useEffect } from "react";
 
 interface ResgisterFormProps {
   isSignUp: boolean;
@@ -23,7 +24,7 @@ const formSchema = z.object({
     message: "Pass must be at least 6 characters.",
   }),
 });
-function LoginForm({ isSignUp }: ResgisterFormProps) {
+function LoginForm({ isSignUp, setIsSignUp }: ResgisterFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -31,6 +32,11 @@ function LoginForm({ isSignUp }: ResgisterFormProps) {
       password: "",
     },
   });
+  useEffect(() => {
+    if (isSignUp) {
+      form.reset();
+    }
+  }, [isSignUp]);
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
       const result: LoginResType = await authApi.login(data);
@@ -47,17 +53,19 @@ function LoginForm({ isSignUp }: ResgisterFormProps) {
       }
     }
   };
+  const hasErrors = !!Object.keys(form.formState.errors).length;
+
   return (
     <div
-      className={`absolute ${
-        isSignUp ? "right-[25%] opacity-0 z-30" : "right-1/2 opacity-100 z-40"
-      } top-1/2  -translate-y-1/2 w-[25%] transition-all duration-1000  bg-white p-10 pb-0  min-h-[600px]  flex-1  `}
+      className={`lg:rounded-l-md absolute ${
+        isSignUp ? "  lg:right-[10%] xl:right-[20%] 2xl:right-[25%] opacity-0 z-30 " : "lg:right-1/2 opacity-100 z-40 "
+      } lg:top-1/2 inset-0 lg:inset-auto xl:w-[30%] 2xl:w-[25%]  p-2 sm:p-[100px]  md:p-[200px]   lg:p-10 lg:py-0  lg:w-[40%] flex flex-col justify-center  lg:-translate-y-1/2  transition-all duration-1000  bg-white  pb-0  min-h-[600px]  flex-1  `}
     >
-      <h2 className="text-[26px] text-center font-extrabold mt-8">Sign in</h2>
+      <h2 className="text-[26px] text-center font-extrabold mt-10 sm:text-3xl">Sign in</h2>
       <LoginWithFirebase />
-      <div className="text-center text-sm font-medium">Or use your account</div>
+      <div className="text-center text-sm font-medium sm:text-base">Or use your account</div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="mt-10 flex gap-y-2 flex-col items-center">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="mt-6 lg:mt-10 flex gap-y-2 flex-col items-center">
           <FormField
             control={form.control}
             name="email"
@@ -90,13 +98,30 @@ function LoginForm({ isSignUp }: ResgisterFormProps) {
               </FormItem>
             )}
           />
-          <button type="submit" className="py-3 font-bold bg-red-400 text-white px-12 border rounded-full mt-5">
+          <div className="mt-2 text-sm sm:text-base text-blue-400 cursor-pointer underline ml-2 lg:ml-0 self-start">
+            Forgot password?{" "}
+          </div>
+          <button
+            type="submit"
+            className=" hover:bg-opacity-65 py-3 font-bold bg-red-400 text-white px-12 border rounded-full mt-4"
+          >
             Sign in
           </button>
+          <div className={`block lg:hidden mt-4 text-sm sm:text-base ml-2 lg:ml-0 self-start`}>
+            You don't have an account?{" "}
+            <span
+              className="text-sm sm:text-base text-blue-400 cursor-pointer underline"
+              onClick={() => {
+                setIsSignUp(true);
+                form.reset();
+              }}
+            >
+              Create account
+            </span>
+          </div>
         </form>
       </Form>
-      <div className="mt-4 text-sm text-blue-400 cursor-pointer underline">Forgot password? </div>
-      <div className="h-16 w-16 mx-auto mt-4">
+      <div className={`h-16 w-16 mx-auto mt-4 lg:mt-2`}>
         <Image
           priority
           alt=""

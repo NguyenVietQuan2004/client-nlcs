@@ -102,7 +102,7 @@ function SettingForm({ initData }: SettingFormProps) {
         </Button>
       </div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="w-[320px] mt-4">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="w-[320px] mt-4 min-h-[72vh]">
           <FormField
             control={form.control}
             name="name"

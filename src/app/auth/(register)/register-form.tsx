@@ -9,6 +9,7 @@ import { handlError } from "@/components/handle-error";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { GoogleIcon } from "../../../../public/icons/icons";
 import LoginWithFirebase from "../(login)/login-firebase";
+import { useEffect } from "react";
 
 interface ResgisterFormProps {
   isSignUp: boolean;
@@ -32,6 +33,11 @@ function RegisterForm({ isSignUp, setIsSignUp }: ResgisterFormProps) {
       password: "",
     },
   });
+  useEffect(() => {
+    if (!isSignUp) {
+      form.reset();
+    }
+  }, [isSignUp]);
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
       await authApi.register(data);
@@ -49,17 +55,18 @@ function RegisterForm({ isSignUp, setIsSignUp }: ResgisterFormProps) {
       });
     }
   };
+  const hasErrors = !!Object.keys(form.formState.errors).length;
   return (
     <div
-      className={`absolute ${
-        isSignUp ? "right-[25%] opacity-100 z-40" : "right-1/2 opacity-0 z-30"
-      } top-1/2 -translate-y-1/2  w-[25%] transition-all duration-1000  bg-white p-10  min-h-[600px]  flex-1  `}
+      className={`lg:rounded-r-md absolute ${
+        isSignUp ? "lg:right-[10%]  xl:right-[20%] 2xl:right-[25%] opacity-100 z-40" : "lg:right-1/2 opacity-0 z-30"
+      } lg:top-1/2 inset-0 lg:inset-auto lg:w-[40%] xl:w-[30%] 2xl:w-[25%] sm:p-[100px] md:p-[200px] lg:p-10 lg:py-0 flex flex-col justify-center lg:block  p-2  w-full  lg:-translate-y-1/2   transition-all duration-1000  bg-white   min-h-[600px]  flex-1  `}
     >
-      <h2 className="text-[26px] text-center font-extrabold mt-8">Sign up</h2>
+      <h2 className="text-[26px]  text-center font-extrabold mt-10 sm:text-3xl">Sign up</h2>
       <LoginWithFirebase />
-      <div className="text-center text-sm font-medium">Or use your email for registration</div>
+      <div className="text-center text-sm font-medium sm:text-base">Or use your email for registration</div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="mt-4 flex gap-y-2 flex-col items-center">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="mt-6 lg:mt-10 flex gap-y-2 flex-col items-center">
           <FormField
             control={form.control}
             name="userName"
@@ -108,10 +115,25 @@ function RegisterForm({ isSignUp, setIsSignUp }: ResgisterFormProps) {
               </FormItem>
             )}
           />
-          <button type="submit" className="py-3 font-bold bg-red-400 text-white px-12 border rounded-full mt-5">
+          <button
+            type="submit"
+            className={`py-3 hover:bg-opacity-65 font-bold bg-red-400 text-white px-12 border rounded-full mt-5 `}
+          >
             Sign up
           </button>
         </form>
+        <div className={`block lg:hidden sm:text-base mt-6 text-sm ml-2 lg:ml-0 self-start`}>
+          You have an account?{" "}
+          <span
+            className="text-sm text-blue-400 cursor-pointer underline"
+            onClick={() => {
+              setIsSignUp(false);
+              form.reset();
+            }}
+          >
+            Sign in
+          </span>
+        </div>
       </Form>
     </div>
   );
