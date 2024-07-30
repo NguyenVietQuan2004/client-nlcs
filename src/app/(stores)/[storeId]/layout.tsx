@@ -1,6 +1,7 @@
 import Wrapper from "@/components/wrapper";
 import MainNavbar from "@/app/(stores)/[storeId]/_navbar/main-nav";
 import Footer from "@/components/Footer";
+import Loading from "./billboards/loading";
 
 function StoreLayout({
   children,
@@ -9,9 +10,10 @@ function StoreLayout({
 }>) {
   return (
     <div>
-      <MainNavbar />
+      {/* <MainNavbar />
       <Wrapper>{children}</Wrapper>
-      <Footer />
+      <Footer /> */}
+      <Loading />
     </div>
   );
 }
