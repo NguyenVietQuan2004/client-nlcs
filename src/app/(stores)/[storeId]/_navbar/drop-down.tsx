@@ -22,7 +22,7 @@ function DropDownStore({ listStore: listStoreInit }: DropDownStoreProps) {
   const [listStore, setListStore] = useState(listStoreInit.data);
 
   const onSelectedStore = (newStoreId: string) => {
-    router.replace(`${newStoreId}`);
+    router.push(`/${newStoreId}`);
   };
   const currentStore = listStoreInit.data.find((item) => {
     return item._id === params.storeId;

@@ -17,7 +17,7 @@ function OrdersClient({ listObjectOrder }: OrdersClientProps) {
         <Heading title={`Orders( ${listOrder?.length})`} description="Manage orders for your store" />
       </div>
       {listOrder && (
-        <div className="container mx-auto py-10">
+        <div className="lg:container mx-auto py-10">
           <DataTable columns={OrderColumns} data={listOrder} filterBy="phone" />
         </div>
       )}

@@ -4,9 +4,9 @@ import { CreditCard, DollarSign, Package } from "lucide-react";
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 
 import Heading from "@/components/heading";
+import { OrderType } from "@/Type/OrderTypes";
 import { ProductType } from "@/Type/ProductType";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { OrderType } from "@/Type/OrderTypes";
 
 function DashboardClient({
   dataOverview,
@@ -49,7 +49,7 @@ function DashboardClient({
     <div>
       <Heading title="Dashboard" description="Overview of your store" />
       <div className="pt-4 border-b"></div>
-      <div className="grid grid-cols-3 gap-x-4 pt-4">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 pt-4 ">
         <Card className="flex justify-between items-start p-6">
           <div>
             <CardHeader className="p-0">
@@ -84,9 +84,11 @@ function DashboardClient({
           </div>
         </Card>
       </div>
-      <Card className="flex justify-between items-start flex-col p-6 mt-6 ">
+      <Card className=" justify-between items-start flex-col p-0 lg:p-6  mt-6 hidden sm:flex ">
+        {/* <Card className=" justify-between items-start flex-col p-6 mt-6 lg:flex hidden "> */}
+
         <CardHeader className="p-0">
-          <CardTitle className="text-sm font-semibold pb-8">Overview</CardTitle>
+          <CardTitle className="text-sm font-semibold pl-6 pt-6 lg:pt-0 lg:pl-0 pb-8 ">Overview</CardTitle>
         </CardHeader>
         <CardContent className="font-semibold text-lg p-0 pt-2 w-full">
           <ResponsiveContainer width={"100%"} height={350}>

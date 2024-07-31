@@ -6,10 +6,10 @@ import { useParams, useRouter } from "next/navigation";
 
 import {
   DropdownMenu,
-  DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { SizeType } from "@/Type/SizeTypes";
 import { sizeAPI } from "@/apiRequest/sizeAPI";

@@ -1,4 +1,7 @@
+"use client";
+
 import { z } from "zod";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -6,10 +9,8 @@ import { Input } from "@/components/ui/input";
 import { authApi } from "@/apiRequest/authAPI";
 import { toast } from "@/components/ui/use-toast";
 import { handlError } from "@/components/handle-error";
+import LoginWithFirebase from "@/app/auth/(login)/login-firebase";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
-import { GoogleIcon } from "../../../../public/icons/icons";
-import LoginWithFirebase from "../(login)/login-firebase";
-import { useEffect } from "react";
 
 interface ResgisterFormProps {
   isSignUp: boolean;

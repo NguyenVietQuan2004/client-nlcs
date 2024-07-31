@@ -4,11 +4,11 @@ import { PlusIcon } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 
 import Heading from "@/components/heading";
+import ApiList from "@/components/api-list";
 import { ListColorResType } from "@/Type/ColorType";
 import { DataTable } from "@/components/data-table/data-table";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { ColorColumns } from "@/app/(stores)/[storeId]/colors/[colorId]/_table_color/color-columns";
-import ApiList from "@/components/api-list";
 
 interface ColorsClientProps {
   listObjectColor: ListColorResType | null;
@@ -32,7 +32,7 @@ function ColorsClient({ listObjectColor }: ColorsClientProps) {
         </Button>
       </div>
       {listColor && (
-        <div className="container mx-auto py-10">
+        <div className="lg:container mx-auto py-10">
           <DataTable columns={ColorColumns} data={listColor} filterBy="name" />
         </div>
       )}

@@ -293,7 +293,7 @@ function ProductForm({ initObjectData }: ProductFormProps) {
             )}
           />
 
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-4 lg:gap-6">
             <FormField
               control={form.control}
               name="name"
@@ -414,7 +414,7 @@ function ProductForm({ initObjectData }: ProductFormProps) {
                 </React.Fragment>
               );
             })}
-            <div className="flex gap-x-4  items-center">
+            <div className="flex gap-x-4  lg:mt-0 items-center">
               {numSize !== listSize?.length && (
                 <Button
                   className={buttonVariants({
@@ -446,7 +446,7 @@ function ProductForm({ initObjectData }: ProductFormProps) {
               control={form.control}
               name="isFeature"
               render={({ field }) => (
-                <FormItem className="flex self-end items-start space-x-3 space-y-0 rounded-md border p-4 ">
+                <FormItem className="flex self-end  items-start space-x-3 space-y-0 rounded-md border p-4 ">
                   <FormControl>
                     <Checkbox checked={field.value} onCheckedChange={field.onChange} />
                   </FormControl>

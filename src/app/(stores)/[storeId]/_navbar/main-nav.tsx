@@ -1,13 +1,13 @@
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 import { storeAPI } from "@/apiRequest/storeAPI";
 import UserAvatar from "@/components/user-avatar";
 import { ListStoreResType } from "@/Type/StoreTypes";
 import { handlError } from "@/components/handle-error";
+import Drawer from "@/app/(stores)/[storeId]/_navbar/drawer";
 import ListRoute from "@/app/(stores)/[storeId]/_navbar/List-route";
 import DropDownStore from "@/app/(stores)/[storeId]/_navbar/drop-down";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { redirect } from "next/navigation";
 
 async function MainNavbar() {
   let stores: ListStoreResType | null = null;
@@ -22,12 +22,15 @@ async function MainNavbar() {
     // return <div>no store loading redirect main page...</div>;
   }
   return (
-    <div className="p-4 border-b flex items-center">
-      <div className="mr-8">
+    <div className="p-4 border-b  items-center flex justify-between">
+      <Drawer />
+      <div className="lg:mr-8">
         <DropDownStore listStore={stores} />
       </div>
-      <ListRoute />
-      <div className="ml-auto">
+      <div className="items-center  justify-between hidden lg:flex">
+        <ListRoute />
+      </div>
+      <div className="ml-0 lg:ml-auto">
         <UserAvatar />
       </div>
     </div>

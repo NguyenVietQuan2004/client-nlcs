@@ -11,7 +11,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-white flex-grow-0 z-10">
-      <Wrapper>
+      <div className="p-4">
         <div className="border-t border-gray-200">
           {pathsToMinimize.includes(pathname) ? null : (
             <div className="pb-8 pt-16">
@@ -62,7 +62,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-      </Wrapper>
+      </div>
     </footer>
   );
 };

@@ -1,7 +1,6 @@
 import Wrapper from "@/components/wrapper";
-import MainNavbar from "@/app/(stores)/[storeId]/_navbar/main-nav";
 import Footer from "@/components/Footer";
-import Loading from "./billboards/loading";
+import MainNavbar from "@/app/(stores)/[storeId]/_navbar/main-nav";
 
 function StoreLayout({
   children,
@@ -13,7 +12,6 @@ function StoreLayout({
       <MainNavbar />
       <Wrapper>{children}</Wrapper>
       <Footer />
-      {/* <Loading /> */}
     </div>
   );
 }

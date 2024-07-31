@@ -5,8 +5,8 @@ import { AuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth
 import { auth } from "@/firebase/config";
 import { authApi } from "@/apiRequest/authAPI";
 import { LoginResType } from "@/Type/AuthTypes";
-import { GoogleIcon } from "../../../../public/icons/icons";
 import { handlError } from "@/components/handle-error";
+import { GoogleIcon } from "../../../../public/icons/icons";
 
 const googleProvider = new GoogleAuthProvider();
 

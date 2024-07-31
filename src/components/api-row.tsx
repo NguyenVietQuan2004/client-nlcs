@@ -15,7 +15,7 @@ function ApiRow({ method, url }: ApiRowProps) {
     });
   };
   return (
-    <div className="flex flex-col py-3 px-4 border rounded-lg ">
+    <div className="flex flex-col py-3 px-2 lg:px-4 border rounded-lg ">
       <div className="flex justify-start gap-x-3 items-center">
         <DatabaseIcon className="w-5 h-5" />
         <div className="font-semibold">{method}</div>
@@ -26,10 +26,11 @@ function ApiRow({ method, url }: ApiRowProps) {
         >
           {method === "GET" ? "Public" : "Admin"}
         </div>
+        <CopyIcon className="w-5 h-5 cursor-pointer lg:hidden" onClick={handleCopy} />
       </div>
-      <div className="flex justify-between py-3 px-6">
+      <div className="flex justify-between py-3 lg:px-6 px-1 ">
         <div className="font-bold py-1 px-2 bg-zinc-100 rounded-lg">{url}</div>
-        <CopyIcon className="w-5 h-5 cursor-pointer" onClick={handleCopy} />
+        <CopyIcon className="hidden lg:block w-5 h-5 cursor-pointer" onClick={handleCopy} />
       </div>
     </div>
   );

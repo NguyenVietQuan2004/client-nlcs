@@ -4,11 +4,11 @@ import { PlusIcon } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 
 import Heading from "@/components/heading";
+import ApiList from "@/components/api-list";
 import { ListCategoryResType } from "@/Type/CategoryTypes";
 import { DataTable } from "@/components/data-table/data-table";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { CategoryColumns } from "@/app/(stores)/[storeId]/categories/[categoryId]/_table_category/category-columns";
-import ApiList from "@/components/api-list";
 
 interface CategoriesClientProps {
   listObjectCategory: ListCategoryResType | null;
@@ -33,7 +33,7 @@ function CategoriesClient({ listObjectCategory }: CategoriesClientProps) {
         </Button>
       </div>
       {listCategory && (
-        <div className="container mx-auto py-10">
+        <div className="lg:container mx-auto py-10">
           <DataTable columns={CategoryColumns} data={listCategory} filterBy="name" />
         </div>
       )}

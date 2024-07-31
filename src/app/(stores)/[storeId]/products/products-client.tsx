@@ -4,11 +4,11 @@ import { PlusIcon } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 
 import Heading from "@/components/heading";
+import ApiList from "@/components/api-list";
 import { ListProductResType } from "@/Type/ProductType";
 import { DataTable } from "@/components/data-table/data-table";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { ProductColumns } from "@/app/(stores)/[storeId]/products/[productId]/_table_product/product-columns";
-import ApiList from "@/components/api-list";
 
 interface ProductsClientProps {
   listObjectProduct: ListProductResType | null;
@@ -32,7 +32,7 @@ function ProductsClient({ listObjectProduct }: ProductsClientProps) {
         </Button>
       </div>
       {listProduct && (
-        <div className="container mx-auto py-10">
+        <div className="lg:container mx-auto py-10">
           <DataTable columns={ProductColumns} data={listProduct} filterBy="name" />
         </div>
       )}

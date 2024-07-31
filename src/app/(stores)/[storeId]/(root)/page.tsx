@@ -4,12 +4,9 @@ import { redirect } from "next/navigation";
 import { storeAPI } from "@/apiRequest/storeAPI";
 import { StoreResType } from "@/Type/StoreTypes";
 import { orderAPI } from "@/apiRequest/orderAPI";
+import { OverviewResType } from "@/Type/OrderTypes";
 import { handlError } from "@/components/handle-error";
 import DashboardClient from "@/app/(stores)/[storeId]/(root)/dashboard-client";
-import { OverviewBodyType, OverviewResType } from "@/Type/OrderTypes";
-import { boolean } from "zod";
-import { Suspense } from "react";
-import Loading from "./loading";
 
 interface StoreProps {
   params: { storeId: string };

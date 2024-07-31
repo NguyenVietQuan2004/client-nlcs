@@ -4,11 +4,11 @@ import { PlusIcon } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 
 import Heading from "@/components/heading";
+import ApiList from "@/components/api-list";
 import { ListSizeResType } from "@/Type/SizeTypes";
 import { DataTable } from "@/components/data-table/data-table";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { SizeColumns } from "@/app/(stores)/[storeId]/sizes/[sizeId]/_table_size/size-columns";
-import ApiList from "@/components/api-list";
 
 interface SizesClientProps {
   listObjectSize: ListSizeResType | null;
@@ -32,7 +32,7 @@ function SizesClient({ listObjectSize }: SizesClientProps) {
         </Button>
       </div>
       {listSize && (
-        <div className="container mx-auto py-10">
+        <div className="lg:container mx-auto py-10">
           <DataTable columns={SizeColumns} data={listSize} filterBy="name" />
         </div>
       )}

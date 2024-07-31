@@ -107,16 +107,16 @@ function SettingForm({ initData }: SettingFormProps) {
             control={form.control}
             name="name"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel className="font-semibold">Name</FormLabel>
+              <FormItem className="">
+                <FormLabel className="font-semibold mb-10">Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="Name store" {...field} className="select-none" disabled={isLoading} />
+                  <Input placeholder="Name store" {...field} className="select-none " disabled={isLoading} />
                 </FormControl>
                 <FormMessage className="text-sm" />
               </FormItem>
             )}
           />
-          <div className=" mt-4  ">
+          <div className=" mt-8 lg:mt-4  ">
             <Button type="submit" className="min-w-[118px]" disabled={isLoading}>
               {isLoading ? <LoadingButton /> : "Save change"}
             </Button>

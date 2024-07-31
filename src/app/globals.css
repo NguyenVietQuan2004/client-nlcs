@@ -58,6 +58,12 @@
     --chart-5: 340 75% 55%;
   }
 }
+@media only screen and (max-width: 600px) {
+  * {
+    font-size: 14px;
+  }
+}
+
 html body {
   overflow-y: overlay;
 }
@@ -83,4 +89,7 @@ html *::-webkit-scrollbar-track {
   body {
     @apply bg-background text-foreground;
   }
+}
+::-webkit-scrollbar {
+  height: 4px; /* Thay đổi chiều cao của thanh cuộn ngang */
 }

@@ -4,11 +4,11 @@ import { PlusIcon } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 
 import Heading from "@/components/heading";
+import ApiList from "@/components/api-list";
 import { ListBillboardResType } from "@/Type/BillboardTypes";
 import { DataTable } from "@/components/data-table/data-table";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { BillboardColumns } from "@/app/(stores)/[storeId]/billboards/[billboardId]/_table_billboard/billboard-columns";
-import ApiList from "@/components/api-list";
 
 interface BillboardsClientProps {
   listObjectBillboard: ListBillboardResType | null;
@@ -25,7 +25,7 @@ function BillboardsClient({ listObjectBillboard }: BillboardsClientProps) {
         <Heading title={`Billboards( ${listBillboard?.length})`} description="Manage billboards for your store" />
         <Button
           className={buttonVariants({
-            className: "ml-auto",
+            className: "ml-auto ",
           })}
           onClick={() => router.push(`/${params.storeId}/billboards/new`)}
         >
@@ -33,7 +33,7 @@ function BillboardsClient({ listObjectBillboard }: BillboardsClientProps) {
         </Button>
       </div>
       {listBillboard && (
-        <div className="container mx-auto py-10">
+        <div className="lg:container mx-auto py-10">
           <DataTable columns={BillboardColumns} data={listBillboard} filterBy="label" />
         </div>
       )}
