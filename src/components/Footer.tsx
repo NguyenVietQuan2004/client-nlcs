@@ -16,7 +16,14 @@ const Footer = () => {
           {pathsToMinimize.includes(pathname) ? null : (
             <div className="pb-8 pt-16">
               <div className="flex justify-center">
-                <Image priority alt="" src="/images/hange.png" className="h-20 w-20" width={300} height={300}></Image>
+                <Image
+                  priority
+                  alt=""
+                  src="/images/hange.png"
+                  className="h-20 w-20 select-none"
+                  width={300}
+                  height={300}
+                ></Image>
               </div>
             </div>
           )}

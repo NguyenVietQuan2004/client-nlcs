@@ -1,7 +1,16 @@
 //////////////////////////////-----CATEGORY TYPE-----//////////////////////////////
 
 import z from "zod";
+import { Billboard } from "@/Type/BillboardTypes";
 
+export const Category = z.object({
+  _id: z.string(),
+  name: z.string(),
+  storeId: z.string(),
+  billboardId: Billboard,
+  createdAt: z.string(),
+  updatedAt: z.string(),
+});
 //  CATEGORY BODY TYPE
 export const CategoryBody = z.object({
   _id: z.string(),
@@ -13,24 +22,8 @@ export type CategoryBodyType = z.TypeOf<typeof CategoryBody>;
 //  CATEGORY RES TYPE
 export const CategoryRes = z.object({
   data: z.object({
-    category: z.object({
-      _id: z.string(),
-      name: z.string(),
-      storeId: z.string(),
-      billboardId: z.string(),
-      createdAt: z.string(),
-      updatedAt: z.string(),
-    }),
-    listBillboard: z.array(
-      z.object({
-        _id: z.string(),
-        label: z.string(),
-        image: z.string(),
-        storeId: z.string(),
-        createdAt: z.string(),
-        updatedAt: z.string(),
-      })
-    ),
+    category: Category,
+    listBillboard: z.array(Billboard),
   }),
   message: z.string(),
   ok: z.boolean(),
@@ -39,21 +32,7 @@ export const CategoryRes = z.object({
 export type CategoryResType = z.TypeOf<typeof CategoryRes>;
 
 // CATEGORT TYPE
-const Category = z.object({
-  _id: z.string(),
-  name: z.string(),
-  storeId: z.string(),
-  billboardId: z.object({
-    _id: z.string(),
-    label: z.string(),
-    image: z.string(),
-    storeId: z.string(),
-    createdAt: z.string(),
-    updatedAt: z.string(),
-  }),
-  createdAt: z.string(),
-  updatedAt: z.string(),
-});
+
 export type CategoryType = z.TypeOf<typeof Category>;
 
 // LIST CATEGORY BODY TYPE
@@ -65,23 +44,7 @@ export type ListCategoryBodyType = z.TypeOf<typeof ListCategoryBody>;
 
 // LIST CATEGORY RES TYPE
 export const ListCategoryRes = z.object({
-  data: z.array(
-    z.object({
-      _id: z.string(),
-      name: z.string(),
-      storeId: z.string(),
-      billboardId: z.object({
-        _id: z.string(),
-        label: z.string(),
-        image: z.string(),
-        storeId: z.string(),
-        createdAt: z.string(),
-        updatedAt: z.string(),
-      }),
-      createdAt: z.string(),
-      updatedAt: z.string(),
-    })
-  ),
+  data: z.array(Category),
 
   message: z.string(),
   ok: z.boolean(),
@@ -99,14 +62,7 @@ export type CreateCategoryBodyType = z.TypeOf<typeof CreateCategoryBody>;
 
 //  CREATE CATEGORY RES TYPE
 export const CreateCategoryRes = z.object({
-  data: z.object({
-    _id: z.string(),
-    name: z.string(),
-    storeId: z.string(),
-    billboardId: z.string(),
-    createdAt: z.string(),
-    updatedAt: z.string(),
-  }),
+  data: Category,
   message: z.string(),
   ok: z.boolean(),
   statusCode: z.number(),
@@ -124,14 +80,7 @@ export type UpdateCategoryBodyType = z.TypeOf<typeof UpdateCategoryBody>;
 
 /// UPDATE CATEGORY RES TYPE
 export const UpdateCategoryRes = z.object({
-  data: z.object({
-    _id: z.string(),
-    name: z.string(),
-    storeId: z.string(),
-    billboardId: z.string(),
-    createdAt: z.string(),
-    updatedAt: z.string(),
-  }),
+  data: Category,
   message: z.string(),
   ok: z.boolean(),
   statusCode: z.number(),
@@ -147,14 +96,7 @@ export type DeleteCategoryBodyType = z.TypeOf<typeof DeleteCategoryBody>;
 
 /// DELETE CATEGORY RES TYPE
 export const DeleteCategoryRes = z.object({
-  data: z.object({
-    _id: z.string(),
-    name: z.string(),
-    storeId: z.string(),
-    billboardId: z.string(),
-    createdAt: z.string(),
-    updatedAt: z.string(),
-  }),
+  data: Category,
   message: z.string(),
   ok: z.boolean(),
   statusCode: z.number(),

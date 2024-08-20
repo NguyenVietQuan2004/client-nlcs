@@ -22,7 +22,7 @@ export const orderAPI = {
     );
   },
 
-  createColor(body: CreateOrderBodyType) {
+  createOrder(body: CreateOrderBodyType) {
     return httpRequest.post<CreateOrderResType>(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/order`, {
       body,
       credentials: "include",

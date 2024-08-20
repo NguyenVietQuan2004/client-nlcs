@@ -11,12 +11,7 @@ import ProductForm from "@/app/(stores)/[storeId]/products/[productId]/product-i
 interface ProductIdProps {
   params: { storeId: string; productId: string };
 }
-interface InformationRevelantProductProps {
-  product: ProductResType | null;
-  categories: ListCategoryResType | null;
-  sizes: ListSizeResType | null;
-  colors: ListColorResType | null;
-}
+
 async function getProduct(storeId: string, productId: string) {
   let product: ProductResType | null = null;
   const cookie = cookies();

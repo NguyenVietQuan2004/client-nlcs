@@ -15,9 +15,13 @@ interface MultiSelectProps {
 
 function MultiSelect({ listColor, onChange, onRemove, values = [""] }: MultiSelectProps) {
   const [openSelect, setIsOpenSelect] = useState(false);
-
   const containerRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(containerRef?.current?.clientWidth);
+  // đổi từ value sang object để lấy name của color
+  const colorsUserSelected = listColor?.filter((color) => {
+    return values.includes(color.value);
+  });
+
   const handleAddToList = (nameItem: string) => {
     onChange(nameItem);
   };
@@ -44,15 +48,16 @@ function MultiSelect({ listColor, onChange, onRemove, values = [""] }: MultiSele
     <div ref={containerRef} className="  py-2 min-h-[52px] flex justify-between relative rounded-md   border border-b ">
       <div className=" absolute inset-0 z-30" onClick={() => setIsOpenSelect(!openSelect)}></div>
       <div className="flex gap-2 flex-wrap relative px-4">
-        {values.map((color, index) => (
+        {colorsUserSelected?.map((color, index) => (
           <div
             key={index}
             className="px-2 py-1 z-30 rounded-sm bg-zinc-100 flex items-center cursor-pointer hover:opacity-70"
           >
-            <span className="mr-1">{color}</span> <XIcon className="w-4 h-4 " onClick={() => onRemove(color)} />{" "}
+            <span className="mr-1">{color.name}</span>{" "}
+            <XIcon className="w-4 h-4 " onClick={() => onRemove(color.value)} />{" "}
           </div>
         ))}
-        {values.length === 0 && (
+        {colorsUserSelected?.length === 0 && (
           <div className="absolute flex items-center select-none z-20 h-full  text-zinc-500 text-sm whitespace-nowrap">
             Choose one color
           </div>
@@ -67,6 +72,8 @@ function MultiSelect({ listColor, onChange, onRemove, values = [""] }: MultiSele
                     variant: "outline",
                   })}
                   key={item._id}
+                  // item.name?
+
                   onClick={() => handleAddToList(item.value)}
                   disabled={values.includes(item.value)}
                 >

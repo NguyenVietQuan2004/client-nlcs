@@ -2,6 +2,13 @@
 
 import z from "zod";
 
+const auth = z.object({
+  id: z.string(),
+  email: z.string(),
+  userName: z.string(),
+  accessToken: z.string(),
+});
+
 // LOGIN BODY TYPE
 const LoginBody = z.object({
   email: z.string(),
@@ -11,12 +18,7 @@ export type LoginBodyType = z.TypeOf<typeof LoginBody>;
 
 // LOGIN RES TYPE
 const LoginRes = z.object({
-  data: z.object({
-    id: z.string(),
-    email: z.string(),
-    userName: z.string(),
-    accessToken: z.string(),
-  }),
+  data: auth,
   message: z.string(),
   ok: z.boolean(),
   statusCode: z.number(),
@@ -33,12 +35,7 @@ export type LoginFirebaseBodyType = z.TypeOf<typeof LoginFirebaseBody>;
 
 // LOGIN RES TYPE
 const LoginFirebaseRes = z.object({
-  data: z.object({
-    id: z.string(),
-    email: z.string(),
-    userName: z.string(),
-    accessToken: z.string(),
-  }),
+  data: auth,
   message: z.string(),
   ok: z.boolean(),
   statusCode: z.number(),
@@ -64,12 +61,7 @@ export type RegisterResType = z.TypeOf<typeof RegisterRes>;
 
 // SEND COOKIE TO SERVER BODY TYPE
 export const SendCookieToServerBody = z.object({
-  data: z.object({
-    id: z.string(),
-    email: z.string(),
-    userName: z.string(),
-    accessToken: z.string(),
-  }),
+  data: auth,
   message: z.string(),
   ok: z.boolean(),
   statusCode: z.number(),
@@ -78,12 +70,7 @@ export type SendCookieToServerBodyType = z.TypeOf<typeof SendCookieToServerBody>
 
 // SEND COOKIE TO SERVER RES TYPE
 export const SendCookieToServerRes = z.object({
-  data: z.object({
-    id: z.string(),
-    email: z.string(),
-    userName: z.string(),
-    accessToken: z.string(),
-  }),
+  data: auth,
   message: z.string(),
   ok: z.boolean(),
   statusCode: z.number(),

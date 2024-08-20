@@ -69,10 +69,10 @@ function ListRoute() {
   ];
   return (
     <>
-      {Routes.map((route) => (
+      {Routes.map((route, index) => (
         <Link
           key={route.name}
-          href={`${route.href}`}
+          href={`${index === 0 ? `/${params.storeId}/${route.href}` : `${route.href}`}`}
           className={`${
             route.active ? "text-zinc-800  font-semibold" : "text-zinc-500"
           } lg:mr-4 font-medium px-3 py-3 lg:p-0 flex items-center lg:block`}

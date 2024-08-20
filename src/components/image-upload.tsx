@@ -23,13 +23,13 @@ export default function ImageUpload({ value, isLoading, onChange, onRemove }: Im
       <div className="flex gap-6 flex-wrap">
         {value.map((item) => {
           return (
-            <div key={item} className="relative w-[200px] h-[200px] object-cover overflow-hidden">
+            <div key={item} className="relative w-[200px] h-[200px] object-cover overflow-hidden ">
               <Image
                 width={600}
                 height={600}
                 src={item}
                 alt=""
-                className="w-[200px] h-[200px] object-cover rounded-sm"
+                className="w-[200px] h-[200px] object-cover rounded-sm select-none"
                 priority
               />
               <Button

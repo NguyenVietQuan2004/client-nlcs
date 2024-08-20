@@ -29,7 +29,7 @@ function Drawer() {
               priority
               alt=""
               src="/images/hange.png"
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover select-none"
               width={300}
               height={300}
             />

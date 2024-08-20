@@ -9,7 +9,6 @@ import { authApi } from "@/apiRequest/authAPI";
 import { LoginResType } from "@/Type/AuthTypes";
 import { handlError } from "@/components/handle-error";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
-import { GoogleIcon } from "../../../../public/icons/icons";
 import Image from "next/image";
 import LoginWithFirebase from "./login-firebase";
 import { useEffect } from "react";
@@ -126,7 +125,7 @@ function LoginForm({ isSignUp, setIsSignUp }: ResgisterFormProps) {
           priority
           alt=""
           src="/images/hange.png"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover select-none"
           width={300}
           height={300}
         />

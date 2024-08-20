@@ -44,7 +44,7 @@ function CategoryForm({ initObjectData }: CategoryFormProps) {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: initData?.name || "",
-      billboardId: initData?.billboardId || "",
+      billboardId: initData?.billboardId._id || "",
     },
   });
   const { isDirty } = useFormState({ control: form.control });

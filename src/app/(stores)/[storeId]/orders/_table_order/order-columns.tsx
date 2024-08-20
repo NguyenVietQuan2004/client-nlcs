@@ -10,7 +10,7 @@ import OrderCellAction from "@/app/(stores)/[storeId]/orders/_table_order/cell-a
 interface orderProps {
   _id: ProductType[];
   size: string;
-  colors: string[];
+  color: string;
 }
 
 export const OrderColumns: ColumnDef<OrderType>[] = [
@@ -22,19 +22,19 @@ export const OrderColumns: ColumnDef<OrderType>[] = [
       return listProductOrder.map((order: orderProps) => {
         const sizeUserSelect = order.size;
         const product: ProductType = order._id[0];
-        const colorsUserSelect = order.colors;
+        const colorsUserSelect = order.color;
         return (
-          <div key={product._id}>
+          <div key={`${product._id}${colorsUserSelect}${sizeUserSelect}`}>
             <div>
               <span className="font-semibold">Name:</span> {product?.name}{" "}
             </div>
             <div className="flex items-center gap-x-3">
               Size: {sizeUserSelect}
-              {colorsUserSelect.map((color: string) => {
-                return (
-                  <div key={color} style={{ backgroundColor: color }} className={`w-5 h-5 rounded-full border `}></div>
-                );
-              })}{" "}
+              <div
+                key={colorsUserSelect}
+                style={{ backgroundColor: colorsUserSelect }}
+                className={`w-5 h-5 rounded-full border `}
+              ></div>
             </div>
           </div>
         );

@@ -1,9 +1,10 @@
 //////////////////////////////-----ORDER TYPE-----//////////////////////////////
 
 import z from "zod";
+import { Product } from "@/Type/ProductType";
 
 //ORDER DATA
-export const OrderData = z.object({
+const Order = z.object({
   _id: z.string(),
   phone: z.string(),
   storeId: z.string(),
@@ -12,28 +13,10 @@ export const OrderData = z.object({
   listProductOrder: z.array(
     z.object({
       // cho nay tra ve 1 mang chua fix
-      _id: z.array(
-        z.object({
-          _id: z.string(),
-          images: z.array(z.string()),
-          name: z.string(),
-          storeId: z.string(),
-          arrayPrice: z.array(
-            z.object({
-              size: z.string(),
-              price: z.number(),
-              colors: z.array(z.string()),
-            })
-          ),
-          categoryId: z.string(),
-          isFeature: z.boolean(),
-          isArchive: z.boolean(),
-          createdAt: z.string(),
-          updatedAt: z.string(),
-        })
-      ),
+      _id: z.array(Product),
       size: z.string(),
-      colors: z.array(z.string()),
+      color: z.string(),
+      amount: z.number(),
     })
   ),
   createdAt: z.string(),
@@ -50,7 +33,7 @@ export type OrderBodyType = z.TypeOf<typeof OrderBody>;
 
 //  ORDER RES TYPE
 export const OrderRes = z.object({
-  data: OrderData,
+  data: Order,
   message: z.string(),
   ok: z.boolean(),
   statusCode: z.number(),
@@ -58,7 +41,7 @@ export const OrderRes = z.object({
 export type OrderResType = z.TypeOf<typeof OrderRes>;
 
 // ORDER TYPE
-export type OrderType = z.TypeOf<typeof OrderData>;
+export type OrderType = z.TypeOf<typeof Order>;
 
 // LIST ORDER BODY TYPE
 export const ListOrderBody = z.object({
@@ -69,43 +52,7 @@ export type ListOrderBodyType = z.TypeOf<typeof ListOrderBody>;
 
 // LIST ORDER RES TYPE
 export const ListOrderRes = z.object({
-  data: z.array(
-    z.object({
-      _id: z.string(),
-      phone: z.string(),
-      storeId: z.string(),
-      address: z.string(),
-      isPaid: z.boolean(),
-      listProductOrder: z.array(
-        z.object({
-          _id: z.array(
-            z.object({
-              _id: z.string(),
-              images: z.array(z.string()),
-              name: z.string(),
-              storeId: z.string(),
-              arrayPrice: z.array(
-                z.object({
-                  size: z.string(),
-                  price: z.number(),
-                  colors: z.array(z.string()),
-                })
-              ),
-              categoryId: z.string(),
-              isFeature: z.boolean(),
-              isArchive: z.boolean(),
-              createdAt: z.string(),
-              updatedAt: z.string(),
-            })
-          ),
-          size: z.string(),
-          colors: z.array(z.string()),
-        })
-      ),
-      createdAt: z.string(),
-      updatedAt: z.string(),
-    })
-  ),
+  data: z.array(Order),
   message: z.string(),
   ok: z.boolean(),
   statusCode: z.number(),
@@ -125,42 +72,7 @@ export type CreateOrderBodyType = z.TypeOf<typeof CreateOrderBody>;
 
 //  CREATE ORDER RES TYPE
 export const CreateOrderRes = z.object({
-  data: z.object({
-    _id: z.string(),
-    phone: z.string(),
-    storeId: z.string(),
-    address: z.string(),
-    isPaid: z.boolean(),
-    listProductOrder: z.array(
-      z.object({
-        // cho nay tra ve 1 mang chua fix
-        _id: z.array(
-          z.object({
-            _id: z.string(),
-            images: z.array(z.string()),
-            name: z.string(),
-            storeId: z.string(),
-            arrayPrice: z.array(
-              z.object({
-                size: z.string(),
-                price: z.number(),
-                colors: z.array(z.string()),
-              })
-            ),
-            categoryId: z.string(),
-            isFeature: z.boolean(),
-            isArchive: z.boolean(),
-            createdAt: z.string(),
-            updatedAt: z.string(),
-          })
-        ),
-        size: z.string(),
-        colors: z.array(z.string()),
-      })
-    ),
-    createdAt: z.string(),
-    updatedAt: z.string(),
-  }),
+  data: Order,
   message: z.string(),
   ok: z.boolean(),
   statusCode: z.number(),
@@ -176,42 +88,7 @@ export type DeleteOrderBodyType = z.TypeOf<typeof DeleteOrderBody>;
 
 /// DELETE ORDER RES TYPE
 export const DeleteOrderRes = z.object({
-  data: z.object({
-    _id: z.string(),
-    phone: z.string(),
-    storeId: z.string(),
-    address: z.string(),
-    isPaid: z.boolean(),
-    listProductOrder: z.array(
-      z.object({
-        // cho nay tra ve 1 mang chua fix
-        _id: z.array(
-          z.object({
-            _id: z.string(),
-            images: z.array(z.string()),
-            name: z.string(),
-            storeId: z.string(),
-            arrayPrice: z.array(
-              z.object({
-                size: z.string(),
-                price: z.number(),
-                colors: z.array(z.string()),
-              })
-            ),
-            categoryId: z.string(),
-            isFeature: z.boolean(),
-            isArchive: z.boolean(),
-            createdAt: z.string(),
-            updatedAt: z.string(),
-          })
-        ),
-        size: z.string(),
-        colors: z.array(z.string()),
-      })
-    ),
-    createdAt: z.string(),
-    updatedAt: z.string(),
-  }),
+  data: Order,
   message: z.string(),
   ok: z.boolean(),
   statusCode: z.number(),
@@ -229,7 +106,7 @@ export type OverviewBodyType = z.TypeOf<typeof OverviewBody>;
 // OVERVIEW RES TYPE
 export const OverviewRes = z.object({
   data: z.object({
-    listOrderPaid: z.array(OrderData),
+    listOrderPaid: z.array(Order),
     countProductsInStock: z.number(),
   }),
   message: z.string(),
@@ -238,4 +115,11 @@ export const OverviewRes = z.object({
 });
 export type OverviewResType = z.TypeOf<typeof OverviewRes>;
 
+export const productOrder = z.object({
+  product: Product,
+  size: z.string(),
+  color: z.string(),
+  amount: z.number(),
+});
+export type productOrderType = z.TypeOf<typeof productOrder>;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

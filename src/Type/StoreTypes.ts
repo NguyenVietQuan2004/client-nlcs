@@ -1,5 +1,13 @@
 //////////////////////////////-----STORE TYPE-----//////////////////////////////
+
 import z from "zod";
+
+const Store = z.object({
+  _id: z.string(),
+  name: z.string(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+});
 
 // STORE BODY TYPE
 export const StoreBody = z.object({
@@ -10,12 +18,7 @@ export type StoreBodyType = z.TypeOf<typeof StoreBody>;
 
 //  STORE RES TYPE
 export const StoreRes = z.object({
-  data: z.object({
-    _id: z.string(),
-    name: z.string(),
-    createdAt: z.string(),
-    updatedAt: z.string(),
-  }),
+  data: Store,
   message: z.string(),
   ok: z.boolean(),
   statusCode: z.number(),
@@ -30,14 +33,7 @@ export type LitStoreBodyType = z.TypeOf<typeof LitStoreBody>;
 
 // LIST STORE RES TYPE
 export const ListStoreRes = z.object({
-  data: z.array(
-    z.object({
-      _id: z.string(),
-      name: z.string(),
-      createdAt: z.string(),
-      updatedAt: z.string(),
-    })
-  ),
+  data: z.array(Store),
   message: z.string(),
   ok: z.boolean(),
   statusCode: z.number(),
@@ -52,12 +48,7 @@ export type CreateStoreBodyType = z.TypeOf<typeof CreateStoreBody>;
 
 //  CREATE STORE RES TYPE
 export const CreateStoreRes = z.object({
-  data: z.object({
-    _id: z.string(),
-    name: z.string(),
-    createdAt: z.string(),
-    updatedAt: z.string(),
-  }),
+  data: Store,
   message: z.string(),
   ok: z.boolean(),
   statusCode: z.number(),
@@ -73,12 +64,7 @@ export type UpdateStoreBodyType = z.TypeOf<typeof UpdateStoreBody>;
 
 //  UPDATE STORE RES TYPE
 export const UpdateStoreRes = z.object({
-  data: z.object({
-    _id: z.string(),
-    name: z.string(),
-    createdAt: z.string(),
-    updatedAt: z.string(),
-  }),
+  data: Store,
   message: z.string(),
   ok: z.boolean(),
   statusCode: z.number(),
@@ -93,12 +79,7 @@ export type DeleteStoreBodyType = z.TypeOf<typeof DeleteStoreBody>;
 
 //  UPDATE STORE RES TYPE
 export const DeleteStoreRes = z.object({
-  data: z.object({
-    _id: z.string(),
-    name: z.string(),
-    createdAt: z.string(),
-    updatedAt: z.string(),
-  }),
+  data: Store,
   message: z.string(),
   ok: z.boolean(),
   statusCode: z.number(),

@@ -2,6 +2,15 @@
 
 import z from "zod";
 
+export const Size = z.object({
+  _id: z.string(),
+  name: z.string(),
+  storeId: z.string(),
+  value: z.string(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+});
+
 //  SIZE BODY TYPE
 export const SizeBody = z.object({
   _id: z.string(),
@@ -12,14 +21,7 @@ export type SizeBodyType = z.TypeOf<typeof SizeBody>;
 
 //  SIZE RES TYPE
 export const SizeRes = z.object({
-  data: z.object({
-    _id: z.string(),
-    name: z.string(),
-    storeId: z.string(),
-    value: z.string(),
-    createdAt: z.string(),
-    updatedAt: z.string(),
-  }),
+  data: Size,
   message: z.string(),
   ok: z.boolean(),
   statusCode: z.number(),
@@ -27,7 +29,7 @@ export const SizeRes = z.object({
 export type SizeResType = z.TypeOf<typeof SizeRes>;
 
 // CATEGORT TYPE
-export type SizeType = Omit<SizeResType, "message" | "ok" | "statusCode">["data"];
+export type SizeType = z.TypeOf<typeof Size>;
 
 // LIST SIZE BODY TYPE
 export const ListSizeBody = z.object({
@@ -38,16 +40,7 @@ export type ListSizeBodyType = z.TypeOf<typeof ListSizeBody>;
 
 // LIST SIZE RES TYPE
 export const ListSizeRes = z.object({
-  data: z.array(
-    z.object({
-      _id: z.string(),
-      name: z.string(),
-      storeId: z.string(),
-      value: z.string(),
-      createdAt: z.string(),
-      updatedAt: z.string(),
-    })
-  ),
+  data: z.array(Size),
   message: z.string(),
   ok: z.boolean(),
   statusCode: z.number(),
@@ -64,14 +57,7 @@ export type CreateSizeBodyType = z.TypeOf<typeof CreateSizeBody>;
 
 //  CREATE SIZE RES TYPE
 export const CreateSizeRes = z.object({
-  data: z.object({
-    _id: z.string(),
-    name: z.string(),
-    storeId: z.string(),
-    value: z.string(),
-    createdAt: z.string(),
-    updatedAt: z.string(),
-  }),
+  data: Size,
   message: z.string(),
   ok: z.boolean(),
   statusCode: z.number(),
@@ -89,14 +75,7 @@ export type UpdateSizeBodyType = z.TypeOf<typeof UpdateSizeBody>;
 
 /// UPDATE SIZE RES TYPE
 export const UpdateSizeRes = z.object({
-  data: z.object({
-    _id: z.string(),
-    name: z.string(),
-    storeId: z.string(),
-    value: z.string(),
-    createdAt: z.string(),
-    updatedAt: z.string(),
-  }),
+  data: Size,
   message: z.string(),
   ok: z.boolean(),
   statusCode: z.number(),
@@ -112,14 +91,7 @@ export type DeleteSizeBodyType = z.TypeOf<typeof DeleteSizeBody>;
 
 /// DELETE SIZE RES TYPE
 export const DeleteSizeRes = z.object({
-  data: z.object({
-    _id: z.string(),
-    name: z.string(),
-    storeId: z.string(),
-    value: z.string(),
-    createdAt: z.string(),
-    updatedAt: z.string(),
-  }),
+  data: Size,
   message: z.string(),
   ok: z.boolean(),
   statusCode: z.number(),

@@ -9,11 +9,11 @@ function CellPriceOrder({ row }: CellPriceOrderProps) {
   const error: Array<string> = [];
   const totalPrice = row.listProductOrder.reduce((acc: number, order: any) => {
     const sizeUserSelect = order.size;
-    const colorsUserSelect = order.colors;
+    const colorsUserSelect = order.color;
     const product: ProductType = order._id[0];
     const objectPrice = product.arrayPrice.find((objectPrice) => objectPrice.size === sizeUserSelect);
     const colors = objectPrice?.colors;
-    const isValidColor: boolean = colorsUserSelect.every((el: string) => colors?.includes(el));
+    const isValidColor = colors?.includes(colorsUserSelect);
 
     if (!objectPrice) {
       error.push(`Has a size in ${product.name} is not valid in store so not add price to total.`);
@@ -25,7 +25,6 @@ function CellPriceOrder({ row }: CellPriceOrderProps) {
     }
     return acc + objectPrice.price;
   }, 0);
-
   return (
     <div>
       {totalPrice}{" "}

@@ -2,6 +2,14 @@
 
 import z from "zod";
 
+export const Billboard = z.object({
+  _id: z.string(),
+  label: z.string(),
+  image: z.string(),
+  storeId: z.string(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+});
 //  BILLBOARD BODY TYPE
 export const BillboardBody = z.object({
   _id: z.string(),
@@ -12,14 +20,7 @@ export type BillboardBodyType = z.TypeOf<typeof BillboardBody>;
 
 //  BILLBOARD RES TYPE
 export const BillboardRes = z.object({
-  data: z.object({
-    _id: z.string(),
-    label: z.string(),
-    image: z.string(),
-    storeId: z.string(),
-    createdAt: z.string(),
-    updatedAt: z.string(),
-  }),
+  data: Billboard,
   message: z.string(),
   ok: z.boolean(),
   statusCode: z.number(),
@@ -27,7 +28,7 @@ export const BillboardRes = z.object({
 export type BillboardResType = z.TypeOf<typeof BillboardRes>;
 
 // BILLBOARD TYPE
-export type BillboardType = Omit<BillboardResType, "message" | "ok" | "statusCode">["data"];
+export type BillboardType = z.TypeOf<typeof Billboard>;
 
 //  LIST BILLBOARD BODY TYPE
 export const ListBillboardBody = z.object({
@@ -38,16 +39,7 @@ export type ListBillboardBodyType = z.TypeOf<typeof ListBillboardBody>;
 
 //  LIST BILLBOARD RES TYPE
 export const ListBillboardRes = z.object({
-  data: z.array(
-    z.object({
-      _id: z.string(),
-      label: z.string(),
-      image: z.string(),
-      storeId: z.string(),
-      createdAt: z.string(),
-      updatedAt: z.string(),
-    })
-  ),
+  data: z.array(Billboard),
   message: z.string(),
   ok: z.boolean(),
   statusCode: z.number(),
@@ -64,14 +56,7 @@ export type CreateBillboardBodyType = z.TypeOf<typeof CreateBillboardBody>;
 
 // CREATE BILLBOARD RES TYPE
 export const CreateBillboardRes = z.object({
-  data: z.object({
-    _id: z.string(),
-    label: z.string(),
-    image: z.string(),
-    storeId: z.string(),
-    createdAt: z.string(),
-    updatedAt: z.string(),
-  }),
+  data: Billboard,
   message: z.string(),
   ok: z.boolean(),
   statusCode: z.number(),
@@ -88,14 +73,7 @@ export const UpdateBillboardBody = z.object({
 export type UpdateBillboardBodyType = z.TypeOf<typeof UpdateBillboardBody>;
 // UPDATE BILLBOARD RES TYPE
 export const UpdateBillboardRes = z.object({
-  data: z.object({
-    _id: z.string(),
-    label: z.string(),
-    image: z.string(),
-    storeId: z.string(),
-    createdAt: z.string(),
-    updatedAt: z.string(),
-  }),
+  data: Billboard,
   message: z.string(),
   ok: z.boolean(),
   statusCode: z.number(),
@@ -111,14 +89,7 @@ export type DeleteBillboardBodyType = z.TypeOf<typeof DeleteBillboardBody>;
 
 // DELETE BILLBOARD RES TYPE
 export const DeleteBillboardRes = z.object({
-  data: z.object({
-    _id: z.string(),
-    label: z.string(),
-    image: z.string(),
-    storeId: z.string(),
-    createdAt: z.string(),
-    updatedAt: z.string(),
-  }),
+  data: Billboard,
   message: z.string(),
   ok: z.boolean(),
   statusCode: z.number(),

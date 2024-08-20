@@ -15,7 +15,7 @@ interface ProductsClientProps {
 }
 
 function ProductsClient({ listObjectProduct }: ProductsClientProps) {
-  const listProduct = listObjectProduct?.data;
+  const listProduct = listObjectProduct?.data.listProduct;
   const router = useRouter();
   const params = useParams();
   return (
