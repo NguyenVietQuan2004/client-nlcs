@@ -7,10 +7,11 @@ import { ProductType } from "@/Type/ProductType";
 import CellPriceOrder from "@/app/(stores)/[storeId]/orders/_table_order/cell-price-order";
 import OrderCellAction from "@/app/(stores)/[storeId]/orders/_table_order/cell-action-oder";
 
-interface orderProps {
-  _id: ProductType[];
+interface productOrderProps {
+  _id: ProductType;
   size: string;
   color: string;
+  amount: number;
 }
 
 export const OrderColumns: ColumnDef<OrderType>[] = [
@@ -18,11 +19,11 @@ export const OrderColumns: ColumnDef<OrderType>[] = [
     header: "Products",
     accessorKey: "listProductOrder",
     cell: ({ row }) => {
-      const listProductOrder: orderProps[] = row.getValue("listProductOrder");
-      return listProductOrder.map((order: orderProps) => {
-        const sizeUserSelect = order.size;
-        const product: ProductType = order._id[0];
-        const colorsUserSelect = order.color;
+      const listProductOrder: productOrderProps[] = row.getValue("listProductOrder");
+      return listProductOrder.map((productOrder: productOrderProps) => {
+        const sizeUserSelect = productOrder.size;
+        const product: ProductType = productOrder._id;
+        const colorsUserSelect = productOrder.color;
         return (
           <div key={`${product._id}${colorsUserSelect}${sizeUserSelect}`}>
             <div>
@@ -34,7 +35,8 @@ export const OrderColumns: ColumnDef<OrderType>[] = [
                 key={colorsUserSelect}
                 style={{ backgroundColor: colorsUserSelect }}
                 className={`w-5 h-5 rounded-full border `}
-              ></div>
+              />{" "}
+              Quantity: {productOrder.amount}
             </div>
           </div>
         );

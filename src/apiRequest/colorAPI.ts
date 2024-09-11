@@ -17,9 +17,7 @@ export const ColorAPI = {
     return httpRequest.get<ColorResType>(
       `${process.env.NEXT_PUBLIC_API_ENDPOINT}/color?_id=${body._id}&storeId=${body.storeId}`,
       {
-        headers: {
-          Cookie: `sessionToken=${body.sessionToken}`,
-        },
+        cache: "no-cache",
       }
     );
   },
@@ -28,9 +26,7 @@ export const ColorAPI = {
     return httpRequest.get<ListColorResType>(
       `${process.env.NEXT_PUBLIC_API_ENDPOINT}/color/getall?storeId=${body.storeId}`,
       {
-        headers: {
-          Cookie: `sessionToken=${body.sessionToken}`,
-        },
+        cache: "no-cache",
       }
     );
   },

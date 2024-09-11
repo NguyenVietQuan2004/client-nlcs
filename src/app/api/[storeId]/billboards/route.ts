@@ -10,5 +10,5 @@ export async function GET(req: Request, { params }: { params: { storeId: string 
   } catch (error) {
     return new NextResponse("ROUTEHANDLER_BILLBOARDs_ERROR", { status: 500 });
   }
-  return Response.json({ listBillboardRes });
+  return Response.json({ ...listBillboardRes });
 }

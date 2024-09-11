@@ -1,5 +1,3 @@
-import { cookies } from "next/headers";
-
 import { productAPI } from "@/apiRequest/productAPI";
 import { handlError } from "@/components/handle-error";
 import { ListProductResType } from "@/Type/ProductType";
@@ -13,8 +11,7 @@ async function getProducts(storeId: string) {
   let products: ListProductResType | null = null;
 
   try {
-    const sessionToken = cookies().get("sessionToken")?.value || "";
-    products = await productAPI.getListProduct({ storeId, sessionToken });
+    products = await productAPI.getListProduct({ storeId });
   } catch (error) {
     handlError({ consoleError: "GET_ALL_PRODUCT", error });
   }

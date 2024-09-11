@@ -3,6 +3,7 @@
 import z from "zod";
 import { useState } from "react";
 import { Trash } from "lucide-react";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams, useRouter } from "next/navigation";
 import { useForm, useFormState } from "react-hook-form";
 
@@ -12,9 +13,8 @@ import { ColorResType } from "@/Type/ColorType";
 import { ColorAPI } from "@/apiRequest/colorAPI";
 import AlertModal from "@/components/alert-modal";
 import { toast } from "@/components/ui/use-toast";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { handlError } from "@/components/handle-error";
-import LoadingButton from "@/components/loadingButton";
+import LoadingButton from "@/components/loading-button";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 

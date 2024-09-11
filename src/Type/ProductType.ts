@@ -1,7 +1,7 @@
 //////////////////////////////-----PRODUCT TYPE-----//////////////////////////////
 
 import z from "zod";
-import { Color } from "@/Type/ColorType";
+import { Color, ColorBody } from "@/Type/ColorType";
 import { Size } from "@/Type/SizeTypes";
 import { Category } from "@/Type/CategoryTypes";
 
@@ -35,7 +35,6 @@ export const Product = z.object({
 //  PRODUCT BODY TYPE
 export const ProductBody = z.object({
   _id: z.string(),
-  sessionToken: z.string(),
   storeId: z.string(),
 });
 export type ProductBodyType = z.TypeOf<typeof ProductBody>;
@@ -62,7 +61,6 @@ export type ProductType = z.TypeOf<typeof Product>;
 // LIST PRODUCT BODY TYPE
 export const ListProductBody = z.object({
   storeId: z.string(),
-  sessionToken: z.string(),
 });
 export type ListProductBodyType = z.TypeOf<typeof ListProductBody>;
 
@@ -71,6 +69,8 @@ export const ListProductRes = z.object({
   data: z.object({
     listProduct: z.array(Product),
     totalProduct: z.number(),
+    listColor: z.array(Color),
+    listSize: z.array(Size),
   }),
   message: z.string(),
   ok: z.boolean(),

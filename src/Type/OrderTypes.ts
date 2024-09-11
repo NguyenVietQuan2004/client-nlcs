@@ -12,8 +12,7 @@ const Order = z.object({
   isPaid: z.boolean(),
   listProductOrder: z.array(
     z.object({
-      // cho nay tra ve 1 mang chua fix
-      _id: z.array(Product),
+      _id: Product,
       size: z.string(),
       color: z.string(),
       amount: z.number(),

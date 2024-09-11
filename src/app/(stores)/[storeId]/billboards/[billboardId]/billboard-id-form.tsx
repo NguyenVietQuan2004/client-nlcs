@@ -13,7 +13,7 @@ import { toast } from "@/components/ui/use-toast";
 import ImageUpload from "@/components/image-upload";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { handlError } from "@/components/handle-error";
-import LoadingButton from "@/components/loadingButton";
+import LoadingButton from "@/components/loading-button";
 import { billboardAPI } from "@/apiRequest/billboardAPI";
 import { BillboardResType } from "@/Type/BillboardTypes";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -159,8 +159,8 @@ function BillboardForm({ initObjectData }: BillboardFormProps) {
                 <FormLabel className="font-semibold">Background Image</FormLabel>
                 <FormControl>
                   <ImageUpload
-                    value={field.value ? [field.value] : []}
                     isLoading={isLoading}
+                    value={field.value ? [field.value] : []}
                     onChange={(url) => field.onChange(url)}
                     onRemove={() => field.onChange("")}
                   />

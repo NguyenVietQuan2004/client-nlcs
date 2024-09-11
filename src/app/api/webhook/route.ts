@@ -1,7 +1,7 @@
+import Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
-import Stripe from "stripe";
 
 export async function POST(request: Request) {
   const body = await request.text();
@@ -21,6 +21,7 @@ export async function POST(request: Request) {
       address?.state,
     ];
     const addressString = addressComponent.filter((item) => item !== null).join(`, `);
+
     if (event.type === "checkout.session.completed") {
       await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/order`, {
         body: JSON.stringify({

@@ -1,5 +1,3 @@
-import { cookies } from "next/headers";
-
 import { ColorResType } from "@/Type/ColorType";
 import { ColorAPI } from "@/apiRequest/colorAPI";
 import { handlError } from "@/components/handle-error";
@@ -10,12 +8,9 @@ interface ColorIdProps {
 }
 async function getColor(storeId: string, colorId: string) {
   let color: ColorResType | null = null;
-  const cookie = cookies();
-  const sessionToken = cookie.get("sessionToken")!.value || "";
   try {
     color = await ColorAPI.getColor({
       _id: colorId,
-      sessionToken,
       storeId,
     });
   } catch (error: any) {

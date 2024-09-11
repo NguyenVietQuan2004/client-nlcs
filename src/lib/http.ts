@@ -25,7 +25,7 @@ const ConfigHttp = async <ResType>(method: string, URL: string, option?: CustomR
 };
 
 export const httpRequest = {
-  get<ResType>(URL: string, option: CustomReuqest) {
+  get<ResType>(URL: string, option?: CustomReuqest) {
     return ConfigHttp<ResType>("GET", URL, option);
   },
   put<ResType>(URL: string, option: CustomReuqest) {

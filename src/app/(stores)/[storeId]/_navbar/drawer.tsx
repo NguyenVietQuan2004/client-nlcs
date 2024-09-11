@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 
 import {
@@ -11,10 +12,12 @@ import {
 } from "@/components/ui/drawer";
 import ListRoute from "@/app/(stores)/[storeId]/_navbar/List-route";
 import { CloseIcon, MenuIcon } from "../../../../../public/icons/icons";
+import { useState } from "react";
 function Drawer() {
+  const [isShowModal, setIsShowModal] = useState(false);
   return (
-    <DrawerShadcn>
-      <DrawerTrigger>
+    <DrawerShadcn open={isShowModal}>
+      <DrawerTrigger onClick={() => setIsShowModal(true)}>
         {" "}
         <div className=" lg:hidden flex h-8 w-8 items-center justify-center rounded-sm border">
           <MenuIcon />
@@ -26,22 +29,21 @@ function Drawer() {
         <DrawerHeader className="flex items-center justify-between">
           <div className={`h-12 w-12 `}>
             <Image
-              priority
               alt=""
               src="/images/hange.png"
-              className="h-full w-full object-cover select-none"
               width={300}
               height={300}
+              className="h-full w-full object-cover select-none"
             />
           </div>
           <div>
-            <DrawerClose>
+            <DrawerClose onClick={() => setIsShowModal(false)}>
               <CloseIcon />
             </DrawerClose>
           </div>
         </DrawerHeader>
         <div className="flex flex-col p-3">
-          <ListRoute />
+          <ListRoute setIsShowModal={setIsShowModal} />
         </div>
       </DrawerContent>
     </DrawerShadcn>

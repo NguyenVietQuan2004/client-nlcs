@@ -1,5 +1,3 @@
-import { cookies } from "next/headers";
-
 import { handlError } from "@/components/handle-error";
 import { billboardAPI } from "@/apiRequest/billboardAPI";
 import { ListBillboardResType } from "@/Type/BillboardTypes";
@@ -13,8 +11,7 @@ async function getBillboards(storeId: string) {
   let billboards: ListBillboardResType | null = null;
 
   try {
-    const sessionToken = cookies().get("sessionToken")?.value || "";
-    billboards = await billboardAPI.getListBillboard({ storeId, sessionToken });
+    billboards = await billboardAPI.getListBillboard({ storeId });
   } catch (error) {
     handlError({ consoleError: "GET_ALL_BILLBOARD", error });
   }

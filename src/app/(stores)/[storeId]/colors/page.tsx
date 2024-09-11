@@ -1,5 +1,3 @@
-import { cookies } from "next/headers";
-
 import { ColorAPI } from "@/apiRequest/colorAPI";
 import { ListColorResType } from "@/Type/ColorType";
 import { handlError } from "@/components/handle-error";
@@ -13,8 +11,7 @@ async function getColors(storeId: string) {
   let colors: ListColorResType | null = null;
 
   try {
-    const sessionToken = cookies().get("sessionToken")?.value || "";
-    colors = await ColorAPI.getListColor({ storeId, sessionToken });
+    colors = await ColorAPI.getListColor({ storeId });
   } catch (error) {
     handlError({ consoleError: "GET_ALL_COLOR", error });
   }

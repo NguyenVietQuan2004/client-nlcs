@@ -18,9 +18,7 @@ export const productAPI = {
     return httpRequest.get<ProductResType>(
       `${process.env.NEXT_PUBLIC_API_ENDPOINT}/product?_id=${body._id}&storeId=${body.storeId}`,
       {
-        headers: {
-          Cookie: `sessionToken=${body.sessionToken}`,
-        },
+        cache: "no-cache",
       }
     );
   },
@@ -29,9 +27,7 @@ export const productAPI = {
     return httpRequest.get<ListProductResType>(
       `${process.env.NEXT_PUBLIC_API_ENDPOINT}/product/getall?storeId=${body.storeId}`,
       {
-        headers: {
-          Cookie: `sessionToken=${body.sessionToken}`,
-        },
+        cache: "no-cache",
       }
     );
   },

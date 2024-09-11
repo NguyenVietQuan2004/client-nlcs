@@ -14,7 +14,6 @@ export const Color = z.object({
 //  COLOR BODY TYPE
 export const ColorBody = z.object({
   _id: z.string(),
-  sessionToken: z.string(),
   storeId: z.string(),
 });
 export type ColorBodyType = z.TypeOf<typeof ColorBody>;
@@ -34,7 +33,6 @@ export type ColorType = z.TypeOf<typeof Color>;
 // LIST COLOR BODY TYPE
 export const ListColorBody = z.object({
   storeId: z.string(),
-  sessionToken: z.string(),
 });
 export type ListColorBodyType = z.TypeOf<typeof ListColorBody>;
 

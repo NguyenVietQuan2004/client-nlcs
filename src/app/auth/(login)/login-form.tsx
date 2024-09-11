@@ -122,12 +122,11 @@ function LoginForm({ isSignUp, setIsSignUp }: ResgisterFormProps) {
       </Form>
       <div className={`h-16 w-16 mx-auto mt-4 lg:mt-2`}>
         <Image
-          priority
           alt=""
           src="/images/hange.png"
-          className="h-full w-full object-cover select-none"
           width={300}
           height={300}
+          className="h-full w-full object-cover select-none"
         />
       </div>
     </div>

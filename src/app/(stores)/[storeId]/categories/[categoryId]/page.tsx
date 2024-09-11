@@ -1,5 +1,3 @@
-import { cookies } from "next/headers";
-
 import { categoryAPI } from "@/apiRequest/categoryAPI";
 import { CategoryResType } from "@/Type/CategoryTypes";
 import { handlError } from "@/components/handle-error";
@@ -11,10 +9,8 @@ interface CategoryIdProps {
 
 async function getCategory(storeId: string, categoryId: string) {
   let category: CategoryResType | null = null;
-  const cookie = cookies();
-  const sessionToken = cookie.get("sessionToken")!.value || "";
   try {
-    category = await categoryAPI.getCategory({ _id: categoryId, sessionToken, storeId });
+    category = await categoryAPI.getCategory({ _id: categoryId, storeId });
   } catch (error: any) {
     if (error.statusCode === 400) {
       category = error;

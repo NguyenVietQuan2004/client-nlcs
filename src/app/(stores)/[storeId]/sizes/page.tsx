@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import { sizeAPI } from "@/apiRequest/sizeAPI";
 import { ListSizeResType } from "@/Type/SizeTypes";
 import { handlError } from "@/components/handle-error";
@@ -12,8 +11,7 @@ async function getSizes(storeId: string) {
   let sizes: ListSizeResType | null = null;
 
   try {
-    const sessionToken = cookies().get("sessionToken")?.value || "";
-    sizes = await sizeAPI.getListSize({ storeId, sessionToken });
+    sizes = await sizeAPI.getListSize({ storeId });
   } catch (error: any) {
     if (error.statusCode !== 400) {
       handlError({ consoleError: "GET_ALL_SIZE", error });

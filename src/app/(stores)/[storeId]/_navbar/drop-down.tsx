@@ -6,8 +6,8 @@ import { CheckIcon, ChevronsUpDown, SearchIcon, StoreIcon } from "lucide-react";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { buttonVariants } from "@/components/ui/button";
 import { ListStoreResType } from "@/Type/StoreTypes";
+import { buttonVariants } from "@/components/ui/button";
 import ModalCreateStore from "@/components/modal-create-store";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 

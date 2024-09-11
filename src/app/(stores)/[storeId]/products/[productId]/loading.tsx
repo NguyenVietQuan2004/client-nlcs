@@ -1,4 +1,4 @@
-import LoadingButton from "@/components/loadingButton";
+import LoadingButton from "@/components/loading-button";
 
 function Loading() {
   return (

@@ -1,5 +1,3 @@
-import { cookies } from "next/headers";
-
 import { handlError } from "@/components/handle-error";
 import { billboardAPI } from "@/apiRequest/billboardAPI";
 import { BillboardResType } from "@/Type/BillboardTypes";
@@ -10,12 +8,9 @@ interface BillboardIdProps {
 }
 async function getBillboard(storeId: string, billboardId: string) {
   let billboard: BillboardResType | null = null;
-  const cookie = cookies();
-  const sessionToken = cookie.get("sessionToken")!.value || "";
   try {
     billboard = await billboardAPI.getBillboard({
       _id: billboardId,
-      sessionToken,
       storeId,
     });
   } catch (error: any) {

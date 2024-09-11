@@ -32,12 +32,15 @@ function DashboardClient({
   ];
 
   // duyệt qua list order để tính doanh thu tổng và doanh thu từng tháng
-  for (let i = 0; i < dataOverview.listOrderPaid.length; i++) {
-    const month = new Date(dataOverview.listOrderPaid[i].createdAt).getMonth();
+  const numOrder = dataOverview.listOrderPaid.length;
+  const listOrderPaid = dataOverview.listOrderPaid;
+
+  for (let i = 0; i < numOrder; i++) {
+    const month = new Date(listOrderPaid[i].createdAt).getMonth();
     let temp = 0;
-    temp = dataOverview.listOrderPaid[i].listProductOrder.reduce((acc: any, order: any) => {
+    temp = listOrderPaid[i].listProductOrder.reduce((acc: any, order: any) => {
       const sizeUserSelect = order.size;
-      const product: ProductType = order._id[0];
+      const product: ProductType = order._id;
       const objectPrice = product.arrayPrice.find((objectPrice) => objectPrice.size === sizeUserSelect);
       return acc + (objectPrice?.price || 0);
     }, 0);

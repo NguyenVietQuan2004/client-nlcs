@@ -1,5 +1,5 @@
+import Footer from "@/components/footer";
 import Wrapper from "@/components/wrapper";
-import Footer from "@/components/Footer";
 import MainNavbar from "@/app/(stores)/[storeId]/_navbar/main-nav";
 
 function StoreLayout({

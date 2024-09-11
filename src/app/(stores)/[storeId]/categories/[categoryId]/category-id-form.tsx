@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import AlertModal from "@/components/alert-modal";
 import { toast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
-import LoadingButton from "@/components/loadingButton";
+import LoadingButton from "@/components/loading-button";
 import { categoryAPI } from "@/apiRequest/categoryAPI";
 import { handlError } from "@/components/handle-error";
 import { CategoryResType } from "@/Type/CategoryTypes";

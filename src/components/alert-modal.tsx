@@ -9,7 +9,7 @@ import {
   AlertDialogDescription,
   AlertDialog as UiAlertDialog,
 } from "@/components/ui/alert-dialog";
-import LoadingButton from "@/components/loadingButton";
+import LoadingButton from "@/components/loading-button";
 import { buttonVariants } from "@/components/ui/button";
 
 interface AlertModalProps {

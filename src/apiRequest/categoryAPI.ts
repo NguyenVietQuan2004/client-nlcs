@@ -17,9 +17,7 @@ export const categoryAPI = {
     return httpRequest.get<CategoryResType>(
       `${process.env.NEXT_PUBLIC_API_ENDPOINT}/category?_id=${body._id}&storeId=${body.storeId}`,
       {
-        headers: {
-          Cookie: `sessionToken=${body.sessionToken}`,
-        },
+        cache: "no-cache",
       }
     );
   },
@@ -28,9 +26,7 @@ export const categoryAPI = {
     return httpRequest.get<ListCategoryResType>(
       `${process.env.NEXT_PUBLIC_API_ENDPOINT}/category/getall?storeId=${body.storeId}`,
       {
-        headers: {
-          Cookie: `sessionToken=${body.sessionToken}`,
-        },
+        cache: "no-cache",
       }
     );
   },

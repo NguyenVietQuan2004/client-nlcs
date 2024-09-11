@@ -1,5 +1,3 @@
-import { cookies } from "next/headers";
-
 import { sizeAPI } from "@/apiRequest/sizeAPI";
 import { SizeResType } from "@/Type/SizeTypes";
 import { handlError } from "@/components/handle-error";
@@ -10,12 +8,9 @@ interface SizeIdProps {
 }
 async function getSize(storeId: string, sizeId: string) {
   let size: SizeResType | null = null;
-  const cookie = cookies();
-  const sessionToken = cookie.get("sessionToken")!.value || "";
   try {
     size = await sizeAPI.getSize({
       _id: sizeId,
-      sessionToken,
       storeId,
     });
   } catch (error) {

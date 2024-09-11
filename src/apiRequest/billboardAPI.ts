@@ -17,9 +17,7 @@ export const billboardAPI = {
     return httpRequest.get<BillboardResType>(
       `${process.env.NEXT_PUBLIC_API_ENDPOINT}/billboard?_id=${body._id}&storeId=${body.storeId}`,
       {
-        headers: {
-          Cookie: `sessionToken=${body.sessionToken}`,
-        },
+        cache: "no-cache",
       }
     );
   },
@@ -28,9 +26,7 @@ export const billboardAPI = {
     return httpRequest.get<ListBillboardResType>(
       `${process.env.NEXT_PUBLIC_API_ENDPOINT}/billboard/getall?storeId=${body.storeId}`,
       {
-        headers: {
-          Cookie: `sessionToken=${body.sessionToken}`,
-        },
+        cache: "no-cache",
       }
     );
   },

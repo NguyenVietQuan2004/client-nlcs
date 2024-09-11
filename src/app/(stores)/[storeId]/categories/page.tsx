@@ -1,5 +1,3 @@
-import { cookies } from "next/headers";
-
 import { categoryAPI } from "@/apiRequest/categoryAPI";
 import { handlError } from "@/components/handle-error";
 import { ListCategoryResType } from "@/Type/CategoryTypes";
@@ -11,8 +9,7 @@ interface CategoriesProps {
 async function getCategories(storeId: string) {
   let categories: ListCategoryResType | null = null;
   try {
-    const sessionToken = cookies().get("sessionToken")?.value || "";
-    categories = await categoryAPI.getListCategory({ storeId, sessionToken });
+    categories = await categoryAPI.getListCategory({ storeId });
   } catch (error) {
     handlError({
       consoleError: "GET_ALL_CATEGORY_ERROR",

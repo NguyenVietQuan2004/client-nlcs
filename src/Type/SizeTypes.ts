@@ -14,7 +14,6 @@ export const Size = z.object({
 //  SIZE BODY TYPE
 export const SizeBody = z.object({
   _id: z.string(),
-  sessionToken: z.string(),
   storeId: z.string(),
 });
 export type SizeBodyType = z.TypeOf<typeof SizeBody>;
@@ -34,7 +33,6 @@ export type SizeType = z.TypeOf<typeof Size>;
 // LIST SIZE BODY TYPE
 export const ListSizeBody = z.object({
   storeId: z.string(),
-  sessionToken: z.string(),
 });
 export type ListSizeBodyType = z.TypeOf<typeof ListSizeBody>;
 

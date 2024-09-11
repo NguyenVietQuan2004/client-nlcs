@@ -1,7 +1,7 @@
 import { stripe } from "@/lib/stripe";
 import { productOrderType } from "@/Type/OrderTypes";
 import { NextResponse } from "next/server";
-
+import Stripe from "stripe";
 const corsHeader = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
@@ -18,10 +18,9 @@ export async function OPTIONS() {
 }
 
 export async function POST(request: Request, { params }: { params: { storeId: string } }) {
-  let session;
+  let session: Stripe.Checkout.Session | undefined;
   try {
     const order = await request.json();
-    console.log(order);
     if (!order) {
       return new Response("Order is empty", { status: 400 });
     }
@@ -60,6 +59,11 @@ export async function POST(request: Request, { params }: { params: { storeId: st
       },
     });
     const orderCreate = await response.json();
+
+    if (!response.ok) {
+      throw orderCreate;
+    }
+
     session = await stripe.checkout.sessions.create({
       line_items,
       mode: "payment",
@@ -73,7 +77,20 @@ export async function POST(request: Request, { params }: { params: { storeId: st
         orderId: orderCreate.data._id,
       },
     });
-  } catch (error) {}
+    setTimeout(async () => {
+      const a = await stripe.checkout.sessions.expire(session?.id || "");
+    }, 60 * 1000);
+  } catch (error: any) {
+    if (error.statusCode === 401) {
+      return NextResponse.json(
+        { ...error },
+        {
+          status: 401,
+          headers: corsHeader,
+        }
+      );
+    }
+  }
 
   return NextResponse.json(
     { url: session?.url },

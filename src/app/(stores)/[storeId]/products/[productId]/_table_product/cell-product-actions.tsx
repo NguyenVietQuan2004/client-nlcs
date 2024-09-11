@@ -12,9 +12,9 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+import { ProductType } from "@/Type/ProductType";
 import { toast } from "@/components/ui/use-toast";
 import AlertModal from "@/components/alert-modal";
-import { ProductType } from "@/Type/ProductType";
 import { productAPI } from "@/apiRequest/productAPI";
 import { handlError } from "@/components/handle-error";
 

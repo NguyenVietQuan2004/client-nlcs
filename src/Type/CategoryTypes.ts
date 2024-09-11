@@ -14,7 +14,6 @@ export const Category = z.object({
 //  CATEGORY BODY TYPE
 export const CategoryBody = z.object({
   _id: z.string(),
-  sessionToken: z.string(),
   storeId: z.string(),
 });
 export type CategoryBodyType = z.TypeOf<typeof CategoryBody>;
@@ -38,14 +37,12 @@ export type CategoryType = z.TypeOf<typeof Category>;
 // LIST CATEGORY BODY TYPE
 export const ListCategoryBody = z.object({
   storeId: z.string(),
-  sessionToken: z.string(),
 });
 export type ListCategoryBodyType = z.TypeOf<typeof ListCategoryBody>;
 
 // LIST CATEGORY RES TYPE
 export const ListCategoryRes = z.object({
   data: z.array(Category),
-
   message: z.string(),
   ok: z.boolean(),
   statusCode: z.number(),

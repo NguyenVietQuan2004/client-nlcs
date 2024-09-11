@@ -3,9 +3,9 @@ import { toast } from "@/components/ui/use-toast";
 import { redirect } from "next/navigation";
 
 interface handlErrorProps {
-  consoleError: string;
   error: any;
   isToast?: boolean;
+  consoleError: string;
 }
 
 export const handlError = async ({ consoleError, error, isToast = false }: handlErrorProps) => {

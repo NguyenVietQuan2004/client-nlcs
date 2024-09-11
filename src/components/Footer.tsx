@@ -1,9 +1,8 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import Link from "next/link";
-import Wrapper from "./wrapper";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const Footer = () => {
   const pathname = usePathname();
@@ -16,14 +15,7 @@ const Footer = () => {
           {pathsToMinimize.includes(pathname) ? null : (
             <div className="pb-8 pt-16">
               <div className="flex justify-center">
-                <Image
-                  priority
-                  alt=""
-                  src="/images/hange.png"
-                  className="h-20 w-20 select-none"
-                  width={300}
-                  height={300}
-                ></Image>
+                <Image alt="" src="/images/hange.png" width={300} height={300} className="h-20 w-20 select-none" />
               </div>
             </div>
           )}

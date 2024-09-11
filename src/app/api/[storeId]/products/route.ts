@@ -23,6 +23,7 @@ export async function GET(req: NextRequest, { params }: { params: { storeId: str
     isArchive: false,
   };
 
+  // nếu ko truyền lên gì thì sẽ chuyển về null có truyền lên thì lấy value, null thì ko truyền lên server ko cần xử lí vì skip null
   Array.from(searchParams.entries()).forEach(([key, value]) => {
     query[key] = value === "undefined" ? null : value;
   });
@@ -44,6 +45,29 @@ export async function GET(req: NextRequest, { params }: { params: { storeId: str
     listProductRes = await response.json();
   } catch (error) {
     return new NextResponse("ROUTEHANDLER_PRODUCTS_ERROR", { status: 500 });
+  }
+  return Response.json(
+    { ...listProductRes },
+    {
+      headers: corsHeader,
+    }
+  );
+}
+
+export async function POST(req: NextRequest, { params }: { params: { storeId: string } }) {
+  const body = await req.json();
+  let listProductRes;
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/product/getall`, {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: {
+        "Content-Type": "application/json", // Thêm header Content-Type
+      },
+    });
+    listProductRes = await response.json();
+  } catch (error) {
+    return new NextResponse("ROUTEHANDLER_PRODUCTSID_ERROR", { status: 500 });
   }
   return Response.json(
     { ...listProductRes },

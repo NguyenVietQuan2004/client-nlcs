@@ -17,9 +17,7 @@ export const sizeAPI = {
     return httpRequest.get<SizeResType>(
       `${process.env.NEXT_PUBLIC_API_ENDPOINT}/size?_id=${body._id}&storeId=${body.storeId}`,
       {
-        headers: {
-          Cookie: `sessionToken=${body.sessionToken}`,
-        },
+        cache: "no-cache",
       }
     );
   },
@@ -27,9 +25,7 @@ export const sizeAPI = {
     return httpRequest.get<ListSizeResType>(
       `${process.env.NEXT_PUBLIC_API_ENDPOINT}/size/getall?storeId=${body.storeId}`,
       {
-        headers: {
-          Cookie: `sessionToken=${body.sessionToken}`,
-        },
+        cache: "no-cache",
       }
     );
   },

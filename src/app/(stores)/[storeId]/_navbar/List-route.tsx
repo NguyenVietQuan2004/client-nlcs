@@ -13,8 +13,9 @@ import {
   SettingIcon,
   SizeIcon,
 } from "../../../../../public/icons/icons";
+import React, { SetStateAction } from "react";
 
-function ListRoute() {
+function ListRoute({ setIsShowModal }: { setIsShowModal?: React.Dispatch<SetStateAction<boolean>> }) {
   const pathName = usePathname();
   const params = useParams();
   const Routes = [
@@ -28,6 +29,12 @@ function ListRoute() {
       href: `/${params.storeId}/billboards`,
       active: pathName.startsWith(`/${params.storeId}/billboards`),
       name: "Billboards",
+      icon: <BillboardIcon />,
+    },
+    {
+      href: `/${params.storeId}/previewstore`,
+      active: pathName.startsWith(`/${params.storeId}/previewstore`),
+      name: "PreviewStore",
       icon: <BillboardIcon />,
     },
     {
@@ -71,6 +78,7 @@ function ListRoute() {
     <>
       {Routes.map((route, index) => (
         <Link
+          onClick={() => setIsShowModal && setIsShowModal(false)}
           key={route.name}
           href={`${index === 0 ? `/${params.storeId}/${route.href}` : `${route.href}`}`}
           className={`${

@@ -13,7 +13,6 @@ export const Billboard = z.object({
 //  BILLBOARD BODY TYPE
 export const BillboardBody = z.object({
   _id: z.string(),
-  sessionToken: z.string(),
   storeId: z.string(),
 });
 export type BillboardBodyType = z.TypeOf<typeof BillboardBody>;
@@ -33,7 +32,6 @@ export type BillboardType = z.TypeOf<typeof Billboard>;
 //  LIST BILLBOARD BODY TYPE
 export const ListBillboardBody = z.object({
   storeId: z.string(),
-  sessionToken: z.string(),
 });
 export type ListBillboardBodyType = z.TypeOf<typeof ListBillboardBody>;
 

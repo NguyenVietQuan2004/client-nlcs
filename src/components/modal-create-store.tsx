@@ -17,7 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { storeAPI } from "@/apiRequest/storeAPI";
 import { toast } from "@/components//ui/use-toast";
-import LoadingButton from "@/components/loadingButton";
+import LoadingButton from "@/components/loading-button";
 import useModalCreateStore from "@/hooks/useModalCreateStore";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
