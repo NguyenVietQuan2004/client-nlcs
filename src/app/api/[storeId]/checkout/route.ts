@@ -34,7 +34,7 @@ export async function POST(request: Request, { params }: { params: { storeId: st
           product_data: {
             name: productOrder.product.name,
           },
-          unit_amount: (objectPrice?.price || 0) * 100,
+          unit_amount: (objectPrice?.price || 0) * (productOrder.product.sale ? 100 - productOrder.product.sale : 1),
         },
         quantity: productOrder.amount,
       });
@@ -59,7 +59,7 @@ export async function POST(request: Request, { params }: { params: { storeId: st
       },
     });
     const orderCreate = await response.json();
-
+    console.log(orderCreate);
     if (!response.ok) {
       throw orderCreate;
     }
@@ -77,8 +77,9 @@ export async function POST(request: Request, { params }: { params: { storeId: st
         orderId: orderCreate.data._id,
       },
     });
+    console.log("aaaaaaaaa", session);
     setTimeout(async () => {
-      const a = await stripe.checkout.sessions.expire(session?.id || "");
+      await stripe.checkout.sessions.expire(session?.id || "");
     }, 60 * 1000);
   } catch (error: any) {
     if (error.statusCode === 401) {
@@ -93,7 +94,7 @@ export async function POST(request: Request, { params }: { params: { storeId: st
   }
 
   return NextResponse.json(
-    { url: session?.url },
+    { url: session?.url || "concac" },
     {
       status: 200,
       headers: corsHeader,

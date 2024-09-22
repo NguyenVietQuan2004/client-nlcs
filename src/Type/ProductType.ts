@@ -10,12 +10,14 @@ export const Product = z.object({
   images: z.array(z.string()),
   name: z.string(),
   storeId: z.string(),
+  sale: z.number(),
   arrayPrice: z.array(
     z.object({
       size: z.string(),
       price: z.number(),
       colors: z.array(z.string()),
       amount: z.number(),
+      amount_sold: z.number(),
     })
   ),
   categoryId: z.object({
@@ -83,11 +85,13 @@ export const CreateProductBody = z.object({
   images: z.array(z.string()),
   name: z.string(),
   storeId: z.string(),
+  sale: z.number(),
   arrayPrice: z.array(
     z.object({
       size: z.string(),
       price: z.number(),
       colors: z.array(z.string()),
+      amount: z.number(),
     })
   ),
   categoryId: z.string(),
@@ -116,11 +120,13 @@ export const UpdateProductBody = z.object({
       size: z.string(),
       price: z.number(),
       colors: z.array(z.string()),
+      amount: z.number(),
     })
   ),
   categoryId: z.string(),
   isFeature: z.boolean(),
   isArchive: z.boolean(),
+  sale: z.number(),
 });
 export type UpdateProductBodyType = z.TypeOf<typeof UpdateProductBody>;
 

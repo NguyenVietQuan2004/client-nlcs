@@ -22,6 +22,15 @@ export const ProductColumns: ColumnDef<ProductType>[] = [
     header: "Featured",
     accessorKey: "isFeature",
   },
+
+  {
+    header: "Category",
+    accessorKey: "categoryId",
+    cell: ({ row }) => {
+      const category: any = row.getValue("categoryId");
+      return <div>{category.name}</div>;
+    },
+  },
   {
     header: "Price",
     cell: ({ row }) => {
@@ -30,12 +39,17 @@ export const ProductColumns: ColumnDef<ProductType>[] = [
     },
   },
   {
-    header: "Category",
-    accessorKey: "categoryId",
+    header: "Sold",
     cell: ({ row }) => {
-      const category: any = row.getValue("categoryId");
-      return <div>{category.name}</div>;
+      const totalProductSold = row.original.arrayPrice.reduce((pre: any, cur, arr) => {
+        return cur.amount_sold + pre;
+      }, 0);
+      return <div>{totalProductSold}</div>;
     },
+  },
+  {
+    header: "Sale (%)",
+    accessorKey: "sale",
   },
   {
     header: "Size",

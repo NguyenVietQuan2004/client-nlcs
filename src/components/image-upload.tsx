@@ -18,6 +18,7 @@ interface ImageUploadProps {
 
 export default function ImageUpload({ value, isLoading, onChange, onRemove, title, children }: ImageUploadProps) {
   const onUpload = (result: any) => {
+    console.log(1);
     onChange(result.info.secure_url);
   };
   return (

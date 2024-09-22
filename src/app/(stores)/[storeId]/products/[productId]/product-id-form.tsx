@@ -46,7 +46,6 @@ function ProductForm({ initObjectData }: ProductFormProps) {
   const title = initData ? "Edit product" : "Create product";
   const toastMessage = initData ? "Updated success" : "Create success";
   const description = initData ? "Change your product" : "Add a new product";
-
   // size
   const sizesArray = initData?.arrayPrice.map((item) => item.size);
   let defaultValueListSize: Array<any> = createListDefaultValueForm(numSize, "size", "");
@@ -114,7 +113,7 @@ function ProductForm({ initObjectData }: ProductFormProps) {
       .number({
         message: "Amount must be a number",
       })
-      .min(1, { message: "Amount cannot be emty" })
+      .min(0, { message: "Amount cannot be emty" })
       .default(0)
   );
   const listColorSchema: any = createListSchemaForm(
@@ -126,8 +125,15 @@ function ProductForm({ initObjectData }: ProductFormProps) {
     name: z.string().min(1, {
       message: "Name must be contain at least 1 character",
     }),
-    ...listPriceSchema,
+    sale: z.coerce
+      .number({
+        message: "Sale must be a number",
+      })
+      .min(0, { message: "Sale between 0 and 100" })
+      .max(100, { message: "Sale between 0 and 100" })
+      .default(0),
     categoryId: z.string().min(1, { message: "Category cannot be emty" }),
+    ...listPriceSchema,
     ...listSizeSchema,
     ...listColorSchema,
     ...listAmountSchema,
@@ -142,6 +148,7 @@ function ProductForm({ initObjectData }: ProductFormProps) {
     defaultValues: {
       name: initData?.name || "",
       images: initData?.images || [],
+      sale: initData?.sale || 0,
       ...formatDefaultValue(defaultValueListSize),
       ...formatDefaultValue(defaultValueListPrice),
       ...formatDefaultValue(defaultValueListColor),
@@ -151,6 +158,8 @@ function ProductForm({ initObjectData }: ProductFormProps) {
       isArchive: initData?.isArchive || false,
     },
   });
+  // console.log(form.getValues());
+
   // initdata
   useEffect(() => {
     setIsMouted(true);
@@ -196,6 +205,7 @@ function ProductForm({ initObjectData }: ProductFormProps) {
   }, [numSize]);
   // lỗi thì thêm form vào
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    console.log(data.images);
     const category = listCategory?.find((item) => item._id === data.categoryId);
     const arrayPrice = createUniqueArray(numSize).map((_, index) => {
       return {
@@ -215,6 +225,7 @@ function ProductForm({ initObjectData }: ProductFormProps) {
           categoryId: category!._id,
           isFeature: data.isFeature,
           isArchive: data.isArchive,
+          sale: data.sale,
         });
       } else {
         await productAPI.updateProduct({
@@ -226,6 +237,7 @@ function ProductForm({ initObjectData }: ProductFormProps) {
           categoryId: category!._id,
           isFeature: data.isFeature,
           isArchive: data.isArchive,
+          sale: data.sale,
         });
       }
       // thứ tự 2 route này quan trọng
@@ -375,7 +387,24 @@ function ProductForm({ initObjectData }: ProductFormProps) {
                 </FormItem>
               )}
             />
-            <div></div>
+            <FormField
+              control={form.control}
+              name="sale"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="font-semibold">Sale</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Sale percent"
+                      {...field}
+                      className="h-[52px] !ring-0  !ring-offset-0 !outline-none pl-4 w-full"
+                      accept="number"
+                    />
+                  </FormControl>
+                  <FormMessage className="text-sm" />
+                </FormItem>
+              )}
+            />
             <div></div>
 
             {createUniqueArray(numSize).map((value: any, index) => {

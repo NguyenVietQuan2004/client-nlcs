@@ -1,6 +1,7 @@
 //////////////////////////////-----ImagesHomePage TYPE-----//////////////////////////////
 
 import z from "zod";
+import { Product } from "./ProductType";
 
 export const ImagesHomePage = z.object({
   _id: z.string(),
@@ -19,7 +20,13 @@ export type ImagesHomePageBodyType = z.TypeOf<typeof ImagesHomePageBody>;
 
 //  ImagesHomePage RES TYPE
 export const ImagesHomePageRes = z.object({
-  data: ImagesHomePage,
+  data: z.object({
+    ImagesHomePage,
+    listProductNewDiscover: z.array(Product),
+    listProductMostPopular: z.array(Product),
+    productBestSeller: Product,
+    productHighestSale: Product,
+  }),
   message: z.string(),
   ok: z.boolean(),
   statusCode: z.number(),

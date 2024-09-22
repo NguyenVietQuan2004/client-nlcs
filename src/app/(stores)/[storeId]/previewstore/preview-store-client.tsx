@@ -34,7 +34,7 @@ const formSchema = z.object({
   }),
 });
 function PreviewStoreClient({ initObjectData }: PreviewStoreClientProps) {
-  const initData = initObjectData?.data;
+  const initData = initObjectData?.data.ImagesHomePage;
   const [isLoading, setIsLoading] = useState(false);
   const params = useParams();
   const form = useForm<z.infer<typeof formSchema>>({

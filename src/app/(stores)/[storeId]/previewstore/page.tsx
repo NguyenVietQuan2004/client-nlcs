@@ -22,7 +22,7 @@ async function getImagesHomePage(storeId: string) {
 
 async function PreviewStore({ params }: PreviewStoreProps) {
   const imagesHomePage = await getImagesHomePage(params.storeId);
-
+  console.log(imagesHomePage);
   return (
     <div>
       <PreviewStoreClient initObjectData={imagesHomePage} />
