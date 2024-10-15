@@ -7,7 +7,6 @@ import Heading from "@/components/heading";
 import { OrderType } from "@/Type/OrderTypes";
 import { ProductType } from "@/Type/ProductType";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
 function DashboardClient({
   dataOverview,
 }: {
@@ -47,7 +46,6 @@ function DashboardClient({
     revenue += temp;
     revenueMonth[month].total += temp;
   }
-
   return (
     <div>
       <Heading title="Dashboard" description="Overview of your store" />

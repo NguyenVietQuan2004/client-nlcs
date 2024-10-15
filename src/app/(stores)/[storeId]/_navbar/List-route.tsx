@@ -14,6 +14,7 @@ import {
   SizeIcon,
 } from "../../../../../public/icons/icons";
 import React, { SetStateAction } from "react";
+import { MessageCircleIcon } from "lucide-react";
 
 function ListRoute({ setIsShowModal }: { setIsShowModal?: React.Dispatch<SetStateAction<boolean>> }) {
   const pathName = usePathname();
@@ -66,6 +67,12 @@ function ListRoute({ setIsShowModal }: { setIsShowModal?: React.Dispatch<SetStat
       active: pathName.startsWith(`/${params.storeId}/orders`),
       name: "Orders",
       icon: <OrderIcon />,
+    },
+    {
+      href: `/${params.storeId}/chat`,
+      active: pathName.startsWith(`/${params.storeId}/chat`),
+      name: "Chat",
+      icon: <MessageCircleIcon />,
     },
     {
       href: `/${params.storeId}/settings`,

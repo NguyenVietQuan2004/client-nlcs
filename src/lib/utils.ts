@@ -1,5 +1,6 @@
 import { twMerge } from "tailwind-merge";
 import { type ClassValue, clsx } from "clsx";
+import { format, isToday } from "date-fns";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -45,4 +46,24 @@ const formatter = new Intl.NumberFormat("en-US", {
 });
 export const formattedPrice = (price: number) => {
   return formatter.format(price);
+};
+
+export const formatDateTime = (dateString: string) => {
+  const date = new Date(dateString);
+
+  const timeFormatted = format(date, "h:mm aa");
+
+  if (!isToday(date)) {
+    const dateFormatted = format(date, "MMM dd");
+    return `${timeFormatted} on ${dateFormatted}`;
+  }
+
+  return timeFormatted;
+};
+
+export const firstKey = (object: { [key: string]: any }) => {
+  return Object.keys(object)[0];
+};
+export const firstValue = (object: { [key: string]: any }) => {
+  return Object.values(object)[0];
 };

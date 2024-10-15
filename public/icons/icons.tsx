@@ -223,3 +223,231 @@ export const ProductIcon = () => {
     </svg>
   );
 };
+export const SendMessageIcon = ({ fill }: { fill: string }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={20}
+      height={20}
+      enableBackground="new 0 0 50 50"
+      viewBox="0 0 50 50"
+      id="telegram"
+      className="cursor-pointer hover:opacity-75"
+      fill={fill}
+    >
+      <path d="M47.74382 1.01725L1.86641 19.02935c-.8728.3427-.9045 1.5662-.0507 1.9536l10.1422 4.6024c.2747.1248.4833.3604.5737.6482l4.3514 13.8478c.21981.6991 1.0652.9703 1.6505.5293l7.5741-5.7063c.3617-.2725.8564-.2853 1.2318-.0321l12.7029 8.5698c.6337.4274 1.4977.0648 1.6366-.6867l7.49591-40.5578C49.32611 1.37895 48.51871.71305 47.74382 1.01725zM19.94331 27.54945l-1.3686 7.7802-3.53289-11.1398 24.221-15.0333L19.94331 27.54945zM8.11682 29.58125c-.39061-.3906-1.02341-.3906-1.41411 0l-5.603 5.6025c-.3906.3907-.3906 1.0235 0 1.4141.3906.3906 1.0234.3906 1.41411 0l5.603-5.6026C8.50741 30.60465 8.50741 29.97185 8.11682 29.58125zM10.99231 41.74825l-5.60249 5.6025c-.39071.3906-.39071 1.0235 0 1.4141.39059.3906 1.02339.3906 1.414 0l5.60259-5.6026c.3906-.3906.3906-1.0234 0-1.414C12.01571 41.35765 11.38291 41.35765 10.99231 41.74825z"></path>
+      <path
+        d="M27.28771,41.74825l-5.603,5.6025c-0.3907,0.3906-0.3907,1.0235,0,1.4141c0.3906,0.3906,1.0234,0.3906,1.414,0
+        l5.60311-5.6026c0.39059-0.3906,0.39059-1.0234,0-1.414C28.31111,41.35765,27.67831,41.35765,27.28771,41.74825z"
+      ></path>
+      <g>
+        <path d="M47.74382 1.01725L1.86641 19.02935c-.8728.3427-.9045 1.5662-.0507 1.9536l10.1422 4.6024c.2747.1248.4833.3604.5737.6482l4.3514 13.8478c.21981.6991 1.0652.9703 1.6505.5293l7.5741-5.7063c.3617-.2725.8564-.2853 1.2318-.0321l12.7029 8.5698c.6337.4274 1.4977.0648 1.6366-.6867l7.49591-40.5578C49.32611 1.37895 48.51871.71305 47.74382 1.01725zM19.94331 27.54945l-1.3686 7.7802-3.53289-11.1398 24.221-15.0333L19.94331 27.54945zM8.11682 29.58125c-.39061-.3906-1.02341-.3906-1.41411 0l-5.603 5.6025c-.3906.3907-.3906 1.0235 0 1.4141.3906.3906 1.0234.3906 1.41411 0l5.603-5.6026C8.50741 30.60465 8.50741 29.97185 8.11682 29.58125zM10.99231 41.74825l-5.60249 5.6025c-.39071.3906-.39071 1.0235 0 1.4141.39059.3906 1.02339.3906 1.414 0l5.60259-5.6026c.3906-.3906.3906-1.0234 0-1.414C12.01571 41.35765 11.38291 41.35765 10.99231 41.74825z"></path>
+        <path
+          d="M27.28771,41.74825l-5.603,5.6025c-0.3907,0.3906-0.3907,1.0235,0,1.4141c0.3906,0.3906,1.0234,0.3906,1.414,0
+        l5.60311-5.6026c0.39059-0.3906,0.39059-1.0234,0-1.414C28.31111,41.35765,27.67831,41.35765,27.28771,41.74825z"
+        ></path>
+      </g>
+    </svg>
+  );
+};
+
+export const MoreIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="cursor-pointer  lucide lucide-more-horizontal "
+    >
+      <circle cx="12" cy="12" r="1"></circle>
+      <circle cx="19" cy="12" r="1"></circle>
+      <circle cx="5" cy="12" r="1"></circle>
+    </svg>
+  );
+};
+
+export const SquarePenIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="cursor-pointer  lucide lucide-square-pen "
+    >
+      <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+      <path d="M18.375 2.625a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4Z"></path>
+    </svg>
+  );
+};
+export const PhoneIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="cursor-pointer  lucide lucide-phone text-muted-foreground"
+    >
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+    </svg>
+  );
+};
+export const VideoCallIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="cursor-pointer  lucide lucide-video text-muted-foreground"
+    >
+      <path d="m22 8-6 4 6 4V8Z"></path>
+      <rect width="14" height="12" x="2" y="6" rx="2" ry="2"></rect>
+    </svg>
+  );
+};
+export const InfoIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="cursor-pointer  lucide lucide-info text-muted-foreground"
+    >
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M12 16v-4"></path>
+      <path d="M12 8h.01"></path>
+    </svg>
+  );
+};
+
+export const animals = [
+  "Dragonfly",
+  "Bison",
+  "Cheetah",
+  "Hamster",
+  "Guinea pig",
+  "Dogfish",
+  "Capybara",
+  "Lobster",
+  "Fox",
+  "Hedgehog",
+  "Shark",
+  "Dolphin",
+  "Tiger",
+  "Panda",
+  "Emu",
+  "Eel",
+  "Ostrich",
+  "Seal",
+  "Gorilla",
+  "Penguin",
+  "Butterfly",
+  "Flamingo",
+  "Owl",
+  "Chimpanzee",
+  "Cobra",
+  "Goose",
+  "Barracuda",
+  "Armadillo",
+  "Horse",
+  "Bear",
+  "Alligator",
+  "Bee",
+  "Crab",
+  "Kangaroo",
+  "Deer",
+  "Sparrow",
+  "Jellyfish",
+  "Bat",
+  "Otter",
+  "Wasp",
+  "Camel",
+  "Ant",
+  "Mole",
+  "Frog",
+  "Crow",
+  "Badger",
+  "Raven",
+  "Hawk",
+  "Goldfish",
+  "Eagle",
+  "Cat",
+  "Hummingbird",
+  "Octopus",
+  "Seagull",
+  "Coyote",
+  "Turtle",
+  "Rabbit",
+  "Elephant",
+  "Buffalo",
+  "Falcon",
+  "Squid",
+  "Spider",
+  "Swan",
+  "Whale",
+  "Caterpillar",
+  "Antelope",
+  "Lemur",
+  "Lion",
+  "Squirrel",
+  "Duck",
+  "Toad",
+  "Hippopotamus",
+  "Otter",
+  "Moose",
+  "Giraffe",
+  "Parrot",
+  "Snail",
+  "Peacock",
+  "Mouse",
+  "Koala",
+  "Wolverine",
+  "Dugong",
+  "Alpaca",
+  "Starfish",
+  "Pelican",
+  "Lizard",
+  "Chinchilla",
+  "Gnu",
+  "Rat",
+  "Wombat",
+  "Bee",
+  "Salmon",
+  "Zebra",
+  "Donkey",
+  "Shrew",
+  "Iguana",
+  "Heron",
+  "Walrus",
+  "Wolf",
+  "Tuna",
+];

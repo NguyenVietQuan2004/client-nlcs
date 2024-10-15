@@ -27,7 +27,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "public/icons",
-    "src/app/auth/register-formtsx"
+    "src/app/auth/register-formtsx",
+    "server.js"
   ],
   "exclude": ["node_modules"]
 }

@@ -17,6 +17,9 @@ const config = {
       backgroundImage: {
         loginIamge: "url('/anhgailogin.jpg')",
       },
+      flex: {
+        "2": "2 2 0%",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

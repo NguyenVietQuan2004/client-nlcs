@@ -59,7 +59,6 @@ export async function POST(request: Request, { params }: { params: { storeId: st
       },
     });
     const orderCreate = await response.json();
-    console.log(orderCreate);
     if (!response.ok) {
       throw orderCreate;
     }
@@ -77,7 +76,6 @@ export async function POST(request: Request, { params }: { params: { storeId: st
         orderId: orderCreate.data._id,
       },
     });
-    console.log("aaaaaaaaa", session);
     setTimeout(async () => {
       await stripe.checkout.sessions.expire(session?.id || "");
     }, 60 * 1000);

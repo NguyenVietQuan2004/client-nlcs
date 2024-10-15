@@ -52,7 +52,6 @@ function LoginForm({ isSignUp, setIsSignUp }: ResgisterFormProps) {
       }
     }
   };
-  const hasErrors = !!Object.keys(form.formState.errors).length;
 
   return (
     <div

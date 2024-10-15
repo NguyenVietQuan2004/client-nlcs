@@ -11,6 +11,7 @@ import { toast } from "@/components/ui/use-toast";
 import { handlError } from "@/components/handle-error";
 import LoginWithFirebase from "@/app/auth/(login)/login-firebase";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { firstKey } from "@/lib/utils";
 
 interface ResgisterFormProps {
   isSignUp: boolean;
@@ -56,7 +57,6 @@ function RegisterForm({ isSignUp, setIsSignUp }: ResgisterFormProps) {
       });
     }
   };
-  const hasErrors = !!Object.keys(form.formState.errors).length;
   return (
     <div
       className={`lg:rounded-r-md absolute ${

@@ -2,10 +2,11 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start",
+    "start": "NODE_ENV=production node server.js",
     "lint": "next lint"
   },
   "dependencies": {
@@ -23,6 +24,7 @@
     "@types/jsonwebtoken": "^9.0.6",
     "@types/jwt-decode": "^3.1.0",
     "@types/tailwindcss": "^3.1.0",
+    "@types/uuid": "^10.0.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
@@ -37,9 +39,12 @@
     "react-dom": "^18",
     "react-hook-form": "^7.52.1",
     "recharts": "^2.13.0-alpha.4",
+    "socket.io": "^4.8.0",
+    "socket.io-client": "^4.8.0",
     "stripe": "^16.7.0",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",
+    "uuid": "^10.0.0",
     "vaul": "^0.9.1",
     "zod": "^3.23.8",
     "zustand": "^4.5.4"

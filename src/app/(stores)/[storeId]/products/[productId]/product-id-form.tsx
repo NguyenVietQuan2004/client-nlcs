@@ -158,7 +158,6 @@ function ProductForm({ initObjectData }: ProductFormProps) {
       isArchive: initData?.isArchive || false,
     },
   });
-  // console.log(form.getValues());
 
   // initdata
   useEffect(() => {
@@ -205,7 +204,6 @@ function ProductForm({ initObjectData }: ProductFormProps) {
   }, [numSize]);
   // lỗi thì thêm form vào
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    console.log(data.images);
     const category = listCategory?.find((item) => item._id === data.categoryId);
     const arrayPrice = createUniqueArray(numSize).map((_, index) => {
       return {
