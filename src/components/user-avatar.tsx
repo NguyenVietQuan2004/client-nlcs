@@ -23,6 +23,18 @@ function UserAvatar() {
       }
     }
   }, []);
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     const user = localStorage.getItem("user");
+  //     if (user) {
+  //       setUserName(() => {
+  //         const fullName = JSON.parse(user).userName;
+  //         const nameArray = fullName.split(" ");
+  //         return nameArray[0][0];
+  //       });
+  //     }
+  //   }
+  // }, []);
   const handleSignOut = async () => {
     try {
       await authApi.signOut();

@@ -40,6 +40,7 @@ function ProductForm({ initObjectData }: ProductFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [isIncrease, setIsIncrease] = useState(true);
   const [numSize, setNumsize] = useState(initData?.arrayPrice.length || 1);
+  const [multiImages, setMultiImages] = useState(initData?.images || []);
 
   // check xem đang muốn update hay create dựa vào có truyền data đầu vào không
   const action = initData ? "Save change" : "Create";
@@ -199,18 +200,22 @@ function ProductForm({ initObjectData }: ProductFormProps) {
         ...cleanFormValue,
       });
     }
+    // setIsChange(!isChange);
     // router.refresh();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [numSize]);
+
   // lỗi thì thêm form vào
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     const category = listCategory?.find((item) => item._id === data.categoryId);
-    const arrayPrice = createUniqueArray(numSize).map((_, index) => {
+    let arrayPrice: any = createUniqueArray(numSize).map((_, index) => {
+      const initialLengthSize = initObjectData?.data?.product?.arrayPrice?.length || 0;
       return {
         size: data[`size${index + 1}`],
         price: data[`price${index + 1}`],
         colors: data[`color${index + 1}`],
         amount: data[`amount${index + 1}`],
+        amount_sold: index < initialLengthSize ? initObjectData?.data.product.arrayPrice[index].amount_sold : 0,
       };
     });
     try {
@@ -283,7 +288,7 @@ function ProductForm({ initObjectData }: ProductFormProps) {
     setIsIncrease(false);
     setNumsize(numSize - 1);
   };
-
+  console.log(form.getValues());
   return (
     <>
       <>
@@ -330,8 +335,18 @@ function ProductForm({ initObjectData }: ProductFormProps) {
                   <ImageUpload
                     isLoading={isLoading}
                     value={field.value ? field.value : []}
-                    onChange={(url) => field.onChange([...field.value, url])}
-                    onRemove={(url) => field.onChange([...field.value.filter((item: any) => item !== url)])}
+                    onChange={(url) => {
+                      setMultiImages((multiImages) => {
+                        field.onChange([...multiImages, url]); // Đồng bộ với form
+                        return [...multiImages, url];
+                      }); // Cập nhật trạng thái cục bộ
+                    }}
+                    onRemove={(item) => {
+                      setMultiImages((multiImages) => {
+                        field.onChange(multiImages.filter((url) => url !== item)); // Đồng bộ với form
+                        return multiImages.filter((url) => url !== item);
+                      }); // Cập nhật trạng thái cục bộ
+                    }}
                   />
                 </FormControl>
                 <FormMessage className="text-sm" />

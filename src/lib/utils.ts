@@ -6,16 +6,17 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 export const createUniqueArray = (length: number) => {
-  if (100 - 1 + 1 < length) {
-    throw new Error("Range is too small to generate unique values");
-  }
+  // if (100 - 1 + 1 < length) {
+  //   throw new Error("Range is too small to generate unique values");
+  // }
 
-  const set = new Set();
-  while (set.size < length) {
-    const randomNumber = Math.floor(Math.random() * (100 - 1 + 1)) + 1;
-    set.add(randomNumber);
-  }
-  return Array.from(set);
+  // const set = new Set();
+  // while (set.size < length) {
+  //   const randomNumber = Math.floor(Math.random() * (100 - 1 + 1)) + 1;
+  //   set.add(randomNumber);
+  // }
+  // return Array.from(set);
+  return Array.from({ length }, (_, index) => index + 1);
 };
 
 export const createListDefaultValueForm = (numSize: number, prefixName: string, defaultValue: any) => {

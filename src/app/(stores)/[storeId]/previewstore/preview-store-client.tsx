@@ -2,7 +2,7 @@
 
 import z from "zod";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TrashIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useParams } from "next/navigation";
@@ -35,6 +35,7 @@ const formSchema = z.object({
 });
 function PreviewStoreClient({ initObjectData }: PreviewStoreClientProps) {
   const initData = initObjectData?.data.ImagesHomePage;
+  const [multiImages, setMultiImages] = useState(initData?.billboardFeature || []);
   const [isLoading, setIsLoading] = useState(false);
   const params = useParams();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -45,6 +46,7 @@ function PreviewStoreClient({ initObjectData }: PreviewStoreClientProps) {
       backgroundInsurancce: initData?.backgroundInsurance || "",
     },
   });
+  console.log(form.getValues());
   const action = initData ? "Save change" : "Create";
   const toastMessage = initData ? "Updated success" : "Create success";
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
@@ -75,6 +77,9 @@ function PreviewStoreClient({ initObjectData }: PreviewStoreClientProps) {
       setIsLoading(false);
     }
   };
+  // useEffect(() => {
+  //   setMultiImages(initData?.billboardFeature || []); // Đồng bộ multiImages với field.value khi render lại
+  // }, [initData?.billboardFeature]);
   return (
     <Form {...form}>
       <form
@@ -103,12 +108,17 @@ function PreviewStoreClient({ initObjectData }: PreviewStoreClientProps) {
                     <FormControl>
                       <ImageUpload
                         isLoading={isLoading}
-                        value={field.value ? field.value : []}
-                        onChange={(url) => field.onChange([...field.value, url])}
-                        onRemove={(url) => field.onChange([...field.value.filter((item: any) => item !== url)])}
+                        // value={field.value ? field.value : []}
+                        onChange={(url) => {
+                          setMultiImages((multiImages) => {
+                            field.onChange([...multiImages, url]); // Đồng bộ với form
+                            return [...multiImages, url];
+                          }); // Cập nhật trạng thái cục bộ
+                        }}
+                        onRemove={() => {}}
                       >
                         <div className="w-full grid grid-cols-3 gap-1 mt-4">
-                          {field.value.map((item) => (
+                          {multiImages.map((item) => (
                             <div key={item} className="relative border flex justify-center items-center ">
                               <Image
                                 alt=""
@@ -123,7 +133,12 @@ function PreviewStoreClient({ initObjectData }: PreviewStoreClientProps) {
                                   variant: "destructive",
                                   size: "sm",
                                 })}
-                                onClick={() => field.onChange([...field.value.filter((url: any) => url !== item)])}
+                                onClick={() => {
+                                  setMultiImages((multiImages) => {
+                                    field.onChange(multiImages.filter((url) => url !== item)); // Đồng bộ với form
+                                    return multiImages.filter((url) => url !== item);
+                                  }); // Cập nhật trạng thái cục bộ
+                                }}
                               >
                                 <TrashIcon className="w-4 h-4" />
                               </Button>

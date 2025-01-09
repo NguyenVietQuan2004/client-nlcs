@@ -8,6 +8,7 @@ interface CellPriceOrderProps {
 
 function CellPriceOrder({ row }: CellPriceOrderProps) {
   const error: Array<string> = [];
+  console.log(row.listProductOrder);
   const totalPrice = row.listProductOrder.reduce((acc: number, order: any) => {
     const sizeUserSelect = order.size;
     const colorsUserSelect = order.color;
@@ -24,7 +25,7 @@ function CellPriceOrder({ row }: CellPriceOrderProps) {
       error.push(`Has a color in ${product.name} is not valid in store so not add price to total.`);
       return acc + 0;
     }
-    return acc + objectPrice.price * order.amount;
+    return acc + (objectPrice.price * order.amount * (100 - product.sale)) / 100;
   }, 0);
   return (
     <div>

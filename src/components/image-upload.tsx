@@ -9,7 +9,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 
 interface ImageUploadProps {
   title?: string;
-  value: string[];
+  value?: string[];
   isLoading: boolean;
   children?: React.ReactNode;
   onChange: (url: string) => void;
@@ -25,7 +25,7 @@ export default function ImageUpload({ value, isLoading, onChange, onRemove, titl
       <div className="flex gap-6 flex-wrap">
         {children
           ? children
-          : value.map((item) => {
+          : value?.map((item) => {
               return (
                 <div key={item} className="relative w-[200px] h-[200px] object-cover overflow-hidden ">
                   <Image
@@ -49,7 +49,7 @@ export default function ImageUpload({ value, isLoading, onChange, onRemove, titl
               );
             })}
       </div>
-      <CldUploadWidget onUpload={onUpload} uploadPreset="u91fw9fp" options={{ multiple: true }}>
+      <CldUploadWidget onSuccess={onUpload} uploadPreset="u91fw9fp" options={{ multiple: true }}>
         {({ open }) => {
           const onClick = () => {
             open();
