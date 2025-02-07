@@ -10,12 +10,14 @@ const Order = z.object({
   storeId: z.string(),
   address: z.string(),
   isPaid: z.boolean(),
+  paid_at: z.date(),
   listProductOrder: z.array(
     z.object({
       _id: Product,
       size: z.string(),
       color: z.string(),
       amount: z.number(),
+      snapshotPrice: z.number(),
     })
   ),
   createdAt: z.string(),
@@ -119,6 +121,7 @@ export const productOrder = z.object({
   size: z.string(),
   color: z.string(),
   amount: z.number(),
+  snapshotPrice: z.number(),
 });
 export type productOrderType = z.TypeOf<typeof productOrder>;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

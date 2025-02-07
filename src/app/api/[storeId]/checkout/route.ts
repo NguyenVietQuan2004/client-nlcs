@@ -42,6 +42,7 @@ export async function POST(request: Request, { params }: { params: { storeId: st
     const data = {
       storeId: params.storeId,
       isPaid: false,
+      paid_at: null,
       listProductOrder: [
         ...order.map((item: productOrderType) => ({
           _id: item.product._id,
@@ -78,7 +79,7 @@ export async function POST(request: Request, { params }: { params: { storeId: st
     });
     setTimeout(async () => {
       await stripe.checkout.sessions.expire(session?.id || "");
-    }, 60 * 1000);
+    }, 60 * 2000);
   } catch (error: any) {
     if (error.statusCode === 401) {
       return NextResponse.json(
@@ -92,7 +93,7 @@ export async function POST(request: Request, { params }: { params: { storeId: st
   }
 
   return NextResponse.json(
-    { url: session?.url || "concac" },
+    { url: session?.url || "url null" },
     {
       status: 200,
       headers: corsHeader,
