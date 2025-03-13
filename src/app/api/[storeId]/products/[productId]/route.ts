@@ -6,7 +6,7 @@ export async function GET(req: NextRequest, { params }: { params: { storeId: str
   let product;
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_ENDPOINT}/product?_id=${params.productId}&storeId=${params.storeId}&categoryId=${categoryId}`,
+      `${process.env.NEXT_PUBLIC_API_ENDPOINT}/product?_id=${params.productId}&store_id=${params.storeId}&categoryId=${categoryId}`,
       {
         cache: "no-cache",
       }

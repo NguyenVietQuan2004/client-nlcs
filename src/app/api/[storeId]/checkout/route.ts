@@ -27,39 +27,44 @@ export async function POST(request: Request, { params }: { params: { storeId: st
     const line_items: any = [];
 
     order.forEach((productOrder: productOrderType) => {
-      const objectPrice = productOrder.product.arrayPrice.find((item: any) => item.size === productOrder.size);
+      const objectPrice = productOrder.product.product_variants.find(
+        (item: productOrderType["product"]["product_variants"][number]) => item._id === productOrder.product_variant_id
+      );
       line_items.push({
         price_data: {
           currency: "usd",
           product_data: {
             name: productOrder.product.name,
           },
-          unit_amount: (objectPrice?.price || 0) * (productOrder.product.sale ? 100 - productOrder.product.sale : 1),
+          unit_amount: (objectPrice?.price || 0) * (productOrder.product.sales ? 100 - productOrder.product.sales : 1),
         },
-        quantity: productOrder.amount,
+        quantity: productOrder.quantity,
       });
     });
     const data = {
-      storeId: params.storeId,
-      isPaid: false,
+      store_id: params.storeId,
+      is_paid: false,
       paid_at: null,
-      listProductOrder: [
+      items: [
         ...order.map((item: productOrderType) => ({
           _id: item.product._id,
-          size: item.size,
-          color: item.color,
-          amount: item.amount,
+          product_variant_id: item.product_variant_id,
+          quantity: item.quantity,
+          snapshot_price: item.snapshot_price,
         })),
       ],
     };
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/order`, {
+
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/order/create-order`, {
       body: JSON.stringify(data),
       method: "POST",
       headers: {
         "Content-type": "application/json",
       },
     });
+
     const orderCreate = await response.json();
+
     if (!response.ok) {
       throw orderCreate;
     }
@@ -77,9 +82,9 @@ export async function POST(request: Request, { params }: { params: { storeId: st
         orderId: orderCreate.data._id,
       },
     });
-    setTimeout(async () => {
-      await stripe.checkout.sessions.expire(session?.id || "");
-    }, 60 * 2000);
+    // setTimeout(async () => {
+    //   await stripe.checkout.sessions.expire(session?.id || "");
+    // }, 60 * 2000);
   } catch (error: any) {
     if (error.statusCode === 401) {
       return NextResponse.json(

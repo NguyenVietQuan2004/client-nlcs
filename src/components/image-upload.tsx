@@ -49,7 +49,7 @@ export default function ImageUpload({ value, isLoading, onChange, onRemove, titl
               );
             })}
       </div>
-      <CldUploadWidget onSuccess={onUpload} uploadPreset="u91fw9fp" options={{ multiple: true }}>
+      <CldUploadWidget onSuccess={onUpload} uploadPreset="nien-luan-co-so" options={{ multiple: true }}>
         {({ open }) => {
           const onClick = () => {
             open();

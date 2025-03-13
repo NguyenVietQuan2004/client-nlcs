@@ -25,7 +25,7 @@ export async function POST(request: Request) {
       await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/order`, {
         body: JSON.stringify({
           _id: session?.metadata?.orderId,
-          isPaid: true,
+          is_paid: true,
           paid_at: new Date(),
           address: addressString,
           phone: session?.customer_details?.phone,

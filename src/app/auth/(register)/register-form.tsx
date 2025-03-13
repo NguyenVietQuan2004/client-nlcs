@@ -18,21 +18,25 @@ interface ResgisterFormProps {
   setIsSignUp: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const formSchema = z.object({
-  userName: z.string().min(4, {
+  fullname: z.string().min(4, {
     message: "Name must be at least 4 characters.",
   }),
   email: z.string().email(),
   password: z.string().min(6, {
     message: "Pass must be at least 6 characters.",
   }),
+  phone_number: z.string(),
+  method: z.string(),
 });
 function RegisterForm({ isSignUp, setIsSignUp }: ResgisterFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      userName: "",
+      fullname: "",
       email: "",
       password: "",
+      phone_number: "",
+      method: "account",
     },
   });
   useEffect(() => {
@@ -41,6 +45,7 @@ function RegisterForm({ isSignUp, setIsSignUp }: ResgisterFormProps) {
     }
   }, [isSignUp, form]);
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    data.method = "account";
     try {
       await authApi.register(data);
       form.reset();
@@ -70,7 +75,7 @@ function RegisterForm({ isSignUp, setIsSignUp }: ResgisterFormProps) {
         <form onSubmit={form.handleSubmit(onSubmit)} className="mt-6 lg:mt-10 flex gap-y-2 flex-col items-center">
           <FormField
             control={form.control}
-            name="userName"
+            name="fullname"
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormControl>
@@ -84,6 +89,8 @@ function RegisterForm({ isSignUp, setIsSignUp }: ResgisterFormProps) {
               </FormItem>
             )}
           />
+          <FormField control={form.control} name="method" render={({ field }) => <input type="hidden" {...field} />} />
+
           <FormField
             control={form.control}
             name="email"

@@ -13,8 +13,9 @@ async function getStores() {
 
   try {
     const cookie = cookies();
-    const sessionToken = cookie.get("sessionToken")?.value || "";
-    stores = await storeAPI.getListStore({ sessionToken });
+    const accessToken = cookie.get("accessToken")?.value || "";
+    const refreshToken = cookie.get("refreshToken")?.value || "";
+    stores = await storeAPI.getListStore({ accessToken, refreshToken });
   } catch (error) {
     handlError({
       consoleError: "GET_ALL_STORE_ERROR",

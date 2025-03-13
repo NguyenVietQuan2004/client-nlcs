@@ -15,7 +15,7 @@ export async function OPTIONS() {
   );
 }
 
-export async function POST(req: NextRequest, { params }: { params: { storeId: string } }) {
+export async function POST(req: NextRequest, { params }: { params: { store_id: string } }) {
   const body = await req.json();
   let data;
   try {

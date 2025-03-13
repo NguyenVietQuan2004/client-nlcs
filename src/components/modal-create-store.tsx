@@ -47,6 +47,7 @@ function ModalCreateStore({ autoShow }: ModalCreateStoreProps) {
     }
   }, [autoShow, setIsShowModalCreate]);
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    data.name = data.name.trim();
     setIsLoading(true);
     try {
       const result = await storeAPI.createStore(data);
@@ -55,7 +56,7 @@ function ModalCreateStore({ autoShow }: ModalCreateStoreProps) {
         variant: "success",
       });
       setIsShowModalCreate(false);
-      window.location.assign(`/${result.data._id}`);
+      window.location.assign(`/${result?.data?._id}`);
     } catch (error) {
       handlError({
         consoleError: "CREATE_STORE_ERROR",

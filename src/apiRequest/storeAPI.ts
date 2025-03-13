@@ -16,36 +16,37 @@ export const storeAPI = {
   getStore(body: StoreBodyType) {
     return httpRequest.get<StoreResType>(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/store?_id=${body._id}`, {
       headers: {
-        Cookie: `sessionToken=${body.sessionToken}`,
+        Authorization: `Bearer ${body.accessToken}`,
+        "X-Refresh-Token": body.refreshToken,
       },
+      cache: "no-cache",
     });
   },
 
   getListStore(body: LitStoreBodyType) {
-    return httpRequest.get<ListStoreResType>(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/store/getall`, {
+    return httpRequest.get<ListStoreResType>(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/store/get-all`, {
       headers: {
-        Cookie: `sessionToken=${body.sessionToken}`,
+        Authorization: `Bearer ${body.accessToken}`,
+        "X-Refresh-Token": body.refreshToken,
+        cache: "no-cache",
       },
     });
   },
 
   createStore(body: CreateStoreBodyType) {
-    return httpRequest.post<CreateStoreResType>(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/store`, {
+    return httpRequest.post<CreateStoreResType>(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/store/create-store`, {
       body,
-      credentials: "include",
     });
   },
 
   updateStore(body: UpdateStoreBodyType) {
     return httpRequest.put<UpdateStoreResType>(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/store`, {
       body: body,
-      credentials: "include",
     });
   },
   deleteStore(body: DeleteStoreBodyType) {
     return httpRequest.delete<DeleteStoreResType>(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/store`, {
       body: body,
-      credentials: "include",
     });
   },
 };

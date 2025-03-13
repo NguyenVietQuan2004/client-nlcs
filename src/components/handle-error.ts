@@ -11,9 +11,9 @@ interface handlErrorProps {
 export const handlError = async ({ consoleError, error, isToast = false }: handlErrorProps) => {
   console.error(consoleError, error);
   if (error.statusCode === 403) {
-    await authApi.signOut();
-    await authApi.signOutNextServer();
-    window.location.reload();
+    // await authApi.signOut();
+    // await authApi.signOutNextServer();
+    // window.location.reload();
   }
   // toast chi hoat dong o client componet
   if (typeof window !== "undefined" && isToast) {

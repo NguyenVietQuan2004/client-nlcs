@@ -22,6 +22,7 @@ const formSchema = z.object({
   password: z.string().min(6, {
     message: "Pass must be at least 6 characters.",
   }),
+  method: z.string().default("account"),
 });
 function LoginForm({ isSignUp, setIsSignUp }: ResgisterFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
@@ -29,6 +30,7 @@ function LoginForm({ isSignUp, setIsSignUp }: ResgisterFormProps) {
     defaultValues: {
       email: "",
       password: "",
+      method: "account",
     },
   });
   useEffect(() => {
@@ -37,10 +39,11 @@ function LoginForm({ isSignUp, setIsSignUp }: ResgisterFormProps) {
     }
   }, [isSignUp, form]);
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    data.method = "account";
     try {
       const result: LoginResType = await authApi.login(data);
       await authApi.sendCookieToServer(result);
-      localStorage.setItem("user", JSON.stringify(result.data.userName));
+      localStorage.setItem("user", JSON.stringify({ name: result.data.fullname }));
       window.location.assign("/");
     } catch (error: any) {
       handlError({
@@ -64,6 +67,8 @@ function LoginForm({ isSignUp, setIsSignUp }: ResgisterFormProps) {
       <div className="text-center text-sm font-medium sm:text-base">Or use your account</div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="mt-6 lg:mt-10 flex gap-y-2 flex-col items-center">
+          <FormField control={form.control} name="method" render={({ field }) => <input type="hidden" {...field} />} />
+
           <FormField
             control={form.control}
             name="email"

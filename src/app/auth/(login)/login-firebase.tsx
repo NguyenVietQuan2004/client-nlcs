@@ -18,13 +18,16 @@ function LoginWithFirebase() {
         // @ts-ignore
         const { accessToken, uid, displayName } = user;
         try {
-          const result: LoginResType = await authApi.loginFirebase({
-            id: uid,
-            userName: displayName || "",
-            accessToken,
+          const result: LoginResType = await authApi.login({
+            email: user.email || "",
+            phone_number: user.phoneNumber || "",
+            fullname: user.displayName || "",
+            avatar: user.photoURL || "",
+            method: "google",
+            google_account_id: user.uid,
           });
           await authApi.sendCookieToServer(result);
-          localStorage.setItem("user", JSON.stringify(result.data.userName));
+          localStorage.setItem("user", JSON.stringify({ name: user.displayName, avatar: user.photoURL }));
           window.location.assign("/");
         } catch (error) {
           handlError({

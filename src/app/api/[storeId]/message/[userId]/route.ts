@@ -14,7 +14,7 @@ export async function OPTIONS() {
     }
   );
 }
-export async function GET(req: NextRequest, { params }: { params: { storeId: string; userId: string } }) {
+export async function GET(req: NextRequest, { params }: { params: { store_id: string; userId: string } }) {
   let data;
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/message/${params.userId}`);

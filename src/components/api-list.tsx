@@ -9,7 +9,7 @@ interface ApiListProps {
 
 function ApiList({ entityName, entityIdName }: ApiListProps) {
   const params = useParams();
-  const baseURL = `${process.env.NEXT_PUBLIC_API_ADMIN}/api/${params.storeId}/${entityName}`;
+  const baseURL = `${process.env.NEXT_PUBLIC_API_ADMIN}/api/${params.store_id}/${entityName}`;
   return (
     <div className="flex flex-col gap-y-4 text-sm">
       <ApiRow method="GET" url={`${baseURL}`} />

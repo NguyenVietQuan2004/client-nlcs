@@ -19,7 +19,7 @@ export async function OPTIONS() {
 export async function GET(req: NextRequest, { params }: { params: { storeId: string } }) {
   const searchParams = req.nextUrl.searchParams;
   const query: any = {
-    storeId: params.storeId,
+    store_id: params.storeId,
     isArchive: false,
   };
 
@@ -32,7 +32,7 @@ export async function GET(req: NextRequest, { params }: { params: { storeId: str
 
   const url = queryString.stringifyUrl(
     {
-      url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/product/getall`,
+      url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/product/get-all`,
       query,
     },
     { skipNull: true }
@@ -54,11 +54,11 @@ export async function GET(req: NextRequest, { params }: { params: { storeId: str
   );
 }
 
-export async function POST(req: NextRequest, { params }: { params: { storeId: string } }) {
+export async function POST(req: NextRequest, { params }: { params: { store_id: string } }) {
   const body = await req.json();
   let listProductRes;
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/product/getall`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/product/get-by-ids`, {
       method: "POST",
       body: JSON.stringify(body),
       headers: {
