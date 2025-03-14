@@ -28,8 +28,8 @@ export const storeAPI = {
       headers: {
         Authorization: `Bearer ${body.accessToken}`,
         "X-Refresh-Token": body.refreshToken,
-        cache: "no-cache",
       },
+      cache: "no-cache",
     });
   },
 

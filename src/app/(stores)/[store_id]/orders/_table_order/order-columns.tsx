@@ -6,43 +6,47 @@ import { OrderType } from "@/Type/OrderTypes";
 import { ProductType } from "@/Type/ProductType";
 import CellPriceOrder from "@/app/(stores)/[store_id]/orders/_table_order/cell-price-order";
 import OrderCellAction from "@/app/(stores)/[store_id]/orders/_table_order/cell-action-oder";
+import CellStatusOrder from "./cell-status-order";
 
 interface productOrderProps {
-  _id: ProductType;
-  size: string;
-  color: string;
-  amount: number;
+  product_variant_id: string;
+  quantity: number;
+  snapshot_price: number;
+  product: ProductType;
 }
 
 export const OrderColumns: ColumnDef<OrderType>[] = [
   {
     header: "Products",
-    accessorKey: "listProductOrder",
+    accessorKey: "order_items",
     cell: ({ row }) => {
-      const listProductOrder: productOrderProps[] = row.getValue("listProductOrder");
-      // return listProductOrder.map((productOrder: productOrderProps) => {
-      //   const product: ProductType = productOrder._id;
-      //   const sizeUserSelect = productOrder.size;
-      //   const colorsUserSelect = productOrder.color;
-      //   return (
-      //     <div key={`${product._id}${colorsUserSelect}${sizeUserSelect}`}>
-      //       <div>
-      //         <span className="font-semibold">Name:</span> {product?.name}{" "}
-      //       </div>
-      //       <div className="flex items-center gap-x-3">
-      //         Size: {sizeUserSelect}
-      //         <div
-      //           key={colorsUserSelect}
-      //           style={{ backgroundColor: colorsUserSelect }}
-      //           className={`w-5 h-5 rounded-full border `}
-      //         />{" "}
-      //         Quantity: {productOrder.amount}
-      //       </div>
-      //     </div>
-      //   );
-      // });
-      return "a";
+      return row.original.order_items?.map((productOrder: productOrderProps) => {
+        const product: ProductType = productOrder.product;
+        const product_variant_user_select = product.product_variants.find(
+          (item) => item._id === productOrder.product_variant_id
+        );
+        return (
+          <div key={`${product._id}${product_variant_user_select?._id}`}>
+            <div>
+              <span className="font-semibold">Name:</span> {product?.name}
+            </div>
+            <div className="flex items-center gap-x-3">
+              {Object.entries(product_variant_user_select?.variant_values || {}).map(([key, value]) => (
+                <div key={key}>
+                  <strong>{key}:</strong> {value}
+                </div>
+              ))}
+              Quantity: {productOrder.quantity}
+            </div>
+          </div>
+        );
+      });
+      // return "a";
     },
+  },
+  {
+    header: "Customer",
+    accessorKey: "user",
   },
   {
     header: "Phone",
@@ -58,7 +62,7 @@ export const OrderColumns: ColumnDef<OrderType>[] = [
   },
   {
     header: "Paid",
-    accessorKey: "is_paid",
+    cell: ({ row }) => <CellStatusOrder row={row.original} />,
   },
   {
     id: "actions",

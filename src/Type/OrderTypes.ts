@@ -8,6 +8,7 @@ const OrderItemSchema = z.object({
   product_variant_id: z.string(),
   quantity: z.number().min(1),
   snapshot_price: z.number().min(0),
+  product: Product,
 });
 
 //ORDER DATA
@@ -86,8 +87,7 @@ export type CreateOrderResType = z.TypeOf<typeof CreateOrderRes>;
 
 // DELETE ORDER BODY TYPE
 export const DeleteOrderBody = z.object({
-  _id: z.string(),
-  store_id: z.string(),
+  order_id: z.string(),
 });
 export type DeleteOrderBodyType = z.TypeOf<typeof DeleteOrderBody>;
 

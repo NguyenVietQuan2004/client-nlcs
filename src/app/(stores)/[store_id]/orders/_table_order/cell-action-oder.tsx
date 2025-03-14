@@ -30,8 +30,7 @@ function OrderCellAction({ row }: CellActionProps) {
     try {
       setIsLoading(true);
       await orderAPI.deleteOrder({
-        store_id: params.store_id as string,
-        _id: row._id,
+        order_id: row._id,
       });
       toast({
         title: "Delete order success.",

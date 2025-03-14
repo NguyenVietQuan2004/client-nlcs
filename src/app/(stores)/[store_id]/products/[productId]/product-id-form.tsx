@@ -1475,25 +1475,49 @@ function ProductForm({ initObjectData }: ProductFormProps) {
   });
   const watchedAttributes = useWatch({ control, name: "attributes" });
 
+  // useEffect(() => {
+  //   if (!isMounted) return;
+  //   const attributeValues = watchedAttributes
+  //     .map((attr) => attr.values.map((v) => v).filter(Boolean))
+  //     .filter((arr) => arr.length > 0);
+  //   if (attributeValues.length > 0) {
+  //     let skus = cartesianProduct(attributeValues);
+  //     const newVariants = skus.map((comb) => ({
+  //       sku: comb.join(" - "),
+  //       price: 0,
+  //       stock: 0,
+  //     }));
+
+  //     newVariants.forEach((_, index) => {
+  //       form.setValue(`variants.${index}.price`, 0); // Đặt giá trị price là ""
+  //       form.setValue(`variants.${index}.stock`, 0); // Đặt giá trị stock là ""
+  //     });
+  //     setVariants(newVariants);
+  //     // router.refresh();
+  //   }
+  // }, [watchedAttributes]);
   useEffect(() => {
     if (!isMounted) return;
+
     const attributeValues = watchedAttributes
       .map((attr) => attr.values.map((v) => v).filter(Boolean))
       .filter((arr) => arr.length > 0);
+
     if (attributeValues.length > 0) {
       let skus = cartesianProduct(attributeValues);
-      const newVariants = skus.map((comb) => ({
-        sku: comb.join(" - "),
-        price: 0,
-        stock: 0,
-      }));
-
-      newVariants.forEach((_, index) => {
-        form.setValue(`variants.${index}.price`, 0); // Đặt giá trị price là ""
-        form.setValue(`variants.${index}.stock`, 0); // Đặt giá trị stock là ""
+      const newVariants = skus.map((comb) => {
+        const sku = comb.join(" - ");
+        const existingVariant = variants.find((v) => {
+          return v.sku.toUpperCase().replace(/\s+/g, "") === sku.toUpperCase().replace(/\s+/g, "");
+        });
+        return {
+          sku,
+          price: existingVariant?.price || 1, // Giữ lại giá trị cũ
+          stock: existingVariant?.stock || 1, // Giữ lại số lượng tồn kho cũ
+        };
       });
+
       setVariants(newVariants);
-      // router.refresh();
     }
   }, [watchedAttributes]);
 
@@ -1523,7 +1547,7 @@ function ProductForm({ initObjectData }: ProductFormProps) {
         });
       }
       // thứ tự 2 route này quan trọng
-      // router.push(`/${params.store_id}/products`);
+      router.push(`/${params.storeId}/products`);
       router.refresh();
       toast({
         title: toastMessage,

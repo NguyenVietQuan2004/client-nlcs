@@ -46,8 +46,8 @@ export const Product = z.object({
     )
     .default([]),
   product_variants: z.array(ProductVariantSchema),
-  createdAt: z.date().optional(),
-  updatedAt: z.date().optional(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
 });
 
 //  PRODUCT BODY TYPE
