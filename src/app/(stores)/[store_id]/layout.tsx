@@ -1,6 +1,6 @@
-// import Footer from "@/components/footer";
 import Wrapper from "@/components/wrapper";
 import MainNavbar from "@/app/(stores)/[store_id]/_navbar/main-nav";
+import Footer from "@/components/footer";
 
 function StoreLayout({
   children,
@@ -11,7 +11,7 @@ function StoreLayout({
     <div>
       <MainNavbar />
       <Wrapper>{children}</Wrapper>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }
